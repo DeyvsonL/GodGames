@@ -98,7 +98,7 @@ namespace UnityStandardAssets.Cameras
             }
 
             // Tilt input around X is applied to the pivot (the child of this object)
-			m_PivotTargetRot = Quaternion.Euler(m_TiltAngle, m_PivotEulers.y , m_PivotEulers.z);
+			m_PivotTargetRot = Quaternion.Euler(m_TiltAngle, Math.Min(m_PivotEulers.y, 45) , m_PivotEulers.z);
 
 			if (m_TurnSmoothing > 0)
 			{

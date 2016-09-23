@@ -12,8 +12,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Vector3 m_CamForward;             // The current forward direction of the camera
         private Vector3 m_Move;
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
+        [SerializeField] private float speed = 10f;
 
-        
         private void Start()
         {
             // get the transform of the main camera
@@ -49,15 +49,17 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
             float v = CrossPlatformInputManager.GetAxis("Vertical");
             bool crouch = Input.GetKey(KeyCode.C);
-
+            m_Character.transform.rotation =  new Quaternion( 0 , m_Cam.transform.rotation.y, 0, m_Cam.transform.rotation.w);
             // calculate move direction to pass to character
             if (m_Cam != null)
             {
                 // calculate camera relative direction to move:
                 m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;
-                m_Move = v*m_CamForward + h*m_Cam.right;
-            }
-            else
+                Debug.Log(m_Cam.forward + " " + m_Cam.right);
+                m_Move = v*m_Cam.forward + h*m_Cam.right;
+                Debug.Log(m_Move);
+
+            } else
             {
                 // we use world-relative directions in the case of no main camera
                 m_Move = v*Vector3.forward ;
@@ -68,7 +70,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 #endif
 
             // pass all parameters to the character control script
-            m_Character.Move(m_Move, crouch, m_Jump);
+            m_Move = new Vector3(m_Move.x, 0, m_Move.z);
+            transform.position = transform.position + (m_Move * Time.deltaTime * speed);
+            //m_Character.Move(m_Move, crouch, m_Jump);
             m_Jump = false;
         }
     }
