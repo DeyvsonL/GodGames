@@ -14,6 +14,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
         [SerializeField] private float speed = 10f;
 
+        [SerializeField] private Rigidbody bullet;
+        [SerializeField]
+        private Transform spawnPoint;
+
         private void Start()
         {
             // get the transform of the main camera
@@ -35,6 +39,17 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Update()
         {
+            bool shoot = Input.GetMouseButtonDown(0);
+            if (shoot)
+            {
+                Rigidbody bulletInstance = Instantiate(bullet,
+                                                           spawnPoint.transform.position,
+                                                           spawnPoint.transform.rotation) as Rigidbody;
+                bulletInstance.velocity = transform.TransformDirection(Vector3.forward * 100);
+                Destroy(bulletInstance.gameObject, 2.0f);
+
+
+            }
             if (!m_Jump)
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
@@ -71,8 +86,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             // pass all parameters to the character control script
             m_Move = new Vector3(m_Move.x, 0, m_Move.z);
-            transform.position = transform.position + (m_Move * Time.deltaTime * speed);
-            //m_Character.Move(m_Move, crouch, m_Jump);
+            m_Character.Move(m_Move, crouch, m_Jump);
             m_Jump = false;
         }
     }
