@@ -52,11 +52,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			// direction.
             
             
-			if (move.magnitude > 1f) move.Normalize();
-			move = transform.InverseTransformDirection(move);
+			
 			CheckGroundStatus();
-			move = Vector3.ProjectOnPlane(move, m_GroundNormal);
-			m_TurnAmount = Mathf.Atan2(move.x, move.z);
+			m_TurnAmount = move.x;
 			m_ForwardAmount = move.z;
 			//ApplyExtraTurnRotation();
 
@@ -123,7 +121,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			// update the animator parameters
 			m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
             //transform.position = transform.position + (move * Time.deltaTime*speed);
-            m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
+            m_Animator.SetFloat("Side", m_TurnAmount, 0.1f, Time.deltaTime);
 			m_Animator.SetBool("Crouch", m_Crouching);
 			m_Animator.SetBool("OnGround", m_IsGrounded);
 			if (!m_IsGrounded)

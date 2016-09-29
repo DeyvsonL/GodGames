@@ -17,7 +17,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         [SerializeField] private Rigidbody bullet;
         [SerializeField]
         private Transform spawnPoint;
-
+        [SerializeField]
+        private Transform pivo;
         private void Start()
         {
             // get the transform of the main camera
@@ -44,8 +45,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 Rigidbody bulletInstance = Instantiate(bullet,
                                                            spawnPoint.transform.position,
-                                                           spawnPoint.transform.rotation) as Rigidbody;
-                bulletInstance.velocity = transform.TransformDirection(Vector3.forward * 100);
+                                                           pivo.transform.rotation) as Rigidbody;
+                bulletInstance.velocity = bulletInstance.transform.forward * 5;
                 Destroy(bulletInstance.gameObject, 2.0f);
 
 
@@ -70,9 +71,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 // calculate camera relative direction to move:
                 m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;
-                Debug.Log(m_Cam.forward + " " + m_Cam.right);
-                m_Move = v*m_Cam.forward + h*m_Cam.right;
-                Debug.Log(m_Move);
+                m_Move = new Vector3(h,0, v);
 
             } else
             {
