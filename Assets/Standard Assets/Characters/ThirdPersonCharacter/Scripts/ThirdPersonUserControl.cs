@@ -1,9 +1,7 @@
-using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-namespace UnityStandardAssets.Characters.ThirdPerson
-{
+namespace UnityStandardAssets.Characters.ThirdPerson {
     [RequireComponent(typeof (ThirdPersonCharacter))]
     public class ThirdPersonUserControl : MonoBehaviour
     {
@@ -14,11 +12,17 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
         [SerializeField] private float speed = 10f;
 
-        [SerializeField] private Rigidbody bullet;
+        [SerializeField]
+        private Rigidbody bullet;
+        [SerializeField]
+        private Rigidbody platform;
         [SerializeField]
         private Transform spawnPoint;
         [SerializeField]
         private Transform pivo;
+        private float speedBullet = 5f;
+        private float timeLifeBullet = 2f;
+
         private void Start()
         {
             // get the transform of the main camera
@@ -37,24 +41,35 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             m_Character = GetComponent<ThirdPersonCharacter>();
         }
 
-
-        private void Update()
-        {
-            bool shoot = Input.GetMouseButtonDown(0);
-            if (shoot)
-            {
+        private void CheckShoot() {
+            if (Input.GetMouseButtonDown(0)) {
                 Rigidbody bulletInstance = Instantiate(bullet,
                                                            spawnPoint.transform.position,
                                                            pivo.transform.rotation) as Rigidbody;
-                bulletInstance.velocity = bulletInstance.transform.forward * 5;
-                Destroy(bulletInstance.gameObject, 2.0f);
-
-
+                bulletInstance.velocity = bulletInstance.transform.forward * speedBullet;
+                Destroy(bulletInstance.gameObject, timeLifeBullet);
             }
-            if (!m_Jump)
-            {
+        }
+        private void CheckSpawnPlatform() {
+            if (Input.GetMouseButtonDown(1)) {
+                Rigidbody bulletInstance = Instantiate(platform,
+                                                           spawnPoint.transform.position,
+                                                           transform.rotation) as Rigidbody;
+                
+            }
+        }
+
+        private void CheckJump() {
+            if (!m_Jump) {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             }
+        }
+
+        private void Update()
+        {
+            CheckShoot();
+            CheckSpawnPlatform();
+            CheckJump();
         }
 
 
@@ -80,7 +95,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
 #if !MOBILE_INPUT
 			// walk speed multiplier
-	        if (Input.GetKey(KeyCode.LeftShift)) m_Move *= 0.5f;
+	        if (Input.GetKey(KeyCode.LeftShift)) m_Move *= 2.5f;
 #endif
 
             // pass all parameters to the character control script
