@@ -38,52 +38,34 @@ public class Movement : MonoBehaviour
 
 
 		Vector3 velocity = rigidbody.velocity;
-		
-		
-		velocity.x = Input.GetAxis ("Horizontal") * speed;
-		velocity.z = Input.GetAxis ("Vertical") * speed;
+
+		if (h != 0) {
+			transform.Translate (h * velMover * Time.deltaTime, 0, 0);
+		}
+
+		if(w != 0){
+			transform.Translate (0, 0, w*velMover*Time.deltaTime);
+		}
 
 
-		if (floorCount > 0 && Input.GetButton ("Jump")){
-//		if(floorCount == 0 && Input.GetButton("Jump")){ 
+		if (floorCount > 0 && Input.GetKeyDown(KeyCode.Space)){
 			Debug.Log("Entrou");
-			transform.Translate(0, jump*Time.deltaTime,0);
 			velocity.y = jump;
 			noChao = false;
+
 		}
-		
-//		if (Input.GetKey (KeyCode.LeftShift)) {
-//			velocity.x = Input.GetAxis ("Horizontal") * speed * 1.6f;
-//			velocity.z = Input.GetAxis ("Vertical") * speed * 1.6f;
-//			Debug.Log ("Shift key was released.");
-//		}
-//
-//
-//
-//		if (Input.GetKeyUp (KeyCode.LeftShift)) {
-//			velocity.x = Input.GetAxis ("Horizontal") * speed;
-//			velocity.z = Input.GetAxis ("Vertical") * speed;
-//		}
-//
-//		rigidbody.velocity = velocity;
 
+		rigidbody.velocity = velocity;
+		Debug.Log(rigidbody.velocity);
 
-		if (floorCount > 0 ) {
-			if (h != 0) {
-				transform.Translate (h * velMover * Time.deltaTime, 0, 0);
-			}
-
-			if(w != 0){
-				transform.Translate (0, 0, w*velMover*Time.deltaTime);
-
-			}
-		} else if (!noChao && pendurado) {
+		if (!noChao && pendurado) {
 			GetComponent<Rigidbody> ().AddForce (transform.right * h * forçaBalançar);
 		} else if (!noChao && !pendurado) {
 			if (h != 0) {
-				transform.Translate (h * velMoverAr * Time.deltaTime, 0, 0);
+				transform.Translate (h * velMover * Time.deltaTime, 0, 0);
 			}
 		}
+
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -93,17 +75,17 @@ public class Movement : MonoBehaviour
 
 			noChao = true;
 		}
-		
-//		if (other.gameObject.name == "Key")
-//		{
-////			hasKey = true;
-//			other.transform.parent = transform;
-//			//GameObject.Destroy(other.gameObject);
-//		}
-//		if (other.gameObject.name == "Gate" && hasKey)
-//		{
-//			SceneManager.LoadScene("Game");
-//		}
+
+		//		if (other.gameObject.name == "Key")
+		//		{
+		////			hasKey = true;
+		//			other.transform.parent = transform;
+		//			//GameObject.Destroy(other.gameObject);
+		//		}
+		//		if (other.gameObject.name == "Gate" && hasKey)
+		//		{
+		//			SceneManager.LoadScene("Game");
+		//		}
 	}
 	void OnTriggerExit(Collider other)
 	{
