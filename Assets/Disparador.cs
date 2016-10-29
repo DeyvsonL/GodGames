@@ -23,12 +23,19 @@ public class Disparador : MonoBehaviour {
 
 	float rotVertical = 0;
 
-	void Start(){
-		
-	}
+    private LineRenderer lr;
+    private GameObject mark;
 
-	// Update is called once per frame
-	void Update () {
+
+	void Start(){
+        lr = GetComponent<LineRenderer>();
+        lr.SetWidth(0.05f, 0.05f);
+        mark = GameObject.FindGameObjectWithTag("mark");
+
+    }
+
+    // Update is called once per frame
+    void Update () {
 
 //		float rotHorizontal = Input.GetAxisRaw("Mouse X");
 //
@@ -81,8 +88,7 @@ public class Disparador : MonoBehaviour {
 //		Debug.DrawRay(cameraRay.origin, cameraRay.direction, Color.red);
 //		Physics.RaycastAll();
 
-		if(auxGancho == null){
-			if(Input.GetMouseButtonDown(0)){
+		
 //				Vector3 posMouse = Input.mousePosition;
 //				posMouse.z = m_camera.nearClipPlane;
 //				Vector3 nearCameraPosition = m_camera.ScreenToWorldPoint(posMouse);
@@ -90,35 +96,41 @@ public class Disparador : MonoBehaviour {
 				Ray cameraRay = m_camera.ScreenPointToRay(Input.mousePosition);
 
 				Debug.DrawLine(cameraRay.origin, cameraRay.origin + cameraRay.direction*10);
+                RaycastHit hit;
+               // RaycastHit nearestHit = new RaycastHit();
+                Physics.Raycast(cameraRay, out hit , 100);
 
-				RaycastHit[] hits = Physics.RaycastAll(cameraRay, 100);
-				RaycastHit nearestHit = new RaycastHit();
-				nearestHit.distance = m_camera.far-500;
-				foreach (RaycastHit hit in hits){
+                hit.distance = m_camera.far-500;
+				//foreach (RaycastHit hit in hits){
 //					hit.collider.tag != "Player"
-//					if(!nearestHit){
-						if((nearestHit.distance > hit.distance) && hit.collider.tag != tag)
+//					if(!nearestHit){/*
+/*
+						if((hit.distance > hit.distance) && hit.collider.tag != tag)
 							nearestHit = hit;
 						Debug.Log(nearestHit.transform.name);
 					Debug.Log(nearestHit.point);
+                    
 //					}
 
-				}
+				}*/
 				Vector3 realDirection;
-				if(!nearestHit.transform){
-					realDirection = cameraRay.direction;
-				}else{
-					realDirection = nearestHit.point-transform.position;
-				}
+				realDirection = hit.point - transform.position;
+        lr.SetPosition(0, transform.position);
+        lr.SetPosition(1, hit.point);
+        mark.transform.position = hit.point;
+        //	realDirection = Quaternion.AngleAxis(-5, Vector3.right) * realDirection;
 
-				realDirection = Quaternion.AngleAxis(-5, Vector3.right) * realDirection;
-
-//				auxDirDoClique = Instantiate(dirDoClique, posMouse, Quaternion.identity) as Transform;
-//				auxDirDoClique = Instantiate(dirDoClique, posMouse, Quaternion.identity) as Transform;
-//				localDoClique = (auxDirDoClique.transform.position - transform.position);
-//				olharParaDir = Quaternion.LookRotation(localDoClique);
-//
-				auxGancho = Instantiate(gancho, transform.position, Quaternion.LookRotation(realDirection)) as GameObject;
+        //				auxDirDoClique = Instantiate(dirDoClique, posMouse, Quaternion.identity) as Transform;
+        //				auxDirDoClique = Instantiate(dirDoClique, posMouse, Quaternion.identity) as Transform;
+        //				localDoClique = (auxDirDoClique.transform.position - transform.position);
+        //				olharParaDir = Quaternion.LookRotation(localDoClique);
+        if (auxGancho == null)
+                {
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        auxGancho = Instantiate(gancho, transform.position, Quaternion.LookRotation(realDirection)) as GameObject;
+                    }
+                }
 //				Destroy(auxDirDoClique.gameObject);
 
 
@@ -127,7 +139,6 @@ public class Disparador : MonoBehaviour {
 //				Rigidbody rb = projectile.GetComponent<Rigidbody>();
 //				rb.velocity = posMouse*40;
 
-			}
-		}
+			
 	}
 } 
