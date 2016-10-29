@@ -27,34 +27,34 @@ public class Mana : MonoBehaviour
 
     void Update()
     {
-            /*
+            
         // Area Para Eu Testar As Barras Nao e nescessario Copiar essa parte
-        if (Input.GetKeyDown(KeyCode.Alpha1) && mana > 0)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && mp > 0)
         {
-            mana = mana - 5;
+            mp = mp - 55;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && mana > 0)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && mp > 0)
         {
-            mana = mana - 10;
+            mp = mp + 55;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3) && mana > 0)
+        if (Input.GetKeyDown(KeyCode.Alpha3) && mp > 0)
         {
-            mana = mana - 15;
+            mp = mp - 15;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha0) && mana < maxMana)
+        if (Input.GetKeyDown(KeyCode.Alpha0) && mp < maxMana)
         {
-            mana = mana + 20;
+            mp = mp + 20;
         }
 
-        if (mana > maxMana)
+        if (mp > maxMana)
         {
-            mana = maxMana;
+            mp = maxMana;
         }
-        if (mana < 0)
+        if (mp < 0)
         {
-            mana = 0;
+            mp = 0;
         }
-        */
+        
     }
     /*
     void OnGUI()
@@ -62,8 +62,8 @@ public class Mana : MonoBehaviour
         ResolucaoMestre.AutoResize(1024, 768);
         GUI.BeginGroup(new Rect(150, 120, painel.width, painel.height));
 
-        GUI.DrawTexture(new Rect(0, 0, ManaT.width * mana / maxMana, ManaT.height), ManaT);
-        GUI.Label(new Rect(0, 0, 200, 100), "<Size=25>Mana " + mana + "/" + maxMana + "</Size>");
+        GUI.DrawTexture(new Rect(0, 0, ManaT.width * mp / maxMana, ManaT.height), ManaT);
+        GUI.Label(new Rect(0, 0, 200, 100), "<Size=25>Mana " + mp + "/" + maxMana + "</Size>");
         GUI.DrawTexture(new Rect(0, 0, painel.width, painel.height), painel);
 
         GUI.EndGroup();
