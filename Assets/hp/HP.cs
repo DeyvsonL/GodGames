@@ -25,7 +25,7 @@ public class HP : MonoBehaviour {
 	}
 	
 	void Update () {
-        /*
+        
         // Area Para Eu Testar As Barras Nao e nescessario Copiar essa parte
         if (Input.GetKeyDown(KeyCode.D) && health > 0)
         {
@@ -33,16 +33,19 @@ public class HP : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.S) && health < maxHealth)
         {
-            health = health + 5;
+            health = health + 55;
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
             maxHealth = maxHealth + 10;
         }
-        */
+        
         if (health <= 0)
         {
-            Destroy(gameObject);
+            //DIE()
+
+
+            Destroy(GameObject.FindGameObjectWithTag("Player"));
         }
     }
 
