@@ -26,6 +26,10 @@ public class Disparador : MonoBehaviour {
     private LineRenderer lr;
     private GameObject mark;
 
+	public GameObject objectToSpawn;
+
+	// private int shootType = 0;
+
 
 	void Start(){
         lr = GetComponent<LineRenderer>();
@@ -97,8 +101,10 @@ public class Disparador : MonoBehaviour {
 
 				Debug.DrawLine(cameraRay.origin, cameraRay.origin + cameraRay.direction*10);
                 RaycastHit hit;
+				
                // RaycastHit nearestHit = new RaycastHit();
-                Physics.Raycast(cameraRay, out hit , 100);
+		Physics.Raycast(cameraRay, out hit , 100);
+
 
                 hit.distance = m_camera.far-500;
 				//foreach (RaycastHit hit in hits){
@@ -126,11 +132,24 @@ public class Disparador : MonoBehaviour {
         //				olharParaDir = Quaternion.LookRotation(localDoClique);
         if (auxGancho == null)
                 {
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        auxGancho = Instantiate(gancho, transform.position, Quaternion.LookRotation(realDirection)) as GameObject;
-                    }
-                }
+			if (Input.GetMouseButtonDown (0)) {
+				
+				auxGancho = Instantiate (gancho, transform.position, Quaternion.LookRotation (realDirection)) as GameObject;
+			} 
+        }
+
+		if (Input.GetMouseButtonDown (1)) {	
+
+			GameObject hitObject = hit.collider.gameObject;
+			print (hitObject.name);
+			if (hitObject.tag == "Tile") { 
+				TileGround tileGround = hitObject.GetComponentInParent<TileGround> ();
+				if (tileGround.pillar == null) {
+					tileGround.insertPillar (objectToSpawn);
+				}
+			}
+
+		}
 //				Destroy(auxDirDoClique.gameObject);
 
 
