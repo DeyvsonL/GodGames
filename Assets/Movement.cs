@@ -56,7 +56,6 @@ public class Movement : MonoBehaviour
 		}
 
 		rigidbody.velocity = velocity;
-		Debug.Log(rigidbody.velocity);
 
 		if (!noChao && pendurado) {
 			GetComponent<Rigidbody> ().AddForce (transform.right * h * forçaBalançar);
