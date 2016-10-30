@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Disparador : MonoBehaviour {
+public class Disparador : MonoBehaviour
+{
 
-	[Header("Hook Gameobject")]
+	[Header ("Hook Gameobject")]
 	public GameObject gancho;
 	private GameObject auxGancho;
 
@@ -23,118 +24,117 @@ public class Disparador : MonoBehaviour {
 
 	float rotVertical = 0;
 
-    private LineRenderer lrMark;
-    private GameObject mark;
-    private LineRenderer lrGancho;
+	private LineRenderer lrMark;
+	private GameObject mark;
+	private LineRenderer lrGancho;
 
 	public GameObject pillarToSpawn;
 	public GameObject trapToSpawn;
 
-    public int skill=1;
-    public int Skill
-    {
-        get { return Skill; }
-    }
+	public int skill = 1;
 
-    public void alterSkill(int newSkill)
-    {
-        skill = newSkill;
-    }
+	public int Skill {
+		get { return Skill; }
+	}
 
-    // private int shootType = 0;
+	public void alterSkill (int newSkill)
+	{
+		skill = newSkill;
+	}
+
+	// private int shootType = 0;
 
 
-    void Start(){
-        lrMark = GetComponent<LineRenderer>();
-        lrMark.SetWidth(0.05f, 0.05f);
-        lrMark.SetColors(Color.red, Color.red);
-        mark = GameObject.FindGameObjectWithTag("mark");
-    }
+	void Start ()
+	{
+		lrMark = GetComponent<LineRenderer> ();
+		lrMark.SetWidth (0.05f, 0.05f);
+		lrMark.SetColors (Color.red, Color.red);
+		mark = GameObject.FindGameObjectWithTag ("mark");
+	}
 
-    // Update is called once per frame
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            skill = 1;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            skill = 2;
-        }
-		if (Input.GetKeyDown(KeyCode.Alpha3))
-		{
+	// Update is called once per frame
+	void Update ()
+	{
+		if (Input.GetKeyDown (KeyCode.Alpha1)) {
+			skill = 1;
+		}
+		if (Input.GetKeyDown (KeyCode.Alpha2)) {
+			skill = 2;
+		}
+		if (Input.GetKeyDown (KeyCode.Alpha3)) {
 			skill = 3;
 		}
 
-        //		float rotHorizontal = Input.GetAxisRaw("Mouse X");
-        //
-        //		transform.Rotate ( 0, rotHorizontal, 0);
-        //
-        //
-        //		rotVertical = Input.GetAxisRaw("Mouse Y");
-        //
-        //		rotVertical = Mathf.Clamp ( rotVertical, -viewRange, viewRange);
-        //
-        //		yaw += speedH * Input.GetAxis("Mouse X");
-        //		pitch -= speedV * rotVertical;
-        //
-        //
-        ////		m_camera.transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
-        //		transform.localEulerAngles = new Vector3(-rotVertical, transform.localEulerAngles.y, transform.localEulerAngles.z);
+		//		float rotHorizontal = Input.GetAxisRaw("Mouse X");
+		//
+		//		transform.Rotate ( 0, rotHorizontal, 0);
+		//
+		//
+		//		rotVertical = Input.GetAxisRaw("Mouse Y");
+		//
+		//		rotVertical = Mathf.Clamp ( rotVertical, -viewRange, viewRange);
+		//
+		//		yaw += speedH * Input.GetAxis("Mouse X");
+		//		pitch -= speedV * rotVertical;
+		//
+		//
+		////		m_camera.transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
+		//		transform.localEulerAngles = new Vector3(-rotVertical, transform.localEulerAngles.y, transform.localEulerAngles.z);
 
 
 
-        //		rotationY += Input.GetAxis ("Mouse Y") * Ysensitivity;
-        //
-        //
-        //		rotationY = Mathf.Clamp (rotationY, -15, 15);
-        //		transform.localEulerAngles = new Vector3(-rotationY, transform.localEulerAngles.y, transform.localEulerAngles.z);
+		//		rotationY += Input.GetAxis ("Mouse Y") * Ysensitivity;
+		//
+		//
+		//		rotationY = Mathf.Clamp (rotationY, -15, 15);
+		//		transform.localEulerAngles = new Vector3(-rotationY, transform.localEulerAngles.y, transform.localEulerAngles.z);
 
-        //		if(m_camera.transform.localEulerAngles.x > viewRange)
-        //		{
-        //			m_camera_transform.localEulerAngles = new Vector3( viewRange, 0, 0);
-        //		} else
-        //		{
-        //			if(m_camera_transform.localEulerAngles.x < -viewRange)
-        //			{
-        //				m_camera_transform.localEulerAngles = new Vector3( -viewRange, 0, 0);
-        //			}
-        //		}
-        //
-        //
-        //		if(m_camera.transform.localEulerAngles.y > viewRange)
-        //		{
-        //			m_camera_transform.localEulerAngles = new Vector3( 0, viewRange, 0);
-        //		} else
-        //		{
-        //			if(m_camera_transform.localEulerAngles.y < -viewRange)
-        //			{
-        //				m_camera_transform.localEulerAngles = new Vector3( 0, -viewRange, 0);
-        //			}
-        //		}
-
-
-        //		Debug.DrawRay(cameraRay.origin, cameraRay.direction, Color.red);
-        //		Physics.RaycastAll();
+		//		if(m_camera.transform.localEulerAngles.x > viewRange)
+		//		{
+		//			m_camera_transform.localEulerAngles = new Vector3( viewRange, 0, 0);
+		//		} else
+		//		{
+		//			if(m_camera_transform.localEulerAngles.x < -viewRange)
+		//			{
+		//				m_camera_transform.localEulerAngles = new Vector3( -viewRange, 0, 0);
+		//			}
+		//		}
+		//
+		//
+		//		if(m_camera.transform.localEulerAngles.y > viewRange)
+		//		{
+		//			m_camera_transform.localEulerAngles = new Vector3( 0, viewRange, 0);
+		//		} else
+		//		{
+		//			if(m_camera_transform.localEulerAngles.y < -viewRange)
+		//			{
+		//				m_camera_transform.localEulerAngles = new Vector3( 0, -viewRange, 0);
+		//			}
+		//		}
 
 
-        //				Vector3 posMouse = Input.mousePosition;
-        //				posMouse.z = m_camera.nearClipPlane;
-        //				Vector3 nearCameraPosition = m_camera.ScreenToWorldPoint(posMouse);
-        //				Ray cameraRay = new Ray(m_camera.transform.position, nearCameraPosition - m_camera_transform.position);
-        Ray cameraRay = m_camera.ScreenPointToRay(Input.mousePosition);
+		//		Debug.DrawRay(cameraRay.origin, cameraRay.direction, Color.red);
+		//		Physics.RaycastAll();
 
-        Debug.DrawLine(cameraRay.origin, cameraRay.origin + cameraRay.direction * 10);
-        RaycastHit hit;
 
-        // RaycastHit nearestHit = new RaycastHit();
-        bool hasHit = Physics.Raycast(cameraRay, out hit, 100);
+		//				Vector3 posMouse = Input.mousePosition;
+		//				posMouse.z = m_camera.nearClipPlane;
+		//				Vector3 nearCameraPosition = m_camera.ScreenToWorldPoint(posMouse);
+		//				Ray cameraRay = new Ray(m_camera.transform.position, nearCameraPosition - m_camera_transform.position);
+		Ray cameraRay = m_camera.ScreenPointToRay (Input.mousePosition);
 
-        hit.distance = m_camera.far - 500;
-        //foreach (RaycastHit hit in hits){
-        //					hit.collider.tag != "Player"
-        //					if(!nearestHit){/*
-        /*
+		Debug.DrawLine (cameraRay.origin, cameraRay.origin + cameraRay.direction * 10);
+		RaycastHit hit;
+
+		// RaycastHit nearestHit = new RaycastHit();
+		bool hasHit = Physics.Raycast (cameraRay, out hit, 100);
+
+		hit.distance = m_camera.far - 500;
+		//foreach (RaycastHit hit in hits){
+		//					hit.collider.tag != "Player"
+		//					if(!nearestHit){/*
+		/*
                                 if((hit.distance > hit.distance) && hit.collider.tag != tag)
                                     nearestHit = hit;
                                 Debug.Log(nearestHit.transform.name);
@@ -143,59 +143,57 @@ public class Disparador : MonoBehaviour {
         //					}
 
                         }*/
-        Vector3 realDirection;
-        realDirection = hit.point - transform.position;
-        lrMark.SetPosition(0, transform.position);
-        lrMark.SetPosition(1, hit.point);
-        mark.transform.position = hit.point;
-        //	realDirection = Quaternion.AngleAxis(-5, Vector3.right) * realDirection;
+		Vector3 realDirection;
+		realDirection = hit.point - transform.position;
+		lrMark.SetPosition (0, transform.position);
+		lrMark.SetPosition (1, hit.point);
+		mark.transform.position = hit.point;
+		//	realDirection = Quaternion.AngleAxis(-5, Vector3.right) * realDirection;
 
-        //				auxDirDoClique = Instantiate(dirDoClique, posMouse, Quaternion.identity) as Transform;
-        //				auxDirDoClique = Instantiate(dirDoClique, posMouse, Quaternion.identity) as Transform;
-        //				localDoClique = (auxDirDoClique.transform.position - transform.position);
-        //				olharParaDir = Quaternion.LookRotation(localDoClique);
-        if (Input.GetMouseButtonDown(0)) 
-            {
-                if (skill == 1)
-                { //Skill ancora
+		//				auxDirDoClique = Instantiate(dirDoClique, posMouse, Quaternion.identity) as Transform;
+		//				auxDirDoClique = Instantiate(dirDoClique, posMouse, Quaternion.identity) as Transform;
+		//				localDoClique = (auxDirDoClique.transform.position - transform.position);
+		//				olharParaDir = Quaternion.LookRotation(localDoClique);
+		if (Input.GetMouseButtonDown (0)) {
+			if (skill == 1) { //Skill ancora
 
-                    if (auxGancho == null)
-                    {
-                        GameObject hitObject = hit.collider.gameObject;
-                        print(hitObject.name);
-                        if (hitObject.tag == "Pillar")
-                        {
-                            auxGancho = Instantiate(gancho, transform.position, Quaternion.LookRotation(realDirection)) as GameObject;
-                        }
-                }
-                }
-                else if (skill == 2) // Skill contonetes
-                {
-                    GameObject hitObject = hit.collider.gameObject;
-                    print(hitObject.name);
-                    if (hitObject.tag == "Tile")
-                    {
-                        TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
-                        if (tileGround.pillar == null)
-                        {
-							tileGround.insertPillar(pillarToSpawn);
-                        }
-                    }
-                }
-				else if (skill == 3) // Skill trap
-				{
+				if (auxGancho == null) {
 					GameObject hitObject = hit.collider.gameObject;
-					print(hitObject.name);
-					if (hitObject.tag == "Tile")
-					{
-						TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
-						if (tileGround.trap == null)
-						{
-							tileGround.insertTrap(trapToSpawn);
+					print (hitObject.name);
+					if (hitObject.tag == "Pillar") {
+						auxGancho = Instantiate (gancho, transform.position, Quaternion.LookRotation (realDirection)) as GameObject;
+					}
+				}
+			} else if (skill == 2) { // Skill contonetes
+				GameObject hitObject = hit.collider.gameObject;
+				print (hitObject.name);
+				if (hitObject.tag == "Tile") {
+					TileGround tileGround = hitObject.GetComponentInParent<TileGround> ();
+					if (tileGround.pillar == null) {
+						tileGround.insertPillar (pillarToSpawn);
+					}
+				}else{
+					if(hitObject.tag == "TopWall"){
+						print("Hitou");
+						TopWall topWall =  hitObject.GetComponentInParent<TopWall> ();
+						if (topWall.pillar == null) {
+							topWall.insertPillar (pillarToSpawn);
 						}
 					}
 				}
-            }
+			} else if (skill == 3) { // Skill trap
+				GameObject hitObject = hit.collider.gameObject;
+				print (hitObject.name);
+				if (hitObject.tag == "Tile") {
+					TileGround tileGround = hitObject.GetComponentInParent<TileGround> ();
+					if (tileGround.trap == null) {
+						tileGround.insertTrap (trapToSpawn);
+					}
+				}
+			} else if (skill == 4) {
+				
+			} else {
+			}
 //				Destroy(auxDirDoClique.gameObject);
 
 
@@ -205,5 +203,6 @@ public class Disparador : MonoBehaviour {
 //				rb.velocity = posMouse*40;
 
 			
+		}
 	}
-} 
+}
