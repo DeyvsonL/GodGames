@@ -14,6 +14,8 @@ public class Disparador : MonoBehaviour {
 
 	public Transform dirDoClique;
 	private Transform auxDirDoClique;
+    [SerializeField]
+    private Transform rightHand;
 
 	public float viewRange = 60f;
 
@@ -117,6 +119,32 @@ public class Disparador : MonoBehaviour {
             gameObjectsSkill[3].gameObject.GetComponent<UnityEngine.UI.Button>().interactable = false;
         }
 
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        {
+            skill ++;
+            if (skill > gameObjectsSkill.Length)
+                skill = 1;
+            for (int i = 0; i < gameObjectsSkill.Length; i++)
+            {
+                gameObjectsSkill[i].gameObject.GetComponent<Button>().interactable = true;
+            }
+            gameObjectsSkill[skill-1].gameObject.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        }
+
+        if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        {
+            skill--;
+            if (skill == 0)
+                skill = gameObjectsSkill.Length;
+
+            for (int i = 0; i < gameObjectsSkill.Length; i++)
+            {
+                gameObjectsSkill[i].gameObject.GetComponent<Button>().interactable = true;
+            }
+
+            gameObjectsSkill[skill - 1].gameObject.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        }
+
         //		float rotHorizontal = Input.GetAxisRaw("Mouse X");
         //
         //		transform.Rotate ( 0, rotHorizontal, 0);
@@ -201,8 +229,8 @@ public class Disparador : MonoBehaviour {
 
                         }*/
         Vector3 realDirection;
-        realDirection = hit.point - transform.position;
-        lrMark.SetPosition(0, transform.position);
+        realDirection = hit.point - rightHand.position;
+        lrMark.SetPosition(0, rightHand.position);
         lrMark.SetPosition(1, hit.point);
         mark.transform.position = hit.point;
         //	realDirection = Quaternion.AngleAxis(-5, Vector3.right) * realDirection;
@@ -253,8 +281,7 @@ public class Disparador : MonoBehaviour {
                 }
             }else if (skill == 4) // Skill bullet
                 {
-                Vector3 vectorAux = new Vector3(0, 0, 1);
-                GameObject bulletAux=Instantiate(bullet, transform.position+ vectorAux, Quaternion.LookRotation(realDirection)) as GameObject;
+                GameObject bulletAux=Instantiate(bullet, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
                 bulletAux.GetComponent<Rigidbody>().velocity = realDirection * velocityBullet;
                 }
             }
