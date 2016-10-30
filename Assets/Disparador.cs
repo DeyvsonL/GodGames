@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Disparador : MonoBehaviour {
@@ -30,7 +31,9 @@ public class Disparador : MonoBehaviour {
 	public GameObject pillarToSpawn;
 	public GameObject trapToSpawn;
 
-    public int skill=1;
+    public Button[] gameObjectsSkill;
+
+    public int skill;
     public int Skill
     {
         get { return Skill; }
@@ -49,6 +52,30 @@ public class Disparador : MonoBehaviour {
         lrMark.SetWidth(0.05f, 0.05f);
         lrMark.SetColors(Color.red, Color.red);
         mark = GameObject.FindGameObjectWithTag("mark");
+        skill = 1;
+        GameObject[] go = GameObject.FindGameObjectsWithTag("BtnSkill");
+        gameObjectsSkill = new Button[go.Length];
+        for (int i = 0; i<go.Length; i++)
+        {
+            gameObjectsSkill[i] = go[i].GetComponent<Button>();
+        }
+
+        for (int i = 0; i < gameObjectsSkill.Length-1; i++)
+        {
+            for(int j=i+1;j< gameObjectsSkill.Length; j++)
+            {
+                if (string.Compare( gameObjectsSkill[j].gameObject.name,  gameObjectsSkill[i].gameObject.name, false) < 0)
+                {
+                    Button goAux = gameObjectsSkill[j];
+                    gameObjectsSkill[j] = gameObjectsSkill[i];
+                    gameObjectsSkill[i] = goAux;
+
+                }
+                
+            }
+        }
+
+
     }
 
     // Update is called once per frame
@@ -56,15 +83,38 @@ public class Disparador : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             skill = 1;
+            for (int i = 0;i< gameObjectsSkill.Length; i++){
+                gameObjectsSkill[i].gameObject.GetComponent<Button>().interactable = true;
+            }
+            gameObjectsSkill[0].gameObject.GetComponent<UnityEngine.UI.Button>().interactable = false;
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             skill = 2;
+            for (int i = 0; i < gameObjectsSkill.Length; i++)
+            {
+                gameObjectsSkill[i].gameObject.GetComponent<Button>().interactable = true;
+            }
+            gameObjectsSkill[1].gameObject.GetComponent<UnityEngine.UI.Button>().interactable = false;
         }
 		if (Input.GetKeyDown(KeyCode.Alpha3))
 		{
 			skill = 3;
-		}
+            for (int i = 0; i < gameObjectsSkill.Length; i++)
+            {
+                gameObjectsSkill[i].gameObject.GetComponent<Button>().interactable = true;
+            }
+            gameObjectsSkill[2].gameObject.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            skill = 4;
+            for (int i = 0; i < gameObjectsSkill.Length; i++)
+            {
+                gameObjectsSkill[i].gameObject.GetComponent<Button>().interactable = true;
+            }
+            gameObjectsSkill[3].gameObject.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        }
 
         //		float rotHorizontal = Input.GetAxisRaw("Mouse X");
         //
@@ -156,45 +206,48 @@ public class Disparador : MonoBehaviour {
         //				olharParaDir = Quaternion.LookRotation(localDoClique);
         if (Input.GetMouseButtonDown(0)) 
             {
-                if (skill == 1)
-                { //Skill ancora
+            if (skill == 1)
+            { //Skill ancora
 
-                    if (auxGancho == null)
-                    {
-                        GameObject hitObject = hit.collider.gameObject;
-                        print(hitObject.name);
-                        if (hitObject.tag == "Pillar")
-                        {
-                            auxGancho = Instantiate(gancho, transform.position, Quaternion.LookRotation(realDirection)) as GameObject;
-                        }
-                }
-                }
-                else if (skill == 2) // Skill contonetes
+                if (auxGancho == null)
                 {
                     GameObject hitObject = hit.collider.gameObject;
                     print(hitObject.name);
-                    if (hitObject.tag == "Tile")
+                    if (hitObject.tag == "Pillar")
                     {
-                        TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
-                        if (tileGround.pillar == null)
-                        {
-							tileGround.insertPillar(pillarToSpawn);
-                        }
+                        auxGancho = Instantiate(gancho, transform.position, Quaternion.LookRotation(realDirection)) as GameObject;
                     }
                 }
-				else if (skill == 3) // Skill trap
-				{
-					GameObject hitObject = hit.collider.gameObject;
-					print(hitObject.name);
-					if (hitObject.tag == "Tile")
-					{
-						TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
-						if (tileGround.trap == null)
-						{
-							tileGround.insertTrap(trapToSpawn);
-						}
-					}
-				}
+            }
+            else if (skill == 2) // Skill contonetes
+            {
+                GameObject hitObject = hit.collider.gameObject;
+                print(hitObject.name);
+                if (hitObject.tag == "Tile")
+                {
+                    TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
+                    if (tileGround.pillar == null)
+                    {
+                        tileGround.insertPillar(pillarToSpawn);
+                    }
+                }
+            }
+            else if (skill == 3) // Skill trap
+            {
+                GameObject hitObject = hit.collider.gameObject;
+                print(hitObject.name);
+                if (hitObject.tag == "Tile")
+                {
+                    TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
+                    if (tileGround.trap == null)
+                    {
+                        tileGround.insertTrap(trapToSpawn);
+                    }
+                }
+            }else if (skill == 4) // Skill bullet
+                {
+                    
+                }
             }
 //				Destroy(auxDirDoClique.gameObject);
 
