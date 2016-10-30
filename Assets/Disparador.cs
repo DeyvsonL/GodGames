@@ -7,8 +7,9 @@ public class Disparador : MonoBehaviour {
 	[Header("Hook Gameobject")]
 	public GameObject gancho;
 	private GameObject auxGancho;
-
-	public Camera m_camera;
+    public GameObject bullet;
+    public float velocityBullet;
+    public Camera m_camera;
 	public Transform m_camera_transform;
 
 	public Transform dirDoClique;
@@ -172,15 +173,21 @@ public class Disparador : MonoBehaviour {
         //				posMouse.z = m_camera.nearClipPlane;
         //				Vector3 nearCameraPosition = m_camera.ScreenToWorldPoint(posMouse);
         //				Ray cameraRay = new Ray(m_camera.transform.position, nearCameraPosition - m_camera_transform.position);
-        Ray cameraRay = m_camera.ScreenPointToRay(Input.mousePosition);
+        //Ray cameraRay = m_camera.ScreenPointToRay(m_camera.transform.forward);
 
-        Debug.DrawLine(cameraRay.origin, cameraRay.origin + cameraRay.direction * 10);
+        //Debug.DrawLine(cameraRay.origin, cameraRay.origin + cameraRay.direction * 10);
         RaycastHit hit;
 
         // RaycastHit nearestHit = new RaycastHit();
-        bool hasHit = Physics.Raycast(cameraRay, out hit, 100);
-
-        hit.distance = m_camera.far - 500;
+        bool hasHit = Physics.Raycast(m_camera.transform.position, m_camera.transform.forward, out hit, 100);
+        if (hit.collider == null)
+        {
+            hit.point = Camera.main.transform.position + Camera.main.transform.forward * 100f;
+        }
+        else
+        {
+            hit.distance = m_camera.far;
+        }
         //foreach (RaycastHit hit in hits){
         //					hit.collider.tag != "Player"
         //					if(!nearestHit){/*
@@ -210,7 +217,7 @@ public class Disparador : MonoBehaviour {
             { //Skill ancora
 
                 if (auxGancho == null)
-                {
+                {   
                     GameObject hitObject = hit.collider.gameObject;
                     print(hitObject.name);
                     if (hitObject.tag == "Pillar")
@@ -246,7 +253,9 @@ public class Disparador : MonoBehaviour {
                 }
             }else if (skill == 4) // Skill bullet
                 {
-                    
+                Vector3 vectorAux = new Vector3(0, 0, 1);
+                GameObject bulletAux=Instantiate(bullet, transform.position+ vectorAux, Quaternion.LookRotation(realDirection)) as GameObject;
+                bulletAux.GetComponent<Rigidbody>().velocity = realDirection * velocityBullet;
                 }
             }
 //				Destroy(auxDirDoClique.gameObject);
