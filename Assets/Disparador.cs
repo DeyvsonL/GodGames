@@ -203,15 +203,18 @@ public class Disparador : MonoBehaviour
 		//				posMouse.z = m_camera.nearClipPlane;
 		//				Vector3 nearCameraPosition = m_camera.ScreenToWorldPoint(posMouse);
 		//				Ray cameraRay = new Ray(m_camera.transform.position, nearCameraPosition - m_camera_transform.position);
-		Ray cameraRay = m_camera.ScreenPointToRay (Input.mousePosition);
-
-		Debug.DrawLine (cameraRay.origin, cameraRay.origin + cameraRay.direction * 10);
 		RaycastHit hit;
 
 		// RaycastHit nearestHit = new RaycastHit();
-		bool hasHit = Physics.Raycast (cameraRay, out hit, 100);
-
-		hit.distance = m_camera.far - 500;
+		bool hasHit = Physics.Raycast(m_camera.transform.position, m_camera.transform.forward, out hit, 100);
+		if (hit.collider == null)
+		{
+			hit.point = Camera.main.transform.position + Camera.main.transform.forward * 100f;
+		}
+		else
+		{
+			hit.distance = m_camera.far;
+		}
 		//foreach (RaycastHit hit in hits){
 		//					hit.collider.tag != "Player"
 		//					if(!nearestHit){/*
