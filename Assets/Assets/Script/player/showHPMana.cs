@@ -22,7 +22,6 @@ public class showHPMana : MonoBehaviour {
     void OnGUI()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        Debug.Log(player.tag);
         int health= player.GetComponent<HP>().Health;
         int maxHealth = player.GetComponent<HP>().MaxHealth;
 

@@ -27,7 +27,7 @@ public class Mana : MonoBehaviour
 
     void Update()
     {
-            
+        /*
         // Area Para Eu Testar As Barras Nao e nescessario Copiar essa parte
         if (Input.GetKeyDown(KeyCode.Alpha1) && mp > 0)
         {
@@ -54,7 +54,7 @@ public class Mana : MonoBehaviour
         {
             mp = 0;
         }
-        
+        */
     }
     /*
     void OnGUI()

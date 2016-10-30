@@ -19,7 +19,9 @@ public class Player : MonoBehaviour
 
     public bool hasKey;
 
-//    private Rigidbody rigidbody;
+    
+
+    //    private Rigidbody rigidbody;
 
     void Awake()
     {

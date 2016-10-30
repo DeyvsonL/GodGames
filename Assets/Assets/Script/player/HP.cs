@@ -25,7 +25,7 @@ public class HP : MonoBehaviour {
 	}
 	
 	void Update () {
-        
+        /*
         // Area Para Eu Testar As Barras Nao e nescessario Copiar essa parte
         if (Input.GetKeyDown(KeyCode.D) && health > 0)
         {
@@ -47,6 +47,7 @@ public class HP : MonoBehaviour {
 
             Destroy(GameObject.FindGameObjectWithTag("Player"));
         }
+        */
     }
 
     public void damage()
