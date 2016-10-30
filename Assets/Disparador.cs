@@ -29,7 +29,7 @@ public class Disparador : MonoBehaviour {
 
     public GameObject objectToSpawn;
 
-    public int skill;
+    public int skill=1;
     public int Skill
     {
         get { return Skill; }
@@ -46,6 +46,7 @@ public class Disparador : MonoBehaviour {
     void Start(){
         lrMark = GetComponent<LineRenderer>();
         lrMark.SetWidth(0.05f, 0.05f);
+        lrMark.SetColors(Color.red, Color.red);
         mark = GameObject.FindGameObjectWithTag("mark");
     }
 

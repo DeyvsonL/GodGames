@@ -16,19 +16,25 @@ public class Hook : MonoBehaviour {
 
 	private bool atirarCorda;
 	public static bool cordaColidiu;
+    private LineRenderer lrCorda;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
 		corpoRigido = GetComponent<Rigidbody>();
 		efeitoCorda = player.GetComponent<SpringJoint>();
 
 		atirarCorda = true;
 		cordaColidiu = false;
-	}
 
-	// Update is called once per frame
-	void Update () {
+        lrCorda = GetComponent<LineRenderer>();
+        lrCorda.SetWidth(0.05f, 0.05f);
+        lrCorda.SetColors(Color.blue, Color.blue);
+
+    }
+
+    // Update is called once per frame
+    void Update () {
 
 		distanciaDoPlayer = Vector3.Distance(transform.position, player.transform.position);
 
@@ -41,11 +47,15 @@ public class Hook : MonoBehaviour {
 		else
 			RecolherGancho();
 
-		//LineRender
-//		GetComponent<LineRenderer>().SetPosition(0, player.transform.position);
-//		GetComponent<LineRenderer>().SetPosition(1, transform.position);
-//
-	}
+
+        lrCorda.SetPosition(0, transform.position);
+        lrCorda.SetPosition(1, GameObject.FindGameObjectWithTag("Player").transform.position);
+
+        //LineRender
+        //		GetComponent<LineRenderer>().SetPosition(0, player.transform.position);
+        //		GetComponent<LineRenderer>().SetPosition(1, transform.position);
+        //
+    }
 	void OnTriggerEnter(Collider coll){
 		if(coll.tag != "Player" && coll.name != "Platform" && coll.name != "Floor"){
 			Debug.Log(coll.name);
