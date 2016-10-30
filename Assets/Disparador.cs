@@ -27,7 +27,8 @@ public class Disparador : MonoBehaviour {
     private GameObject mark;
     private LineRenderer lrGancho;
 
-    public GameObject objectToSpawn;
+	public GameObject pillarToSpawn;
+	public GameObject trapToSpawn;
 
     public int skill=1;
     public int Skill
@@ -60,6 +61,10 @@ public class Disparador : MonoBehaviour {
         {
             skill = 2;
         }
+		if (Input.GetKeyDown(KeyCode.Alpha3))
+		{
+			skill = 3;
+		}
 
         //		float rotHorizontal = Input.GetAxisRaw("Mouse X");
         //
@@ -173,10 +178,23 @@ public class Disparador : MonoBehaviour {
                         TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
                         if (tileGround.pillar == null)
                         {
-                            tileGround.insertPillar(objectToSpawn);
+							tileGround.insertPillar(pillarToSpawn);
                         }
                     }
                 }
+				else if (skill == 3) // Skill trap
+				{
+					GameObject hitObject = hit.collider.gameObject;
+					print(hitObject.name);
+					if (hitObject.tag == "Tile")
+					{
+						TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
+						if (tileGround.trap == null)
+						{
+							tileGround.insertTrap(trapToSpawn);
+						}
+					}
+				}
             }
 //				Destroy(auxDirDoClique.gameObject);
 
