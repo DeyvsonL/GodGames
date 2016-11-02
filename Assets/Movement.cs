@@ -17,12 +17,19 @@ public class Movement : MonoBehaviour
 
 	private int floorCount;
 
-	private Rigidbody rigidbody;
-	// Use this for initialization
-	void Start ()
+	private new Rigidbody rigidbody;
+    [SerializeField]
+    private Transform m_Cam;
+
+    // Use this for initialization
+    void Start ()
 	{
 		rigidbody = GetComponent<Rigidbody>();
 	}
+
+    void FixedUpdate() {
+        gameObject.transform.rotation = new Quaternion(0, m_Cam.transform.rotation.y, 0, m_Cam.transform.rotation.w);
+    }
 
 	// Update is called once per frame
 	void Update ()
