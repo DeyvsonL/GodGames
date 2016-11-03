@@ -33,7 +33,7 @@ public class Disparador : MonoBehaviour
 	private LineRenderer lrGancho;
 
 	public GameObject pillarToSpawn;
-	public GameObject trapToSpawn;
+	public GameObject trapSlow;
 
     public Button[] gameObjectsSkill;
 
@@ -360,7 +360,7 @@ public class Disparador : MonoBehaviour
                     TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
                     if (tileGround.trap == null)
                     {
-                        tileGround.insertTrap(trapToSpawn);
+                        tileGround.insertTrap(trapSlow);
                     }
                 }
             }else if (skill == 4) // Skill bullet

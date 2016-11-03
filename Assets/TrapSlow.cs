@@ -1,26 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Trap : MonoBehaviour {
+public class TrapSlow : MonoBehaviour {
 
     [SerializeField]
-    private int type; //1 == damage, 2 == slow, 3 == stun
+    private float slow = 0.5f;
 
     void OnTriggerEnter(Collider collider){
         if(collider.tag == "Player") {
-            collider.gameObject.GetComponent<Movement>().Slow = 0.5f;
+            collider.gameObject.GetComponent<Movement>().Slow = slow;
         } else if (collider.tag == "Enemy"){
             //mudar depois
-            collider.gameObject.GetComponent<Movement>().Slow = 0.5f;
+            collider.gameObject.GetComponent<Movement>().Slow = slow;
         }
     }
 
     void OnTriggerStay(Collider collider) {
         if (collider.tag == "Player") {
-            collider.gameObject.GetComponent<Movement>().Slow = 0.5f;
+            collider.gameObject.GetComponent<Movement>().Slow = slow;
         } else if (collider.tag == "Enemy") {
             //mudar depois
-            collider.gameObject.GetComponent<Movement>().Slow = 0.5f;
+            collider.gameObject.GetComponent<Movement>().Slow = slow;
         }
     }
 
