@@ -20,6 +20,16 @@ public class Movement : MonoBehaviour
 	private new Rigidbody rigidbody;
     [SerializeField]
     private Transform m_Cam;
+    [SerializeField]
+    private float slow = 1;
+    public float Slow {
+        get {
+            return this.slow;
+        }
+        set {
+            this.slow = value;
+        }
+    }
 
     // Use this for initialization
     void Start ()
@@ -43,11 +53,11 @@ public class Movement : MonoBehaviour
 		Vector3 velocity = rigidbody.velocity;
 
 		if (h != 0) {
-			transform.Translate (h * velMover * Time.fixedDeltaTime, 0, 0);
+			transform.Translate (h * velMover * Time.fixedDeltaTime * slow, 0, 0);
 		}
 
 		if(w != 0){
-			transform.Translate (0, 0, w*velMover*Time.fixedDeltaTime);
+			transform.Translate (0, 0, w*velMover*Time.fixedDeltaTime * slow);
 		}
 
 
