@@ -27,15 +27,11 @@ public class Movement : MonoBehaviour
 		rigidbody = GetComponent<Rigidbody>();
 	}
 
-    void FixedUpdate() {
-        gameObject.transform.rotation = new Quaternion(0, m_Cam.transform.rotation.y, 0, m_Cam.transform.rotation.w);
-    }
-
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate()
 	{
-
-		RaycastHit raio;
+        gameObject.transform.rotation = new Quaternion(0, m_Cam.transform.rotation.y, 0, m_Cam.transform.rotation.w);
+        RaycastHit raio;
 		noChao = Physics.Raycast (transform.position, -transform.up, out raio, 1.5f);
 
 		pendurado = Hook.cordaColidiu;
@@ -47,11 +43,11 @@ public class Movement : MonoBehaviour
 		Vector3 velocity = rigidbody.velocity;
 
 		if (h != 0) {
-			transform.Translate (h * velMover * Time.deltaTime, 0, 0);
+			transform.Translate (h * velMover * Time.fixedDeltaTime, 0, 0);
 		}
 
 		if(w != 0){
-			transform.Translate (0, 0, w*velMover*Time.deltaTime);
+			transform.Translate (0, 0, w*velMover*Time.fixedDeltaTime);
 		}
 
 
@@ -68,7 +64,7 @@ public class Movement : MonoBehaviour
 			GetComponent<Rigidbody> ().AddForce (transform.right * h * forçaBalançar);
 		} else if (!noChao && !pendurado) {
 			if (h != 0) {
-				transform.Translate (h * velMover * Time.deltaTime, 0, 0);
+				transform.Translate (h * velMover * Time.fixedDeltaTime, 0, 0);
 			}
 		}
 
