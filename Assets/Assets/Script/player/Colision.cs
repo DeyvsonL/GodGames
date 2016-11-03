@@ -15,13 +15,9 @@ public class Colision : MonoBehaviour {
 
     void OnCollisionEnter (Collision Colider)
     {
-        if (Colider.gameObject.tag == "wall")
+        if ((Colider.gameObject.tag == "Mob"))
         {
             gameObject.GetComponent<HP>().damage();
-        }
-        if ((Colider.gameObject.tag == "mob"))
-        {
-            Colider.gameObject.GetComponent<HP>().damage();
         }
     }
 }

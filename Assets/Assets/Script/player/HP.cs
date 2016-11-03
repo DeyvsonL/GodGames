@@ -39,15 +39,15 @@ public class HP : MonoBehaviour {
         {
             maxHealth = maxHealth + 10;
         }
-        
+        */
         if (health <= 0)
         {
             //DIE()
 
 
-            Destroy(GameObject.FindGameObjectWithTag("Player"));
+            Destroy(gameObject);
         }
-        */
+        
     }
 
     public void damage()

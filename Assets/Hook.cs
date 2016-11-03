@@ -38,7 +38,7 @@ public class Hook : MonoBehaviour {
 
 		distanciaDoPlayer = Vector3.Distance(transform.position, player.transform.position);
 
-		if(Input.GetMouseButtonDown(1)){
+		if(Input.GetMouseButtonDown(0)){
 			atirarCorda = false;
 		}
 
