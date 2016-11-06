@@ -31,9 +31,13 @@ public class Disparador : MonoBehaviour
 	private LineRenderer lrMark;
 	private GameObject mark;
 	private LineRenderer lrGancho;
+    [SerializeField]
+	private GameObject pillarToSpawn;
+    [SerializeField]
+	private GameObject trapSlow;
+    [SerializeField]
+    private GameObject trapDamage;
 
-	public GameObject pillarToSpawn;
-	public GameObject trapSlow;
 
     public Button[] gameObjectsSkill;
 
@@ -365,15 +369,27 @@ public class Disparador : MonoBehaviour
                         tileGround.insertTrap(trapSlow);
                     }
                 }
-            }
-        }
-        if (Input.GetMouseButton(0)) {
-
-            if (skill == 4) // Skill bullet
+            } 
+            else if (skill == 4) // Skill bullet
             {
                 GameObject bulletAux = Instantiate(bullet, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
                 bulletAux.GetComponent<Rigidbody>().velocity = realDirection * velocityBullet;
             }
+        }
+        if (Input.GetMouseButton(1)) {
+            if (skill == 3) // Skill trap
+            {
+                Debug.Log("pressed");
+                GameObject hitObject = hit.collider.gameObject;
+                print(hitObject.name);
+                if (hitObject.tag == "Tile") {
+                    TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
+                    if (tileGround.trap == null) {
+                        tileGround.insertTrap(trapDamage);
+                    }
+                }
+            }
+
         }
     
 //				Destroy(auxDirDoClique.gameObject);

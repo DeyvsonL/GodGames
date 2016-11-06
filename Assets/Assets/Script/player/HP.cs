@@ -17,12 +17,6 @@ public class HP : MonoBehaviour {
         get { return maxHealth; }
         set { maxHealth = value; }
     }
-    [SerializeField]
-    private GameObject target;
-
-    void Start () {
-	
-	}
 	
 	void Update () {
         /*
@@ -48,6 +42,10 @@ public class HP : MonoBehaviour {
             Destroy(gameObject);
         }
         
+    }
+
+    public void damage(int damage) {
+        health -= damage;
     }
 
     public void damage()
