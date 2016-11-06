@@ -3,30 +3,16 @@ using System.Collections;
 
 public class ColisionBullet : MonoBehaviour
 {
-
-    // Use this for initialization
-    void Start()
+    void OnCollisionEnter(Collision collider)
     {
-        GetComponent<HP>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    void OnCollisionEnter(Collision Colider)
-    {
-        if ((Colider.gameObject.tag != "Player") && (Colider.gameObject.tag == "Mob"))
+        if ((collider.gameObject.tag != "Player") && (collider.gameObject.tag == "Enemy"))
         {
-            Colider.gameObject.GetComponent<HP>().damage();
+            collider.gameObject.GetComponent<HP>().damage();
         }
-
-        if ((Colider.gameObject.tag != "Player"))
+        
+        if ((collider.gameObject.tag != "Player"))
         {
             Destroy(gameObject);
         }
     }
-    
 }

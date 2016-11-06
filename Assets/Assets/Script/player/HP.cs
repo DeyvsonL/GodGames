@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+using UnityEngine.SceneManagement;
 
 public class HP : MonoBehaviour {
 
-    // primeiro criaremos as variaveis 
     [SerializeField]
     private int health = 100;
     public int Health {
@@ -19,29 +20,23 @@ public class HP : MonoBehaviour {
     }
 	
 	void Update () {
-        /*
-        // Area Para Eu Testar As Barras Nao e nescessario Copiar essa parte
-        if (Input.GetKeyDown(KeyCode.D) && health > 0)
+        if (health <= 0) 
         {
-            health = health - 55;
-        }
-        if (Input.GetKeyDown(KeyCode.S) && health < maxHealth)
-        {
-            health = health + 55;
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            maxHealth = maxHealth + 10;
-        }
-        */
-        if (health <= 0)
-        {
-            //DIE()
-
-
-            Destroy(gameObject);
+            
+            if(gameObject.tag == "Player") {
+                gameObject.SetActive(false);
+                Invoke("Reload", 5);
+            } else {
+                Destroy(gameObject);
+            }
         }
         
+    }
+
+    public void Reload() {
+        int scene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(scene, LoadSceneMode.Single);
+        Time.timeScale = 1;
     }
 
     public void damage(int damage) {
@@ -52,17 +47,4 @@ public class HP : MonoBehaviour {
     {
         health= health-50;
     }
-    /*
-    void OnGUI()
-	{
-		ResolucaoMestre.AutoResize (1024,768);
-		GUI.BeginGroup (new Rect(150,50,painel.width,painel.height));
-
-		GUI.DrawTexture (new Rect(0,0,Hp.width * health / maxHealth, Hp.height),Hp);
-		GUI.Label (new Rect(0,0,200,100),"<Size=25>Hp "+ health + "/"+ maxHealth + "</Size>");
-		GUI.DrawTexture (new Rect(0,0,painel.width,painel.height), painel);
-
-		GUI.EndGroup ();
-	}
-    */
 }
