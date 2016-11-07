@@ -49,7 +49,7 @@ public class showHPMana : MonoBehaviour {
             GUI.DrawTexture(new Rect(0, 0, painel.width, painel.height), painel);
 
             GUI.EndGroup();
-        } else {
+        } else if(maxHealth >0) {
             int health = 0;
 
             int mana = 0;

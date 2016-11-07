@@ -18,8 +18,7 @@ public class Movement : MonoBehaviour
 	private int floorCount;
 
 	private new Rigidbody rigidbody;
-    [SerializeField]
-    private Transform m_Cam;
+    private Camera m_Cam;
     [SerializeField]
     private float slow = 1;
     public float Slow {
@@ -34,7 +33,8 @@ public class Movement : MonoBehaviour
     // Use this for initialization
     void Start ()
 	{
-		rigidbody = GetComponent<Rigidbody>();
+        m_Cam = Camera.main;
+        rigidbody = GetComponent<Rigidbody>();
 	}
 
 	// Update is called once per frame

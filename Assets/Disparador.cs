@@ -8,8 +8,7 @@ public class Disparador : MonoBehaviour
     private GameObject auxGancho;
     
     public float velocityBullet;
-    public Camera m_camera;
-	public Transform m_camera_transform;
+    private Camera m_camera;
 
 	public Transform dirDoClique;
 	private Transform auxDirDoClique;
@@ -62,6 +61,9 @@ public class Disparador : MonoBehaviour
     }
 
     void Start(){
+        m_camera = Camera.main;
+        if (m_camera != null)
+            Debug.Log("Camera encontrada");
         lrMark = GetComponent<LineRenderer>();
         lrMark.SetWidth(0.05f, 0.05f);
         lrMark.SetColors(Color.red, Color.red);

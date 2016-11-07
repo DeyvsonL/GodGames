@@ -28,22 +28,30 @@ namespace UnityStandardAssets.Cameras
 		private Quaternion m_PivotTargetRot;
 		private Quaternion m_TransformTargetRot;
 
+        
         protected override void Awake()
         {
             base.Awake();
             // Lock or unlock the cursor.
+            if (m_Target == null)
+                return;
+            gameStart();
+        }
+
+        public void gameStart() {
             Cursor.lockState = m_LockCursor ? CursorLockMode.Locked : CursorLockMode.None;
             Cursor.visible = !m_LockCursor;
             Cursor.visible = false;
             m_PivotEulers = m_Pivot.rotation.eulerAngles;
 
-	        m_PivotTargetRot = m_Pivot.transform.localRotation;
-			m_TransformTargetRot = transform.localRotation;
+            m_PivotTargetRot = m_Pivot.transform.localRotation;
+            m_TransformTargetRot = transform.localRotation;
         }
-
 
         protected void Update()
         {
+            if (m_Target == null)
+                return;
             HandleRotationMovement();
             if (m_LockCursor && Input.GetMouseButtonUp(0))
             {
@@ -51,7 +59,6 @@ namespace UnityStandardAssets.Cameras
                 Cursor.visible = !m_LockCursor;
             }
         }
-
 
         private void OnDisable()
         {
