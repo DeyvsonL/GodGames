@@ -164,6 +164,7 @@ public class Disparador : MonoBehaviour
 
         }
         if (Input.GetButtonDown(FIRE2)) {
+			print ("FIRE2");
             if (skill == TRAP) // Skill trap
             {
                 GameObject hitObject = hit.collider.gameObject;

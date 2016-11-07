@@ -10,6 +10,7 @@ public class Mob : MonoBehaviour {
         if (stunCount())
             return;
         //se não estiver estunado, fazer o resto das ações abaixo
+
 	}
 
     private bool stunCount() {
