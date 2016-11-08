@@ -165,15 +165,15 @@ public class Disparador : NetworkBehaviour
         }
         else if (skill == BULLET) // Skill bullet
         {
-            spawnBullet(realDirection);
+            Cmd_spawnBullet(realDirection);
         }
     }
 
-    
-    void spawnBullet(Vector3 realDirection) {
+    [Command]
+    void Cmd_spawnBullet(Vector3 realDirection) {
         GameObject bulletAux = Instantiate(bullet, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
         bulletAux.GetComponent<Rigidbody>().velocity = realDirection * velocityBullet;
-        NetworkServer.Spawn(bullet);
+        NetworkServer.Spawn(bulletAux);
     }
 
     private void calcateDirection(out RaycastHit hit, out Vector3 realDirection) {
