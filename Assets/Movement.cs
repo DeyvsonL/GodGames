@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.Networking;
 
-public class Movement : MonoBehaviour
+public class Movement : NetworkBehaviour
 {
 
 	public float velMover;
@@ -40,6 +40,8 @@ public class Movement : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate()
 	{
+        if (!isLocalPlayer)
+            return;
         gameObject.transform.rotation = new Quaternion(0, m_Cam.transform.rotation.y, 0, m_Cam.transform.rotation.w);
         RaycastHit raio;
 		noChao = Physics.Raycast (transform.position, -transform.up, out raio, 1.5f);

@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class Disparador : MonoBehaviour
+public class Disparador : NetworkBehaviour
 {
     private const string FIRE1 = "Fire1";
     private const string FIRE2 = "Fire2";
@@ -62,8 +63,6 @@ public class Disparador : MonoBehaviour
 
     void Start(){
         m_camera = Camera.main;
-        if (m_camera != null)
-            Debug.Log("Camera encontrada");
         lrMark = GetComponent<LineRenderer>();
         lrMark.SetWidth(0.05f, 0.05f);
         lrMark.SetColors(Color.red, Color.red);
@@ -93,80 +92,22 @@ public class Disparador : MonoBehaviour
     }
 
     void Update() {
+        if (!isLocalPlayer)
+            return;
 
         selectSkill();
+
         RaycastHit hit;
-        bool hasHit = Physics.Raycast(m_camera.transform.position, m_camera.transform.forward, out hit, 100);
-        if (hit.collider == null)
-        {
-            hit.point = Camera.main.transform.position + Camera.main.transform.forward * 100f;
-        }
-        else
-        {
-            hit.distance = m_camera.farClipPlane;
-        }
-
         Vector3 realDirection;
-        realDirection = hit.point - rightHand.position;
-        lrMark.SetPosition(0, rightHand.position);
-        lrMark.SetPosition(1, hit.point);
-        mark.transform.position = hit.point;
-       
-        if (Input.GetButtonDown(FIRE1)) {
-             
-            if (skill == HOOK)
-            { //Skill ancora
-                if (auxGancho == null)
-                {
-                    GameObject hitObject = hit.collider.gameObject;
-                    print(hitObject.name);
-                    if (hitObject.tag == "Pillar")
-                    {
-                        auxGancho = Instantiate(hook, transform.position, Quaternion.LookRotation(realDirection)) as GameObject;
-                    }
-                }
-            }
-            else if (skill == PILLAR) // Skill contonetes
-            {
-                GameObject hitObject = hit.collider.gameObject;
-                if (hitObject.tag == "Tile")
-                {
-                    TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
-                    if (tileGround.pillar == null)
-                    {
-                        tileGround.insertPillar(pillarToSpawn);
-                    }
-                }
-                if (hitObject.tag == "TopWall")
-                {
-                    TopWall topWall = hitObject.GetComponentInParent<TopWall>();
-                    if (topWall.pillar == null)
-                    {
-                        topWall.insertPillar(pillarToSpawn);
-                    }
-                }
-            }
-            else if (skill == TRAP) // Skill trap
-            {
-                GameObject hitObject = hit.collider.gameObject;
-                if (hitObject.tag == "Tile")
-                {
-                    TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
-                    if (tileGround.trap == null)
-                    {
-                        tileGround.insertTrap(trapSlow);
-                    }
-                }
-            }
-            else if(skill == BULLET) // Skill bullet
-            {
-                GameObject bulletAux = Instantiate(bullet, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
-                bulletAux.GetComponent<Rigidbody>().velocity = realDirection * velocityBullet;
-            }
+        calcateDirection(out hit, out realDirection);
+        tryShot(hit, realDirection);
+    }
 
-        }
-        if (Input.GetButtonDown(FIRE2)) {
-			print ("FIRE2");
+    private void tryShot(RaycastHit hit, Vector3 realDirection) {
+        if (Input.GetButtonDown(FIRE1)) {
+            skillsButtonOne(hit, realDirection);
+
+        } else if (Input.GetButtonDown(FIRE2)) {
             if (skill == TRAP) // Skill trap
             {
                 GameObject hitObject = hit.collider.gameObject;
@@ -178,13 +119,75 @@ public class Disparador : MonoBehaviour
                 }
             }
             if (skill == BULLET) // Skill bullet
-          {
+            {
                 GameObject bulletAux = Instantiate(bulletStun, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
                 bulletAux.GetComponent<Rigidbody>().velocity = realDirection * velocityBullet;
             }
 
         }
-	}
+    }
+
+    private void skillsButtonOne(RaycastHit hit, Vector3 realDirection) {
+        if (skill == HOOK) { //Skill ancora
+            if (auxGancho == null) {
+                GameObject hitObject = hit.collider.gameObject;
+                print(hitObject.name);
+                if (hitObject.tag == "Pillar") {
+                    auxGancho = Instantiate(hook, transform.position, Quaternion.LookRotation(realDirection)) as GameObject;
+                }
+            }
+        }
+        else if (skill == PILLAR) // Skill contonetes
+        {
+            GameObject hitObject = hit.collider.gameObject;
+            if (hitObject.tag == "Tile") {
+                TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
+                if (tileGround.pillar == null) {
+                    tileGround.insertPillar(pillarToSpawn);
+                }
+            }
+            if (hitObject.tag == "TopWall") {
+                TopWall topWall = hitObject.GetComponentInParent<TopWall>();
+                if (topWall.pillar == null) {
+                    topWall.insertPillar(pillarToSpawn);
+                }
+            }
+        }
+        else if (skill == TRAP) // Skill trap
+        {
+            GameObject hitObject = hit.collider.gameObject;
+            if (hitObject.tag == "Tile") {
+                TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
+                if (tileGround.trap == null) {
+                    tileGround.insertTrap(trapSlow);
+                }
+            }
+        }
+        else if (skill == BULLET) // Skill bullet
+        {
+            spawnBullet(realDirection);
+        }
+    }
+
+    
+    void spawnBullet(Vector3 realDirection) {
+        GameObject bulletAux = Instantiate(bullet, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
+        bulletAux.GetComponent<Rigidbody>().velocity = realDirection * velocityBullet;
+        NetworkServer.Spawn(bullet);
+    }
+
+    private void calcateDirection(out RaycastHit hit, out Vector3 realDirection) {
+        bool hasHit = Physics.Raycast(m_camera.transform.position, m_camera.transform.forward, out hit, 100);
+        if (hit.collider == null) {
+            hit.point = Camera.main.transform.position + Camera.main.transform.forward * 100f;
+        } else {
+            hit.distance = m_camera.farClipPlane;
+        }
+        realDirection = hit.point - rightHand.position;
+        lrMark.SetPosition(0, rightHand.position);
+        lrMark.SetPosition(1, hit.point);
+        mark.transform.position = hit.point;
+    }
 
     private void selectSkill() {
         if (Input.GetKeyDown(KeyCode.Alpha1)) {
