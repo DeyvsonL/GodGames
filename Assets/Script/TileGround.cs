@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class TileGround : Tile {
+public class TileGround :  NetworkBehaviour
+{
 
 	public GameObject trap;
 	public GameObject pillar;
@@ -18,7 +20,9 @@ public class TileGround : Tile {
 		
 	public void insertPillar(GameObject objectToSpawn){
 		pillar = insertObject (objectToSpawn);
-	}
+        Destroy(pillar, 10);
+
+    }
 
 	public void insertTrap(GameObject objectToSpawn){
 		trap = insertObject (objectToSpawn);
@@ -29,7 +33,10 @@ public class TileGround : Tile {
 		float trapHeight = objectToSpawn.GetComponent<MeshFilter>().sharedMesh.bounds.extents.y * objectToSpawn.transform.localScale.y;
 
 		Vector3 spawnPos = transform.position + new Vector3 (0, tileHeight + trapHeight + 0.1f, 0);
-		return Instantiate (objectToSpawn, spawnPos, Quaternion.identity) as GameObject;
-	}
+
+		GameObject objReturn = Instantiate (objectToSpawn, spawnPos, Quaternion.identity) as GameObject;
+        NetworkServer.Spawn(objReturn);
+        return objReturn;
+    }
 
 }

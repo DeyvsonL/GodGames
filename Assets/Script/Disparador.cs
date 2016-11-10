@@ -106,7 +106,6 @@ public class Disparador : NetworkBehaviour
     private void tryShot(RaycastHit hit, Vector3 realDirection) {
         if (Input.GetButtonDown(FIRE1)) {
             skillsButtonOne(hit, realDirection);
-
         } else if (Input.GetButtonDown(FIRE2)) {
             if (skill == TRAP) // Skill trap
             {
@@ -128,7 +127,7 @@ public class Disparador : NetworkBehaviour
     }
 
     private void skillsButtonOne(RaycastHit hit, Vector3 realDirection) {
-        if (skill == HOOK) { //Skill ancora
+        if (skill == HOOK) {
             if (auxGancho == null) {
                 GameObject hitObject = hit.collider.gameObject;
                 print(hitObject.name);
@@ -140,12 +139,14 @@ public class Disparador : NetworkBehaviour
         else if (skill == PILLAR) // Skill contonetes
         {
             GameObject hitObject = hit.collider.gameObject;
+            
             if (hitObject.tag == "Tile") {
                 TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
                 if (tileGround.pillar == null) {
                     tileGround.insertPillar(pillarToSpawn);
                 }
             }
+            
             if (hitObject.tag == "TopWall") {
                 TopWall topWall = hitObject.GetComponentInParent<TopWall>();
                 if (topWall.pillar == null) {
