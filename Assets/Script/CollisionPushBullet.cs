@@ -8,7 +8,6 @@ public class CollisionPushBullet : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collider)
 	{
-		print (collider.gameObject.name);
 		if ((collider.gameObject.tag == "Mob"))
 		{
 			Vector3 direction = GetComponent<Transform> ().forward;
