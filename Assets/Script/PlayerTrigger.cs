@@ -118,9 +118,9 @@ public class PlayerTrigger : NetworkBehaviour{
             if (auxGancho == null) {
                 GameObject hitObject = hit.collider.gameObject;
                 print(hitObject.name);
-                if (hitObject.tag == "Pillar") {
+                //if (hitObject.tag == "Pillar") {
                     auxGancho = Instantiate(hookPrefab, transform.position, Quaternion.LookRotation(realDirection)) as GameObject;
-                }
+                //}
             }
         }
         else if (skill == PILLAR) // Skill contonetes
