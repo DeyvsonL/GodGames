@@ -14,11 +14,14 @@ public class PlayerHook : MonoBehaviour {
 	private SpringJoint efeitoCorda;
 
 	/* Hook pull direction is defined by weight difference between target and player
-	 * 	target is pulled if targetWeight < playerWeight : hookPullDirection = 1
-	 * 	player is pulled if playerWeight < targetWeight : hookPullDirection = -1
-	 * 	hook is pulled if playerWeight == targetWeight : hookPullDirection = 0
+	 * 	target is pulled if targetWeight < playerWeight
+	 * 	player is pulled if playerWeight < targetWeight
+	 * 	hook is pulled if playerWeight == targetWeight
 	 */
 	private int hookPullDirection;
+	private const int PULL_TARGET = 1;
+	private const int PULL_PLAYER = -1;
+	private const int PULL_HOOK = 0;
 	private float pullSpeed = 25;
 
 	private float distanciaDoPlayer;
@@ -67,12 +70,12 @@ public class PlayerHook : MonoBehaviour {
 			Rigidbody playerRigidBody = player.GetComponent<Rigidbody> ();
 			if (targetRigidBody && playerRigidBody) {
 				if (targetRigidBody.mass < playerRigidBody.mass) {
-					hookPullDirection = 1;
+					hookPullDirection = PULL_TARGET;
 					gameObject.transform.SetParent (target.transform);
 				} else if (targetRigidBody.mass > playerRigidBody.mass) {
-					hookPullDirection = -1;
+					hookPullDirection = PULL_PLAYER;
 				} else {
-					hookPullDirection = 0;
+					hookPullDirection = PULL_HOOK;
 				}
 			} else {
 				hookPullDirection = 0;
@@ -102,11 +105,11 @@ public class PlayerHook : MonoBehaviour {
 	}
 
 	public void RecolherGancho(){
-		if (hookPullDirection > 0) {
+		if (hookPullDirection == PULL_TARGET) {
 			target.transform.position = Vector3.MoveTowards(target.transform.position, player.transform.position, pullSpeed*Time.deltaTime);
-		} else if (hookPullDirection < 0) {
+		} else if (hookPullDirection == PULL_PLAYER) {
 			player.transform.position = Vector3.MoveTowards(player.transform.position, target.transform.position, pullSpeed*Time.deltaTime);
-		} else {
+		} else if (hookPullDirection == PULL_HOOK) {
 			transform.position = Vector3.MoveTowards(transform.position, player.transform.position, pullSpeed*Time.deltaTime);
 		}
 
