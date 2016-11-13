@@ -8,7 +8,7 @@ public class PlayerHook : MonoBehaviour {
 	public float forçaCorda;
 	public float peso;
 
-	private Player player;
+	private GameObject player;
 	private Rigidbody corpoRigido;
 	private SpringJoint efeitoCorda;
 
@@ -20,7 +20,7 @@ public class PlayerHook : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		player = GetComponent<Player> ();
+		player = GameObject.FindGameObjectWithTag("Player");
 		corpoRigido = GetComponent<Rigidbody>();
 		efeitoCorda = player.GetComponent<SpringJoint>();
 
@@ -48,7 +48,7 @@ public class PlayerHook : MonoBehaviour {
         }
 
         lrCorda.SetPosition(0, transform.position);
-        lrCorda.SetPosition(1, GameObject.FindGameObjectWithTag("Player").transform.position);
+        lrCorda.SetPosition(1, player.transform.position);
 
     }
 	void OnTriggerEnter(Collider coll){
