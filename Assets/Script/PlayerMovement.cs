@@ -20,6 +20,11 @@ public class PlayerMovement : NetworkBehaviour {
 	private bool jumpTriggered;
 
 	private Vector3 currentVelocity;
+	[SerializeField]
+	private float slow = 1;
+	public float Slow {
+		set{slow = value;}
+	}
 
     void Start() {
         body = GetComponent<Rigidbody>();
@@ -44,9 +49,10 @@ public class PlayerMovement : NetworkBehaviour {
     void FixedUpdate() {
         if (!isLocalPlayer)
             return;
-
-		Vector3 targetPosition = body.position + (((transform.forward * movementInput.y) + (transform.right * movementInput.x)) * speed);
-		Vector3 smoothedTargetPosition = Vector3.SmoothDamp (body.position, targetPosition, ref currentVelocity, 0.2f, speed, Time.fixedDeltaTime);
+		Debug.Log (speed * slow);
+		float currentSpeed = speed * slow;
+		Vector3 targetPosition = body.position + (((transform.forward * movementInput.y) + (transform.right * movementInput.x)) * currentSpeed);
+		Vector3 smoothedTargetPosition = Vector3.SmoothDamp (body.position, targetPosition, ref currentVelocity, 0.2f, currentSpeed, Time.fixedDeltaTime);
 		body.MovePosition (smoothedTargetPosition);
 		if (jumpInput) {
 			body.AddForce (Vector3.up * jump, ForceMode.VelocityChange);

@@ -5,7 +5,7 @@ public class TrapSlow : MonoBehaviour {
 
     [SerializeField]
     private float slow = 0.5f;
-	/*
+
     void OnTriggerEnter(Collider collider){
         if(collider.tag == "Player") {
             collider.gameObject.GetComponent<PlayerMovement>().Slow = slow;
@@ -32,5 +32,5 @@ public class TrapSlow : MonoBehaviour {
             collider.gameObject.GetComponent<PlayerMovement>().Slow = 1;
         }
     }
-*/
+
 }
