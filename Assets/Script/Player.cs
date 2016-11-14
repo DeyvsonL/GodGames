@@ -9,8 +9,9 @@ public class Player : NetworkBehaviour {
 	public Camera Cam{
 		get { return cam;}
 	}
-
+	[SerializeField]
     private float currentHealth;
+	[SerializeField]
     private float currentMana;
 
 	private bool dead;

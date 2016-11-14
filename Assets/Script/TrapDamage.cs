@@ -9,29 +9,19 @@ public class TrapDamage : MonoBehaviour {
     private float damageInterval = 1f;
     private float lastDamageTime;
     
-    void OnTriggerEnter(Collider collider) {
+    void Start() {
         lastDamageTime = Time.time;
     }
     
     void OnTriggerStay(Collider collider) {
-        if (collider.tag == "Player" || collider.tag == "Enemy") {
+        if (collider.tag == "Player") {
             if(Time.time > lastDamageTime + damageInterval) {
-                collider.gameObject.GetComponent<HP>().damage(damage);
+				Debug.Log (damage);
+				collider.gameObject.GetComponent<Player>().takeDamage(damage);
                 lastDamageTime = Time.time;
             } else {
                 Debug.Log(lastDamageTime + " " + (Time.time + damageInterval));
             }
-            
         }
     }
-    /*
-    void OnTriggerExit(Collider collider) {
-        if (collider.tag == "Player") {
-            collider.gameObject.GetComponent<Movement>().Slow = 1;
-        } else if (collider.tag == "Enemy") {
-            //mudar depois
-            collider.gameObject.GetComponent<Movement>().Slow = 1;
-        }
-    }
-    */
 }

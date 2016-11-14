@@ -49,7 +49,6 @@ public class PlayerMovement : NetworkBehaviour {
     void FixedUpdate() {
         if (!isLocalPlayer)
             return;
-		Debug.Log (speed * slow);
 		float currentSpeed = speed * slow;
 		Vector3 targetPosition = body.position + (((transform.forward * movementInput.y) + (transform.right * movementInput.x)) * currentSpeed);
 		Vector3 smoothedTargetPosition = Vector3.SmoothDamp (body.position, targetPosition, ref currentVelocity, 0.2f, currentSpeed, Time.fixedDeltaTime);
