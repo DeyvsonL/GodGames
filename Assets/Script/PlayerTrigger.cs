@@ -86,7 +86,7 @@ public class PlayerTrigger : NetworkBehaviour{
 
         RaycastHit hit;
         Vector3 realDirection;
-        calcateDirection(out hit, out realDirection);
+        calculateDirection(out hit, out realDirection);
         tryShot(hit, realDirection);
     }
 
@@ -169,7 +169,7 @@ public class PlayerTrigger : NetworkBehaviour{
         NetworkServer.Spawn(bulletAux);
     }
 
-    private void calcateDirection(out RaycastHit hit, out Vector3 realDirection) {
+    private void calculateDirection(out RaycastHit hit, out Vector3 realDirection) {
 		bool hasHit = Physics.Raycast(player.Cam.transform.position, player.Cam.transform.forward, out hit, 100);
         if (hit.collider == null) {
             hit.point = Camera.main.transform.position + Camera.main.transform.forward * 100f;
@@ -185,53 +185,40 @@ public class PlayerTrigger : NetworkBehaviour{
     private void selectSkill() {
         if (Input.GetKeyDown(KeyCode.Alpha1)) {
             skill = 1;
-            for (int i = 0; i < gameObjectsSkill.Length; i++) {
-                gameObjectsSkill[i].gameObject.GetComponent<Button>().interactable = true;
-            }
-            gameObjectsSkill[0].gameObject.GetComponent<UnityEngine.UI.Button>().interactable = false;
+            updateButtonSKill();
         }
         if (Input.GetKeyDown(KeyCode.Alpha2)) {
             skill = 2;
-            for (int i = 0; i < gameObjectsSkill.Length; i++) {
-                gameObjectsSkill[i].gameObject.GetComponent<Button>().interactable = true;
-            }
-            gameObjectsSkill[1].gameObject.GetComponent<UnityEngine.UI.Button>().interactable = false;
+            updateButtonSKill();
         }
         if (Input.GetKeyDown(KeyCode.Alpha3)) {
             skill = 3;
-            for (int i = 0; i < gameObjectsSkill.Length; i++) {
-                gameObjectsSkill[i].gameObject.GetComponent<Button>().interactable = true;
-            }
-            gameObjectsSkill[2].gameObject.GetComponent<UnityEngine.UI.Button>().interactable = false;
+            updateButtonSKill();
         }
         if (Input.GetKeyDown(KeyCode.Alpha4)) {
             skill = 4;
-            for (int i = 0; i < gameObjectsSkill.Length; i++) {
-                gameObjectsSkill[i].gameObject.GetComponent<Button>().interactable = true;
-            }
-            gameObjectsSkill[3].gameObject.GetComponent<UnityEngine.UI.Button>().interactable = false;
+            updateButtonSKill();
         }
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) {
             skill++;
             if (skill > gameObjectsSkill.Length)
                 skill = 1;
-            for (int i = 0; i < gameObjectsSkill.Length; i++) {
-                gameObjectsSkill[i].gameObject.GetComponent<Button>().interactable = true;
-            }
-            gameObjectsSkill[skill - 1].gameObject.GetComponent<UnityEngine.UI.Button>().interactable = false;
+            updateButtonSKill();
         }
 
         if (Input.GetAxis("Mouse ScrollWheel") < 0f) {
             skill--;
             if (skill == 0)
                 skill = gameObjectsSkill.Length;
-
-            for (int i = 0; i < gameObjectsSkill.Length; i++) {
-                gameObjectsSkill[i].gameObject.GetComponent<Button>().interactable = true;
-            }
-
-            gameObjectsSkill[skill - 1].gameObject.GetComponent<UnityEngine.UI.Button>().interactable = false;
+            updateButtonSKill();
         }
+    }
+
+    private void updateButtonSKill() {
+        for (int i = 0; i < gameObjectsSkill.Length; i++) {
+            gameObjectsSkill[i].gameObject.GetComponent<Button>().interactable = true;
+        }
+        gameObjectsSkill[skill - 1].gameObject.GetComponent<UnityEngine.UI.Button>().interactable = false;
     }
 }
