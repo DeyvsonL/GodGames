@@ -11,8 +11,14 @@ public class Player : NetworkBehaviour {
 	}
 	[SerializeField]
     private float currentHealth;
+	public float CurrentHealth {
+		get{ return currentHealth; }
+	}
 	[SerializeField]
-    private float currentMana;
+	private float currentMana;
+	public float CurrentMana {
+		get{ return currentMana; }
+	}
 
 	private bool dead;
 
@@ -23,9 +29,11 @@ public class Player : NetworkBehaviour {
 
     override public void OnStartLocalPlayer() {
         base.OnStartLocalPlayer();
-        FreeLookCam flc = GameObject.FindGameObjectWithTag("CamController").GetComponent<FreeLookCam>();
+		GameObject camController = GameObject.FindGameObjectWithTag ("CamController");
+		FreeLookCam flc = camController.GetComponent<FreeLookCam>();
         flc.Target = gameObject.transform;
         flc.gameStart();
+		camController.GetComponent<ShowHPMana>().Player = this;
 		cam = Camera.main;
     }
 

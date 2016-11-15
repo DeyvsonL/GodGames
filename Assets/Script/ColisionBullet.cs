@@ -9,9 +9,9 @@ public class ColisionBullet : MonoBehaviour
     {
         if ((collider.gameObject.tag != "Player") && (collider.gameObject.tag == "Mob"))
         {
-            collider.gameObject.GetComponent<HP>().damage(damage);
+			collider.gameObject.GetComponent<Mob>().takeDamage(damage);
         }
-        if ((collider.gameObject.tag != "Player")){
+        if (collider.gameObject.tag != "Player"){
             Destroy(gameObject);
         }
     }

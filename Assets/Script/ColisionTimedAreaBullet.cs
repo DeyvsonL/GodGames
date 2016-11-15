@@ -22,7 +22,7 @@ public class ColisionTimedAreaBullet : MonoBehaviour
 
 		foreach (Collider c in colliders){
 			if (c.gameObject.tag == "Mob") {
-				c.gameObject.GetComponent<HP>().damage(damage);
+				c.gameObject.GetComponent<Mob>().takeDamage(damage);
 			}
 		}
 		Destroy(gameObject);

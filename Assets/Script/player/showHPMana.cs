@@ -1,35 +1,27 @@
 ﻿using UnityEngine;
 
-public class showHPMana : MonoBehaviour {
+public class ShowHPMana : MonoBehaviour {
     [SerializeField]
     private Texture2D Hp;
     [SerializeField]
     private Texture2D ManaT;
     [SerializeField]
     private Texture2D painel;
-    private GameObject player;
+
+    private Player player;
+	public Player Player{
+		set{player = value; }
+	}
     private int maxHealth;
     private int maxMana;
 
-    // Use this for initialization
-    void Start () {
-	    
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        player = GameObject.FindGameObjectWithTag("Player");
-
-    }
-
-    void OnGUI()
-    {
+    void OnGUI(){
         if (player != null) {
-            int health = player.GetComponent<HP>().Health;
-            maxHealth = player.GetComponent<HP>().MaxHealth;
+			int health = (int)player.CurrentHealth;
+			maxHealth = (int)player.health;
 
-            int mana = player.GetComponent<Mana>().Mp;
-            maxMana = player.GetComponent<Mana>().MaxMana;
+			int mana = (int)player.mana;
+			maxMana = (int)player.CurrentMana;
 
             ResolucaoMestre.AutoResize(1024, 768);
             GUI.BeginGroup(new Rect(150, 50, painel.width, painel.height));

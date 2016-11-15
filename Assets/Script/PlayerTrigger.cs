@@ -115,12 +115,13 @@ public class PlayerTrigger : NetworkBehaviour{
 
     private void skillsButtonOne(RaycastHit hit, Vector3 realDirection) {
         if (skill == HOOK) {
+			
             if (auxGancho == null) {
                 GameObject hitObject = hit.collider.gameObject;
-                print(hitObject.name);
-                //if (hitObject.tag == "Pillar") {
-                    auxGancho = Instantiate(hookPrefab, transform.position, Quaternion.LookRotation(realDirection)) as GameObject;
-                //}
+				Debug.Log(hitObject.name);
+                auxGancho = Instantiate(hookPrefab, transform.position, Quaternion.LookRotation(realDirection)) as GameObject;
+				Debug.Log (auxGancho);
+				Debug.Log (auxGancho.transform.position);
             }
         }
         else if (skill == PILLAR) // Skill contonetes

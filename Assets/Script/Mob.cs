@@ -6,6 +6,8 @@ public class Mob : MonoBehaviour {
 
     private float stunTime = 0;
 
+	private float health = 10;
+
     void Update () {
         if (stunCount())
             return;
@@ -27,4 +29,8 @@ public class Mob : MonoBehaviour {
         stunned = true;
         stunTime = time;
     }
+
+	public void takeDamage(float damage){
+		health -= damage;
+	}
 }
