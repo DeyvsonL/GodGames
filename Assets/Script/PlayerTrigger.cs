@@ -154,7 +154,7 @@ public class PlayerTrigger : NetworkBehaviour{
     [Command]
     private void Cmd_spawnTrapOne(RaycastHit hit) {
         GameObject hitObject = hit.collider.gameObject;
-        if (hitObject.tag == "Tile") {
+        if (hitObject!=null &&  hitObject.tag == "Tile") {
             TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
             if (tileGround.trap == null) {
                 tileGround.insertTrap(trapSlowPrefab);

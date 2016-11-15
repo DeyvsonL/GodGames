@@ -8,6 +8,9 @@ public class Mob : MonoBehaviour {
 
 	private float health = 10;
 
+	[SerializeField]
+	private float damage = 20;
+
     void Update () {
         if (stunCount())
             return;
@@ -33,4 +36,13 @@ public class Mob : MonoBehaviour {
 	public void takeDamage(float damage){
 		health -= damage;
 	}
+
+	void OnCollisionEnter(Collision collider)
+	{
+		if ((collider.gameObject.tag == "Player"))
+		{
+			collider.gameObject.GetComponent<Player>().takeDamage(damage);
+		}
+	}
+
 }
