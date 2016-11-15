@@ -1,73 +1,69 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class PlayerHook : MonoBehaviour {
 
-	public float velLançar;
-	public float tamanhoCorda;
-	public float forçaCorda;
-	public float peso;
+	public float lauchSpeed;
+	public float ropeLength;
+	public float ropeForce;
+	public float weight;
 
 	private GameObject player;
 	private GameObject target;
-	private Rigidbody corpoRigido;
-	private SpringJoint efeitoCorda;
-
-	/* Hook pull direction is defined by weight difference between target and player
+	private Rigidbody hookBody;
+	private SpringJoint ropeEffect;
+    private Rigidbody playerRigidBody;
+    /* Hook pull direction is defined by weight difference between target and player
 	 * 	target is pulled if targetWeight < playerWeight
 	 * 	player is pulled if playerWeight < targetWeight
 	 * 	hook is pulled if playerWeight == targetWeight
 	 */
-	private int hookPullDirection;
+    private int hookPullDirection;
 	private const int PULL_TARGET = 1;
 	private const int PULL_PLAYER = -1;
 	private const int PULL_HOOK = 0;
 	private float pullSpeed = 25;
 
-	private float distanciaDoPlayer;
+	private float playerDistance;
 
-	private bool atirarCorda;
-	public static bool cordaColidiu;
-    private LineRenderer lrCorda;
+	private bool launchRope;
+	public static bool ropeCollided;
+    private LineRenderer lrRope;
 
-    // Use this for initialization
     void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
-		corpoRigido = GetComponent<Rigidbody>();
-		efeitoCorda = player.GetComponent<SpringJoint>();
+		hookBody = GetComponent<Rigidbody>();
+		ropeEffect = player.GetComponent<SpringJoint>();
+        playerRigidBody = player.GetComponent<Rigidbody>();
+        launchRope = true;
+		ropeCollided = false;
 
-		atirarCorda = true;
-		cordaColidiu = false;
-
-        lrCorda = GetComponent<LineRenderer>();
-        lrCorda.SetWidth(0.05f, 0.05f);
-        lrCorda.SetColors(Color.blue, Color.blue);
+        lrRope = GetComponent<LineRenderer>();
+        lrRope.SetWidth(0.05f, 0.05f);
+        lrRope.SetColors(Color.blue, Color.blue);
 
     }
 
-    // Update is called once per frame
     void Update () {
-		distanciaDoPlayer = Vector3.Distance(transform.position, player.transform.position);
+		playerDistance = Vector3.Distance(transform.position, player.transform.position);
 
 		if(Input.GetMouseButtonDown(0)){
-			atirarCorda = false;
+			launchRope = false;
 		}
 
-        if (atirarCorda) {
-            AtirarGancho();
+        if (launchRope) {
+            LaunchHook();
         } else {
-            RecolherGancho();
+            RecallHook();
         }
 
-        lrCorda.SetPosition(0, transform.position);
-        lrCorda.SetPosition(1, player.transform.position);
+        lrRope.SetPosition(0, transform.position);
+        lrRope.SetPosition(1, player.transform.position);
 
     }
 	void OnTriggerEnter(Collider coll){
 		if(coll.tag != "Player" && coll.name != "Platform" && coll.name != "Floor"){
 			target = coll.gameObject;
 			Rigidbody targetRigidBody = target.GetComponent<Rigidbody> ();
-			Rigidbody playerRigidBody = player.GetComponent<Rigidbody> ();
 			if (targetRigidBody && playerRigidBody) {
 				if (targetRigidBody.mass < playerRigidBody.mass) {
 					hookPullDirection = PULL_TARGET;
@@ -82,29 +78,29 @@ public class PlayerHook : MonoBehaviour {
 			}
 
 			Debug.Log(coll.name);
-			cordaColidiu = true;
+			ropeCollided = true;
 		}
 	}
 
-	public void AtirarGancho(){
-		if(distanciaDoPlayer <= tamanhoCorda){
-			if(!cordaColidiu){
-				transform.Translate(0, 0, velLançar*Time.deltaTime);
+	public void LaunchHook(){
+		if(playerDistance <= ropeLength){
+			if(!ropeCollided){
+				transform.Translate(0, 0, lauchSpeed*Time.deltaTime);
 			}
 
 			else{
-				efeitoCorda.connectedBody = corpoRigido;
-				efeitoCorda.spring = forçaCorda;
-				efeitoCorda.damper = peso;
+				ropeEffect.connectedBody = hookBody;
+				ropeEffect.spring = ropeForce;
+				ropeEffect.damper = weight;
 			}
 		}
 
-		if(distanciaDoPlayer > tamanhoCorda){
-			atirarCorda = false;
+		if(playerDistance > ropeLength){
+			launchRope = false;
 		}
 	}
 
-	public void RecolherGancho(){
+	public void RecallHook(){
 		if (hookPullDirection == PULL_TARGET) {
 			target.transform.position = Vector3.MoveTowards(target.transform.position, player.transform.position, pullSpeed*Time.deltaTime);
 		} else if (hookPullDirection == PULL_PLAYER) {
@@ -113,9 +109,9 @@ public class PlayerHook : MonoBehaviour {
 			transform.position = Vector3.MoveTowards(transform.position, player.transform.position, pullSpeed*Time.deltaTime);
 		}
 
-		cordaColidiu = false;
+		ropeCollided = false;
 
-		if(distanciaDoPlayer <= 2){
+		if(playerDistance <= 2){
 			Destroy(gameObject);
 		}
 	}
