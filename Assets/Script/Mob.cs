@@ -37,8 +37,7 @@ public class Mob : MonoBehaviour {
 		health -= damage;
 	}
 
-	void OnCollisionEnter(Collision collider)
-	{
+	void OnCollisionEnter(Collision collider){
 		if ((collider.gameObject.tag == "Player"))
 		{
 			collider.gameObject.GetComponent<Player>().takeDamage(damage);
