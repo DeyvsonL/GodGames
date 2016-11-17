@@ -2,7 +2,7 @@
 
 public class PlayerHook : MonoBehaviour {
 
-	public float lauchSpeed;
+	public float launchSpeed;
 	public float ropeLength;
 	public float ropeForce;
 	public float weight;
@@ -61,6 +61,9 @@ public class PlayerHook : MonoBehaviour {
 
     }
 	void OnTriggerEnter(Collider coll){
+        if (coll.isTrigger) {
+            return;
+        }
 		if(coll.tag != "Player" && coll.name != "Platform" && coll.name != "Floor"){
 			target = coll.gameObject;
 			Rigidbody targetRigidBody = target.GetComponent<Rigidbody> ();
@@ -85,7 +88,7 @@ public class PlayerHook : MonoBehaviour {
 	public void LaunchHook(){
 		if(playerDistance <= ropeLength){
 			if(!ropeCollided){
-				transform.Translate(0, 0, lauchSpeed*Time.deltaTime);
+				transform.Translate(0, 0, launchSpeed*Time.deltaTime);
 			}
 
 			else{
