@@ -128,9 +128,9 @@ public class PlayerTrigger : NetworkBehaviour{
         {
             GameObject hitObject = hit.collider.gameObject;
             
-            if (hitObject.tag == "Tile") {
+            if (hitObject != null) {
                 TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
-                if (tileGround.pillar == null) {
+                if (tileGround!=null && tileGround.pillar == null) {
                     tileGround.insertPillar(pillarPrefab);
                 }
             }
@@ -154,9 +154,9 @@ public class PlayerTrigger : NetworkBehaviour{
     [Command]
     private void Cmd_spawnTrapOne(RaycastHit hit) {
         GameObject hitObject = hit.collider.gameObject;
-        if (hitObject!=null &&  hitObject.tag == "Tile") {
+        if (hitObject!=null) {
             TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
-            if (tileGround.trap == null) {
+            if (tileGround!=null && tileGround.trap == null) {
                 tileGround.insertTrap(trapSlowPrefab);
             }
         }
