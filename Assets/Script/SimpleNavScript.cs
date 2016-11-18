@@ -3,11 +3,10 @@ using System.Collections;
 
 public class SimpleNavScript : MonoBehaviour {
 	public Transform[] possiblePaths;
-	public float separationRadius = 3f;
 
 	private NavMeshAgent agent;
 	private Transform path;
-	private int pathIndex = 0;
+	private int pathIndex = 1; // Zero is the Path parent itself
 	private int pathLength = 0;
 	private Vector3 destination;
 	private Transform[] waypoints;
@@ -28,10 +27,10 @@ public class SimpleNavScript : MonoBehaviour {
 
 		waypoints = path.GetComponentsInChildren<Transform> ();
 		pathLength = waypoints.Length;
+
+		destination = transform.position;
+		agent.SetDestination (destination);
 	}
-
-	// Update is called once per frame
-
 
 	void LateUpdate () {
 		if (pathIndex == pathLength)
@@ -40,6 +39,13 @@ public class SimpleNavScript : MonoBehaviour {
 		if (Reached ()) {
 			destination = waypoints [pathIndex].position;
 			agent.SetDestination (destination);
+			string message = string.Format ("{0} going from {1} to {2} {3}({4})\n",
+				name, 
+				transform.position,
+				destination,
+				waypoints[pathIndex].name,
+				pathIndex);
+			//print (message);
 			pathIndex++;
 		}
 	}
