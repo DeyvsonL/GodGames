@@ -18,30 +18,691 @@ Platform assembly: C:\Users\Deyv\Desktop\Documents\GodGames\Scenes\Test_Data\Man
 Loading C:\Users\Deyv\Desktop\Documents\GodGames\Scenes\Test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\Users\Deyv\Desktop\Documents\GodGames\Scenes\Test_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
 Loading C:\Users\Deyv\Desktop\Documents\GodGames\Scenes\Test_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
-- Completed reload, in  0.067 seconds
+- Completed reload, in  0.171 seconds
 Platform assembly: C:\Users\Deyv\Desktop\Documents\GodGames\Scenes\Test_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\Deyv\Desktop\Documents\GodGames\Scenes\Test_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.368625 ms
+UnloadTime: 0.994394 ms
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 11dc -> priority: 1 
-JumpingWall
+  Thread -> id: 276c -> priority: 1 
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.414495 ms
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 9373.
+Total: 4.423653 ms (FindLiveObjects: 0.992025 ms CreateObjectMapping: 0.403442 ms MarkObjects: 2.954366 ms  DeleteObjects: 0.073030 ms)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=653
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-JumpingWall
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=654
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-JumpingWall (1)
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=655
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-JumpingWall
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=656
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-Log: connection {1} has been disconnected by timeout; address {::ffff:127.0.0.1:7777}
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=657
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=658
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=659
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=660
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=661
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=662
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=663
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=664
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=665
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=666
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 9.663666 ms
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 327.
+Total: 0.404231 ms (FindLiveObjects: 0.018553 ms CreateObjectMapping: 0.020527 ms MarkObjects: 0.331596 ms  DeleteObjects: 0.033159 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.440549 ms
+
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 9373.
+Total: 6.164140 ms (FindLiveObjects: 0.917416 ms CreateObjectMapping: 0.322516 ms MarkObjects: 4.829859 ms  DeleteObjects: 0.086057 ms)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=653
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=654
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=655
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=656
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=657
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=658
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=659
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=660
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=661
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=662
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=663
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=664
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=665
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=666
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=667
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=668
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=669
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=670
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=671
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=672
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=673
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=674
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=675
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=676
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=677
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=678
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=b39d33e42d428564d89649c5b686a9ee netId=679
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=b39d33e42d428564d89649c5b686a9ee netId=680
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NetworkWriter JumpingWall (2) (UnityEngine.GameObject) has no NetworkIdentity
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NetworkWriter JumpingWall (2) (UnityEngine.GameObject) has no NetworkIdentity
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NetworkWriter JumpingWall (2) (UnityEngine.GameObject) has no NetworkIdentity
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=b39d33e42d428564d89649c5b686a9ee netId=681
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=682
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=683
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=684
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=685
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=c01675e492176894ab4ef59c873bc7ad netId=686
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=b39d33e42d428564d89649c5b686a9ee netId=687
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=b39d33e42d428564d89649c5b686a9ee netId=688
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=b39d33e42d428564d89649c5b686a9ee netId=689
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=b39d33e42d428564d89649c5b686a9ee netId=690
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=691
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=692
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=693
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=694
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=695
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=696
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=697
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=698
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=699
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=700
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=701
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=702
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=703
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=704
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=705
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=706
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=707
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=708
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=709
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=710
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=711
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=712
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=713
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=714
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=715
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=716
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=717
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=718
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=719
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=720
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=721
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=722
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=723
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=724
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=725
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=726
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=727
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=728
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=729
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=730
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=731
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=732
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=733
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=734
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=735
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=736
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=737
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=738
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=739
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=740
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=741
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=742
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=743
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=744
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=745
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=746
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=747
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=748
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=749
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=750
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=751
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=752
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=753
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=754
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=755
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=756
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=757
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=758
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=759
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=760
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=761
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=762
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=763
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=764
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=765
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=766
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=767
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=768
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=769
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=770
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=771
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=772
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=773
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=774
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=775
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=776
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=777
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=778
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=779
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=780
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=781
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=782
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=783
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=784
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=785
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=786
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=787
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=788
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=789
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=790
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=791
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=792
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=793
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=794
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=795
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=796
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=797
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=798
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=799
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Failed to spawn server object, assetId=8f4eabb112db9d64eb2f70b3e1b48c8f netId=800
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
