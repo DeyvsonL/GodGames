@@ -33,7 +33,9 @@ public class Player : NetworkBehaviour {
 		FreeLookCam flc = camController.GetComponent<FreeLookCam>();
         flc.Target = gameObject.transform;
         flc.gameStart();
-		camController.GetComponent<ShowHPMana>().Player = this;
+        GameObject canvas = GameObject.FindGameObjectWithTag("Canvas");
+
+        canvas.GetComponent<ShowHPMana>().Player = this;
 		cam = Camera.main;
     }
 
