@@ -144,6 +144,7 @@ public class PlayerTrigger : NetworkBehaviour{
         }
         else if (skill == TRAP) // Skill trap
         {
+            Debug.Log("trap -2");
             Cmd_spawnTrapOne(hit);
         } else if (skill == BULLET) // Skill bullet
         {
@@ -151,14 +152,21 @@ public class PlayerTrigger : NetworkBehaviour{
         }
     }
 
-    [Command]
     private void Cmd_spawnTrapOne(RaycastHit hit) {
+        Debug.Log("trap -1");
         GameObject hitObject = hit.collider.gameObject;
         if (hitObject!=null) {
-            TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
-            if (tileGround!=null && tileGround.trap == null) {
-                tileGround.insertTrap(trapSlowPrefab);
-            }
+            CmdNewMethod(hitObject);
+        }
+    }
+
+    [Command]
+    private void CmdNewMethod(GameObject hitObject) {
+        TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
+        Debug.Log("trap");
+        if (tileGround != null && tileGround.trap == null) {
+            Debug.Log("trap 2");
+            tileGround.insertTrap(trapSlowPrefab);
         }
     }
 
@@ -219,6 +227,6 @@ public class PlayerTrigger : NetworkBehaviour{
         for (int i = 0; i < gameObjectsSkill.Length; i++) {
             gameObjectsSkill[i].gameObject.GetComponent<Button>().interactable = true;
         }
-        gameObjectsSkill[skill - 1].gameObject.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        gameObjectsSkill[skill - 1].gameObject.GetComponent<Button>().interactable = false;
     }
 }
