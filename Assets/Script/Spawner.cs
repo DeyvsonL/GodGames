@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class Spawner : MonoBehaviour {
+public class Spawner : NetworkBehaviour {
 
 	public GameObject objectToSpawn;
 	public int quantity;
@@ -24,6 +25,11 @@ public class Spawner : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+        if (!isServer) {
+            return;
+        }
+
 		if (spawned == quantity) {
 			enabled = false;
 		}
@@ -33,8 +39,9 @@ public class Spawner : MonoBehaviour {
 			elapsed -= spawnInterval;
 			spawned++;
 			GameObject spawnedObject = Instantiate (objectToSpawn, gameObject.transform.position, Quaternion.identity) as GameObject;
+            NetworkServer.Spawn(spawnedObject);
 
 
-		}
+        }
 	}
 }
