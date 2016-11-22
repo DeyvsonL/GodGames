@@ -118,60 +118,52 @@ public class PlayerTrigger : NetworkBehaviour{
 			
             if (auxGancho == null) {
                 GameObject hitObject = hit.collider.gameObject;
-				Debug.Log(hitObject.name);
                 auxGancho = Instantiate(hookPrefab, transform.position, Quaternion.LookRotation(realDirection)) as GameObject;
-				Debug.Log (auxGancho);
-				Debug.Log (auxGancho.transform.position);
             }
         }
-        else if (skill == PILLAR) // Skill contonetes
-        {
+        else if (skill == PILLAR){
             GameObject hitObject = hit.collider.gameObject;
-            
             if (hitObject != null) {
-                TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
-                if (tileGround!=null && tileGround.pillar == null) {
-                    tileGround.insertPillar(pillarPrefab);
-                }
+                CmdSpawnPillar(hitObject);
             }
-            
+
             if (hitObject.tag == "TopWall") {
                 TopWall topWall = hitObject.GetComponentInParent<TopWall>();
                 if (topWall.pillar == null) {
                     topWall.insertPillar(pillarPrefab);
                 }
             }
+        }else if (skill == TRAP){
+            spawnTrapSlow(hit);
+        } else if (skill == BULLET){
+            CmdSpawnBulletOne(realDirection);
         }
-        else if (skill == TRAP) // Skill trap
-        {
-            Debug.Log("trap -2");
-            Cmd_spawnTrapOne(hit);
-        } else if (skill == BULLET) // Skill bullet
-        {
-            Cmd_spawnBulletOne(realDirection);
+    }
+    [Command]
+    private void CmdSpawnPillar(GameObject hitObject) {
+        TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
+        if (tileGround != null && tileGround.pillar == null) {
+            tileGround.insertPillar(pillarPrefab);
         }
     }
 
-    private void Cmd_spawnTrapOne(RaycastHit hit) {
-        Debug.Log("trap -1");
+    private void spawnTrapSlow(RaycastHit hit) {
         GameObject hitObject = hit.collider.gameObject;
         if (hitObject!=null) {
-            CmdNewMethod(hitObject);
+            CmdSpawnTrapSlow(hitObject);
         }
     }
 
     [Command]
-    private void CmdNewMethod(GameObject hitObject) {
+    private void CmdSpawnTrapSlow(GameObject hitObject) {
         TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
-        Debug.Log("trap");
         if (tileGround != null && tileGround.trap == null) {
-            Debug.Log("trap 2");
             tileGround.insertTrap(trapSlowPrefab);
         }
     }
 
     [Command]
-    void Cmd_spawnBulletOne(Vector3 realDirection) {
+    void CmdSpawnBulletOne(Vector3 realDirection){
         GameObject bulletAux = Instantiate(bulletPrefab, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
         bulletAux.GetComponent<Rigidbody>().velocity = realDirection * bulletSpeed;
         NetworkServer.Spawn(bulletAux);
