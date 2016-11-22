@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class SimpleNavScript : MonoBehaviour {
+public class SimpleNavScript : NetworkBehaviour {
 	public Transform[] possiblePaths;
 
 	private NavMeshAgent agent;
@@ -15,6 +16,9 @@ public class SimpleNavScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        if (!isServer) {
+            return;
+        }
 		agent = GetComponent<NavMeshAgent> ();
 
 		int length = possiblePaths.Length;
@@ -33,7 +37,10 @@ public class SimpleNavScript : MonoBehaviour {
 	}
 
 	void LateUpdate () {
-		if (pathIndex == pathLength)
+        if (!isServer) {
+            return;
+        }
+        if (pathIndex == pathLength)
 			return;
 
 		if (Reached ()) {
