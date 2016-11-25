@@ -2,8 +2,11 @@
 using System.Collections;
 using UnityEngine.Networking;
 
+// Nav Movement requires the GameObject to have a NavMeshAgent
+[RequireComponent (typeof (NavMeshAgent))]
 public class SimpleNavScript : NetworkBehaviour {
 	public Transform[] possiblePaths;
+	public float randomizedDistance = 0;
 
 	private NavMeshAgent agent;
 	private Transform path;
@@ -20,6 +23,7 @@ public class SimpleNavScript : NetworkBehaviour {
             return;
         }
 		agent = GetComponent<NavMeshAgent> ();
+		agent.stoppingDistance = randomizedDistance/2 + 0.5f;
 
 		int length = possiblePaths.Length;
 
@@ -45,16 +49,24 @@ public class SimpleNavScript : NetworkBehaviour {
 
 		if (Reached ()) {
 			destination = waypoints [pathIndex].position;
+			Vector3 randomized = Random.insideUnitCircle * randomizedDistance;
+			randomized.y = 0;
+			destination += randomized;
 			agent.SetDestination (destination);
 			string message = string.Format ("{0} going from {1} to {2} {3}({4})\n",
-				name, 
-				transform.position,
-				destination,
-				waypoints[pathIndex].name,
-				pathIndex);
+				                 name, 
+				                 transform.position,
+				                 destination,
+				                 waypoints [pathIndex].name,
+				                 pathIndex);
 			//print (message);
 			pathIndex++;
+		} else {
+			// check if is stuck?
+			// http://answers.unity3d.com/questions/396867/getting-navmeshagents-to-avoid-obstacles-effective.html
 		}
+
+
 	}
 
 	bool Reached(){
