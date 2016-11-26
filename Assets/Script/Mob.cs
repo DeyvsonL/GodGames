@@ -6,6 +6,7 @@ public class Mob : MonoBehaviour {
 
     private float stunTime = 0;
 
+	[SerializeField]
 	private float health = 10;
 
 	[SerializeField]
