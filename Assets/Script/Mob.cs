@@ -6,8 +6,8 @@ public class Mob : MonoBehaviour {
 
     private float stunTime = 0;
 
-	[SerializeField]
-	private float health = 10;
+	//[SerializeField]
+	public float health = 10;
 
 	[SerializeField]
 	private float damage = 20;
@@ -34,8 +34,14 @@ public class Mob : MonoBehaviour {
         stunTime = time;
     }
 
-	public void takeDamage(float damage){
+	public virtual void takeDamage(float damage){
 		health -= damage;
+
+		print (gameObject.name + " newHealth:" + health);
+
+		if (health <= 0) {
+			Destroy (gameObject);
+		}
 	}
 
 	void OnCollisionEnter(Collision collider){

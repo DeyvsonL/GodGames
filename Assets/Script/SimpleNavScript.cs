@@ -29,8 +29,11 @@ public class SimpleNavScript : NetworkBehaviour {
 
 		int length = possiblePaths.Length;
 
-		if (length == 0)
+		if (length == 0) {
+			this.enabled = false;
+			print (gameObject.name + " navscript disabled");
 			return;
+		}
 
 		int pathChoice = Random.Range (0, length);
 		path = possiblePaths [pathChoice];
@@ -47,6 +50,7 @@ public class SimpleNavScript : NetworkBehaviour {
             return;
         }
 		if (pathIndex == pathLength) {
+			this.enabled = false;
 			return;
 		}
 
@@ -75,7 +79,7 @@ public class SimpleNavScript : NetworkBehaviour {
 	bool Reached(){
 		if (agent.hasPath){
 			distance = agent.remainingDistance;
-			return distance <= agent.stoppingDistance/2;
+			return distance <= 0;
 		}
 
 		return true;
