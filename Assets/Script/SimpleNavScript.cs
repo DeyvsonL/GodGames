@@ -14,6 +14,7 @@ public class SimpleNavScript : NetworkBehaviour {
 	private Vector3 destination;
 	private Transform[] waypoints;
 	public float speed;
+	public float acceleration;
 
 	private float distance;
 
@@ -45,7 +46,7 @@ public class SimpleNavScript : NetworkBehaviour {
 		destination = body.position;
 	}
 
-	void LateUpdate () {
+	void FixedUpdate () {
 		if (!isServer) {
 			return;
 		}
@@ -74,10 +75,18 @@ public class SimpleNavScript : NetworkBehaviour {
 			// http://answers.unity3d.com/questions/396867/getting-navmeshagents-to-avoid-obstacles-effective.html
 
 			Vector3 direction = destination - body.position;
-			Vector3 targetPosition = body.position + direction * speed;
-			Vector3 smoothedTargetPosition = Vector3.SmoothDamp (body.position, targetPosition, ref currentVelocity, 0.1f, speed, Time.fixedDeltaTime);
+			direction.y = 0;
+			direction.Normalize ();
+			Vector3 targetPosition = body.position + direction * acceleration;
+
+			if (body.velocity.magnitude < speed)
+				body.AddForce (direction * acceleration * 10);
+			else if (body.velocity.magnitude > speed)
+				body.velocity = body.velocity.normalized * speed;
+			
+			//print(string.Format("velocity:{0}\ndir*speed:{1}\nvelMagnitude:{2}", body.velocity, direction*speed, body.velocity.magnitude));
+
 			Debug.DrawLine (body.position, targetPosition, Color.red);
-			body.MovePosition (smoothedTargetPosition);
 
 		}
 
