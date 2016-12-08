@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Networking;
+using UnityEngine.AI;
 
 //
 
@@ -22,6 +23,12 @@ public class SimpleNavScript : NetworkBehaviour {
 	private Vector3 currentVelocity = Vector3.zero;
 	private NavMeshAgent agent;
 	private NavMeshPath agentPath;
+
+	public enum State {SEEK, ATTACK};
+	public State state;
+
+	private Transform target;
+
 
 	// Use this for initialization
 	void Start () {
@@ -51,7 +58,6 @@ public class SimpleNavScript : NetworkBehaviour {
 
 		body = GetComponentInChildren<Rigidbody> ();
 		destination = body.position;
-
 	}
 
 	void FixedUpdate () {
@@ -59,52 +65,63 @@ public class SimpleNavScript : NetworkBehaviour {
 			return;
 		}
 
-		NavMeshHit myDestinationHit, myPositionHit;
-		bool canReachDestination = NavMesh.SamplePosition (destination, out myDestinationHit, 2f, NavMesh.AllAreas);
+		if (state == State.SEEK) {
+			NavMeshHit myDestinationHit, myPositionHit;
+			bool canReachDestination = NavMesh.SamplePosition (destination, out myDestinationHit, 2f, NavMesh.AllAreas);
 
-		if (Reached () || (!canReachDestination && pathIndex != pathLength-1)) {
-			if (pathIndex == pathLength) {
-				agent.enabled = false;
-				this.enabled = false;
-				return;
+			if (Reached () || (!canReachDestination && pathIndex != pathLength - 1)) {
+				if (pathIndex == pathLength) {
+					agent.enabled = false;
+					this.enabled = false;
+					return;
+				}
+				destination = waypoints [pathIndex].position;
+				Vector3 randomized = Random.insideUnitCircle * randomizedDistance;
+				randomized.y = 0;
+				destination += randomized;
+				//agent.SetDestination (destination);
+				string message = string.Format ("{0} going from {1} to {2} {3}({4})\n",
+					                 name, 
+					                 transform.position,
+					                 destination,
+					                 waypoints [pathIndex].name,
+					                 pathIndex);
+				//print (message);
+				pathIndex++;
+
+			} else {
+				Move (destination, true, true);
+				SearchPlayer ();
 			}
-			destination = waypoints [pathIndex].position;
-			Vector3 randomized = Random.insideUnitCircle * randomizedDistance;
-			randomized.y = 0;
-			destination += randomized;
-			//agent.SetDestination (destination);
-			string message = string.Format ("{0} going from {1} to {2} {3}({4})\n",
-				name, 
-				transform.position,
-				destination,
-				waypoints [pathIndex].name,
-				pathIndex);
-			//print (message);
-			pathIndex++;
+		} else if (state == State.ATTACK) {
+			Move (target.position, true, false);
+		}
 
-		} else {
-			// check if is stuck?
-			// http://answers.unity3d.com/questions/396867/getting-navmeshagents-to-avoid-obstacles-effective.html
+	}
 
-			//agent.CalculatePath (destination, agentPath);
+	void SearchPlayer(){
+		Collider[] colliders = Physics.OverlapSphere (body.position, 2f);
+		for (int i = 0; i < colliders.Length; i++) {
+			if (colliders [i].tag == "Player") {
+				state = State.ATTACK;
+				target = colliders [i].transform;
+			}
+		}
+	}
 
-			agent.SetDestination (destination);
+	void Move(Vector3 position, bool avoidWalls, bool avoidPlayer){
+		agent.nextPosition = body.position;
+		agent.SetDestination (position);
 
-			Vector3 direction = destination - body.position;
-			direction.y = 0;
-			direction.Normalize ();
-			direction = agent.desiredVelocity.normalized;
-			//print (direction + " " + agent.path.status + " " + agent.CalculatePath (destination, agentPath));
-			agent.nextPosition = body.position;
+		Vector3 direction = agent.desiredVelocity.normalized;
 
-			Vector3 targetPosition = body.position + body.velocity;
+		if (avoidWalls || avoidPlayer) {
 			RaycastHit frontRay, leftRay, rightRay;
 			bool hasHitFront, hasHitLeft, hasHitRight;
 
-			hasHitFront = Physics.SphereCast (body.position, 0.5f, body.velocity, out frontRay, 1f);
-			Debug.DrawLine (body.position, body.position + body.velocity.normalized, Color.black);
+			hasHitFront = Physics.SphereCast (body.position, 0.5f, direction, out frontRay, 1f);
 
-			if (hasHitFront) {
+			if (hasHitFront && (avoidPlayer || !(frontRay.collider.tag == "Player") ) ) {
 				Vector3 leftDirection = RotateLeft (direction);
 				Vector3 rightDirection = RotateRight (direction);
 				hasHitLeft = Physics.SphereCast (body.position, 0.5f, leftDirection, out leftRay, 1f);
@@ -122,29 +139,25 @@ public class SimpleNavScript : NetworkBehaviour {
 					direction = leftDirection;
 				}
 			} 
-
-			if (body.velocity.magnitude < speed)
-				body.AddForce (direction * acceleration * 10);
-			else if (body.velocity.magnitude > speed)
-				body.velocity = body.velocity.normalized * speed;
-			
-			//print(string.Format("velocity:{0}\ndir*speed:{1}\nvelMagnitude:{2}", body.velocity, direction*speed, body.velocity.magnitude));
-
-			Debug.DrawLine (body.position, targetPosition, Color.red);
-
-			currentVelocity = body.velocity;
-
 		}
 
+		if (body.velocity.magnitude < speed)
+			body.AddForce (direction * acceleration * 10);
+		else if (body.velocity.magnitude > speed)
+			body.velocity = direction * speed;
+
+		Vector3 targetPosition = body.position + body.velocity;
+		Debug.DrawLine (body.position, targetPosition, Color.red);
+		currentVelocity = body.velocity;
 	}
 
 	bool Reached(){
 		Vector3 from = body.position;
 		from.y = 0;
 		Vector3 to = destination;
-		destination.y = 0;
+		to.y = 0;
 		distance = Vector3.Distance (from, to);
-		return distance <= 0.5f;
+		return distance <= 1f;
 	}
 
 	bool IsOnGround(){
@@ -158,7 +171,7 @@ public class SimpleNavScript : NetworkBehaviour {
 	Vector3 RotateRight(Vector3 vector){
 		return Quaternion.Euler (0, 45, 0) * vector;
 	}
-		
+
 	bool RandomBoolean(){
 		return Random.value > 0.5f;
 	}
