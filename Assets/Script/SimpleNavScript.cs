@@ -20,12 +20,19 @@ public class SimpleNavScript : NetworkBehaviour {
 
 	private Rigidbody body;
 	private Vector3 currentVelocity = Vector3.zero;
+	private NavMeshAgent agent;
+	private NavMeshPath agentPath;
 
 	// Use this for initialization
 	void Start () {
 		if (!isServer) {
 			return;
 		}
+		agent = GetComponentInChildren<NavMeshAgent> ();
+		agent.updatePosition = false;
+		agent.updateRotation = false;
+		agent.avoidancePriority = Random.Range (1, 99);
+		agentPath = new NavMeshPath ();
 		//agent.stoppingDistance = randomizedDistance/2 + 0.5f;
 
 		int length = possiblePaths.Length;
@@ -44,15 +51,20 @@ public class SimpleNavScript : NetworkBehaviour {
 
 		body = GetComponentInChildren<Rigidbody> ();
 		destination = body.position;
+
 	}
 
 	void FixedUpdate () {
-		if (!isServer) {
+		if (!isServer || !IsOnGround()) {
 			return;
 		}
 
-		if (Reached ()) {
+		NavMeshHit myDestinationHit, myPositionHit;
+		bool canReachDestination = NavMesh.SamplePosition (destination, out myDestinationHit, 2f, NavMesh.AllAreas);
+
+		if (Reached () || (!canReachDestination && pathIndex != pathLength-1)) {
 			if (pathIndex == pathLength) {
+				agent.enabled = false;
 				this.enabled = false;
 				return;
 			}
@@ -74,10 +86,42 @@ public class SimpleNavScript : NetworkBehaviour {
 			// check if is stuck?
 			// http://answers.unity3d.com/questions/396867/getting-navmeshagents-to-avoid-obstacles-effective.html
 
+			//agent.CalculatePath (destination, agentPath);
+
+			agent.SetDestination (destination);
+
 			Vector3 direction = destination - body.position;
 			direction.y = 0;
 			direction.Normalize ();
-			Vector3 targetPosition = body.position + direction * acceleration;
+			direction = agent.desiredVelocity.normalized;
+			//print (direction + " " + agent.path.status + " " + agent.CalculatePath (destination, agentPath));
+			agent.nextPosition = body.position;
+
+			Vector3 targetPosition = body.position + body.velocity;
+			RaycastHit frontRay, leftRay, rightRay;
+			bool hasHitFront, hasHitLeft, hasHitRight;
+
+			hasHitFront = Physics.SphereCast (body.position, 0.5f, body.velocity, out frontRay, 1f);
+			Debug.DrawLine (body.position, body.position + body.velocity.normalized, Color.black);
+
+			if (hasHitFront) {
+				Vector3 leftDirection = RotateLeft (direction);
+				Vector3 rightDirection = RotateRight (direction);
+				hasHitLeft = Physics.SphereCast (body.position, 0.5f, leftDirection, out leftRay, 1f);
+				hasHitRight = Physics.SphereCast (body.position, 0.5f, rightDirection, out rightRay, 1f);
+
+				if (hasHitLeft && hasHitRight) {
+					if (leftRay.distance > rightRay.distance) {
+						direction = leftDirection;
+					} else {
+						direction = rightDirection;
+					}
+				} else if (hasHitLeft) {
+					direction = rightDirection;
+				} else {
+					direction = leftDirection;
+				}
+			} 
 
 			if (body.velocity.magnitude < speed)
 				body.AddForce (direction * acceleration * 10);
@@ -87,6 +131,8 @@ public class SimpleNavScript : NetworkBehaviour {
 			//print(string.Format("velocity:{0}\ndir*speed:{1}\nvelMagnitude:{2}", body.velocity, direction*speed, body.velocity.magnitude));
 
 			Debug.DrawLine (body.position, targetPosition, Color.red);
+
+			currentVelocity = body.velocity;
 
 		}
 
@@ -101,4 +147,19 @@ public class SimpleNavScript : NetworkBehaviour {
 		return distance <= 0.5f;
 	}
 
+	bool IsOnGround(){
+		return Mathf.Abs (body.velocity.y) < 0.1f;
+	}
+
+	Vector3 RotateLeft(Vector3 vector){
+		return Quaternion.Euler (0, -45, 0) * vector;
+	}
+
+	Vector3 RotateRight(Vector3 vector){
+		return Quaternion.Euler (0, 45, 0) * vector;
+	}
+		
+	bool RandomBoolean(){
+		return Random.value > 0.5f;
+	}
 }
