@@ -44,6 +44,7 @@ public class Mob : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collider){
+        Debug.Log(collider.gameObject.tag);
 		if ((collider.gameObject.tag == "Player"))
 		{
 			collider.gameObject.GetComponent<Player>().takeDamage(damage);
