@@ -5,12 +5,8 @@ using UnityEditor;
 
 public class Spawner : NetworkBehaviour {
 
-	public GameObject objectToSpawn;
-	public int quantity;
-	public float spawnInterval = 5f;
 	public Transform[] possiblePaths;
 
-	private int spawned;
 	private float elapsed;
 
 	public Wave[] waves;
@@ -19,9 +15,17 @@ public class Spawner : NetworkBehaviour {
 	private int waveSize;
 
 	private int groupIndex;
+	private SpawnGroup[] groups;
 
+	private Spawn[] spawns;
 	private int spawnIndex;
 	private int spawnCnt;
+
+	private float waveInterval;
+	private float groupInterval;
+	private float spawnInterval;
+	private GameObject spawnObject;
+	private int spawnLimit;
 
 	[System.Serializable]
 	public struct Spawn {
@@ -47,34 +51,79 @@ public class Spawner : NetworkBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		spawned = 0;
 		elapsed = 0;
+		spawnCnt = 0;
+		GetCurrentSpawn ();
+	}
 
-		SimpleNavScript navScript = objectToSpawn.GetComponent<SimpleNavScript> ();
+	// Update is called once per frame
+	void Update () {
+		if (!isServer) {
+			return;
+		}
+			
+		if (waveIndex == waves.Length) {
+			this.enabled = false;
+			return;
+		}
+
+		if (groupIndex == waves [waveIndex].spawnGroups.Length) {
+			elapsed += Time.deltaTime;
+			if (elapsed > waveInterval) {
+				elapsed -= waveInterval;
+				waveIndex++;
+				groupIndex = 0;
+				spawnIndex = 0;
+				spawnCnt = 0;
+				GetCurrentSpawn ();
+			}
+		} else {
+			if (spawnIndex == waves [waveIndex].spawnGroups [groupIndex].objectsToSpawn.Length) {
+				elapsed += Time.deltaTime;
+				if (elapsed > groupInterval) {
+					elapsed -= groupInterval;
+					groupIndex++;
+					spawnIndex = 0;
+					spawnCnt = 0;
+					GetCurrentSpawn ();
+				}
+			} else {
+				if (spawnCnt == spawnLimit) {
+					spawnIndex++;
+					spawnCnt = 0;
+					GetCurrentSpawn ();
+				} else {
+					elapsed += Time.deltaTime;
+
+					if (elapsed > spawnInterval) {
+						elapsed -= spawnInterval;
+						spawnCnt++;
+						GameObject spawnedObject = Instantiate (spawnObject, gameObject.transform.position, Quaternion.identity) as GameObject;
+						NetworkServer.Spawn (spawnedObject);
+					}
+				}
+			}
+		}
+
+	}
+
+	private void GetCurrentSpawn(){
+		if (waveIndex == waves.Length 
+			|| groupIndex == waves [waveIndex].spawnGroups.Length
+			|| spawnIndex == waves [waveIndex].spawnGroups [groupIndex].objectsToSpawn.Length)
+			return;
+		
+		spawnObject = waves [waveIndex].spawnGroups [groupIndex].objectsToSpawn [spawnIndex].objectToSpawn;
+		spawnLimit = waves [waveIndex].spawnGroups [groupIndex].objectsToSpawn [spawnIndex].quantity;
+		spawnInterval = waves [waveIndex].spawnGroups [groupIndex].objectsToSpawn [spawnIndex].spawnInterval;
+
+		groupInterval = waves [waveIndex].spawnGroups [groupIndex].groupInterval;
+		waveInterval = waves [waveIndex].waveInterval;
+
+		SimpleNavScript navScript = spawnObject.GetComponent<SimpleNavScript> ();
 		if (navScript) {
 			navScript.possiblePaths = possiblePaths;
 		}
 	}
 
-	// Update is called once per frame
-	void Update () {
-
-        if (!isServer) {
-            return;
-        }
-
-		if (spawned == quantity) {
-			enabled = false;
-		}
-
-		elapsed += Time.deltaTime;
-		if (elapsed > spawnInterval) {
-			elapsed -= spawnInterval;
-			spawned++;
-			GameObject spawnedObject = Instantiate (objectToSpawn, gameObject.transform.position, Quaternion.identity) as GameObject;
-            NetworkServer.Spawn(spawnedObject);
-
-
-        }
-	}
 }
