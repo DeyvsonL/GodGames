@@ -3,7 +3,6 @@ using UnityEngine.Networking;
 
 public class MobGolem : Mob {
 	public GameObject miniGolem;
-	private Rigidbody body;
 
 	void Start(){
 		SimpleNavScript golemNavScript = GetComponent<SimpleNavScript> ();
@@ -11,7 +10,6 @@ public class MobGolem : Mob {
 		if (golemNavScript && miniGolemNavScript) {
 			miniGolemNavScript.possiblePaths = golemNavScript.possiblePaths;
 		}
-		body = GetComponentInChildren<Rigidbody> ();
 	}
 
 	override

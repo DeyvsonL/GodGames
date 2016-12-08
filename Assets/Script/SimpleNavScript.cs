@@ -17,6 +17,8 @@ public class SimpleNavScript : NetworkBehaviour {
 	public float speed;
 	public float acceleration;
 
+	public bool persuitPlayer;
+
 	private float distance;
 
 	private Rigidbody body;
@@ -24,18 +26,17 @@ public class SimpleNavScript : NetworkBehaviour {
 	private NavMeshAgent agent;
 	private NavMeshPath agentPath;
 
-	public enum State {SEEK, ATTACK};
+	public enum State {SEEK, PERSUIT, ATTACK};
 	public State state;
 
 	private Transform target;
 
-
 	// Use this for initialization
 	void Start () {
-		if (!isServer) {
-			return;
-		}
-		agent = GetComponentInChildren<NavMeshAgent> ();
+//		if (!isServer) {
+//			return;
+//		}
+		agent = GetComponent<NavMeshAgent> ();
 		agent.updatePosition = false;
 		agent.updateRotation = false;
 		agent.avoidancePriority = Random.Range (1, 99);
@@ -56,12 +57,18 @@ public class SimpleNavScript : NetworkBehaviour {
 		waypoints = path.GetComponentsInChildren<Transform> ();
 		pathLength = waypoints.Length;
 
-		body = GetComponentInChildren<Rigidbody> ();
+		body = GetComponent<Rigidbody> ();
 		destination = body.position;
+
+
 	}
 
 	void FixedUpdate () {
-		if (!isServer || !IsOnGround()) {
+//		if (!isServer) {
+//			return;
+//		}
+
+		if (!IsOnGround()) {
 			return;
 		}
 
@@ -91,9 +98,8 @@ public class SimpleNavScript : NetworkBehaviour {
 
 			} else {
 				Move (destination, true, true);
-				SearchPlayer ();
 			}
-		} else if (state == State.ATTACK) {
+		} else if (state == State.PERSUIT) {
 			Move (target.position, true, false);
 		}
 
@@ -175,4 +181,22 @@ public class SimpleNavScript : NetworkBehaviour {
 	bool RandomBoolean(){
 		return Random.value > 0.5f;
 	}
+
+	void OnTriggerEnter(Collider other) {
+		//print (string.Format ("{0} colidiu com {1}\n", gameObject.name, other.name));
+		if (other.tag == "Player") {
+			if (persuitPlayer) {
+				target = other.transform;
+				state = State.PERSUIT;
+			}
+		}
+	}
+
+	void OnTriggerExit(Collider other) {
+		if (other.tag == "Player") {
+			target = other.transform;
+			state = State.SEEK;
+		}
+	}
+
 }

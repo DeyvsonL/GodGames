@@ -12,10 +12,36 @@ public class Mob : MonoBehaviour {
 	[SerializeField]
 	private float damage = 20;
 
+	private Rigidbody body;
+	private Transform target;
+	private bool attackMode;
+
+	[SerializeField]
+	private float attackTime;
+	[SerializeField]
+	private float attackRange;
+
+	private float elapsed;
+
+	void Start(){
+		body = GetComponent<Rigidbody> ();
+	}
+
 	void Update () {
 		if (stunCount())
 			return;
 		//se não estiver estunado, fazer o resto das ações abaixo
+
+		if (attackMode) {
+			elapsed += Time.deltaTime;
+
+			if (elapsed >= attackTime) {
+				elapsed -= attackTime;
+				if (Vector3.Distance (body.position, target.position) < attackRange) {
+					Attack (target.gameObject);
+				}
+			}
+		}
 
 	}
 
@@ -43,9 +69,13 @@ public class Mob : MonoBehaviour {
 		}
 	}
 
+	public void Attack(GameObject gameObject){
+		gameObject.GetComponent<Player>().takeDamage(damage);
+	}
+
 	void OnCollisionEnter(Collision collider){
 		if ((collider.gameObject.tag == "Player")){
-			collider.gameObject.GetComponent<Player>().takeDamage(damage);
+			//Attack (collider.gameObject);
 		}
 	}
 

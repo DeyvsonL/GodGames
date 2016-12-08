@@ -120,9 +120,11 @@ public class Spawner : NetworkBehaviour {
 		groupInterval = waves [waveIndex].spawnGroups [groupIndex].groupInterval;
 		waveInterval = waves [waveIndex].waveInterval;
 
-		SimpleNavScript navScript = spawnObject.GetComponent<SimpleNavScript> ();
+		SimpleNavScript navScript = spawnObject.GetComponentInChildren<SimpleNavScript> ();
 		if (navScript) {
 			navScript.possiblePaths = possiblePaths;
+		} else {
+			print(string.Format("não achou o script do {0}\n",spawnObject.name));
 		}
 	}
 
