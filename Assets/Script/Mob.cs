@@ -43,7 +43,7 @@ public class Mob : MonoBehaviour {
 			elapsed += Time.deltaTime;
 
 			if (elapsed >= attackTime) {
-				elapsed -= attackTime;
+				elapsed = 0;
 				float distance = Vector3.Distance (body.position, target.position);
 				if (distance <= attackRange) {
 					Attack (target.gameObject);
