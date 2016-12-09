@@ -97,23 +97,39 @@ public class PlayerTrigger : NetworkBehaviour{
     private void tryShot(RaycastHit hit, Vector3 realDirection) {
         if (Input.GetButtonDown("Fire1")) {
             skillsButtonOne(hit, realDirection);
-        } else if (Input.GetButtonDown("Fire2")) {
-            if (skill == TRAP) // Skill trap
-            {
-                GameObject hitObject = hit.collider.gameObject;
-                if (hitObject.tag == "Tile") {
-                    TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
-                    if (tileGround.trap == null) {
-                        tileGround.insertTrap(trapDamagePrefab);
-                    }
-                }
-            }
-            if (skill == BULLET) // Skill bullet
-            {
-                GameObject bulletAux = Instantiate(bulletStunPrefab, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
-                bulletAux.GetComponent<Rigidbody>().velocity = realDirection * bulletSpeed;
-            }
+        } else if (Input.GetButtonDown("Fire2"))
+        {
+            skillsButtonTwo(hit, realDirection);
 
+        }
+    }
+
+    private void skillsButtonTwo(RaycastHit hit, Vector3 realDirection)
+    {
+        if (skill == TRAP)
+        {
+            spawnTrapDamage(hit);
+        }
+        if (skill == BULLET)
+        {
+            GameObject bulletAux = Instantiate(bulletStunPrefab, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
+            bulletAux.GetComponent<Rigidbody>().velocity = realDirection * bulletSpeed;
+        }
+    }
+
+    private void spawnTrapDamage(RaycastHit hit)
+    {
+        GameObject hitObject = hit.collider.gameObject;
+        CmdSpawnTrapDamage(hitObject);
+    }
+
+    [Command]
+    private void CmdSpawnTrapDamage(GameObject hitObject)
+    {
+        TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
+        if (tileGround != null && tileGround.trap == null)
+        {
+            tileGround.insertTrap(trapDamagePrefab);
         }
     }
 

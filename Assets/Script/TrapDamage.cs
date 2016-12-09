@@ -16,11 +16,13 @@ public class TrapDamage : MonoBehaviour {
     void OnTriggerStay(Collider collider) {
         if (collider.tag == "Player") {
             if(Time.time > lastDamageTime + damageInterval) {
-				Debug.Log (damage);
 				collider.gameObject.GetComponent<Player>().takeDamage(damage);
                 lastDamageTime = Time.time;
-            } else {
-                Debug.Log(lastDamageTime + " " + (Time.time + damageInterval));
+            }
+        }else if(collider.tag == "Mob"){
+            if (Time.time > lastDamageTime + damageInterval){
+                collider.gameObject.GetComponent<Mob>().takeDamage(damage);
+                lastDamageTime = Time.time;
             }
         }
     }
