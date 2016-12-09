@@ -11,9 +11,19 @@ public class SimpleNavScript : NetworkBehaviour {
 
 	private Transform path;
 	private int pathIndex = 1; // Zero is the Path parent itself
+	public int PathIndex {
+		set{pathIndex = value;}
+		get{return pathIndex;}
+	}
+
 	private int pathLength = 0;
 	private Vector3 destination;
 	private Transform[] waypoints;
+	public Transform[] Waypoints {
+		set{waypoints = value;}
+		get{return waypoints;}
+	}
+
 	public float speed;
 	public float acceleration;
 
@@ -62,14 +72,42 @@ public class SimpleNavScript : NetworkBehaviour {
 			return;
 		}
 
-		int pathChoice = Random.Range (0, length);
-		path = possiblePaths [pathChoice];
+		if (waypoints == null || waypoints.Length == 0) {
+			int pathChoice = Random.Range (0, length);
+			path = possiblePaths [pathChoice];
 
-		waypoints = path.GetComponentsInChildren<Transform> ();
+			waypoints = path.GetComponentsInChildren<Transform> ();
+		}
 		pathLength = waypoints.Length;
 
 		body = GetComponent<Rigidbody> ();
 		destination = body.position;
+
+		switch (GetComponent<Mob>().mobType) {
+		case Mob.MobType.REGULAR:
+			this.speed = MobConfig.MobRegularConfig.speed;
+			this.acceleration = MobConfig.MobRegularConfig.acceleration;
+			this.persuitPlayer = MobConfig.MobRegularConfig.persuitPlayer;
+			break;
+
+		case Mob.MobType.FAST:
+			this.speed = MobConfig.MobFastConfig.speed;
+			this.acceleration = MobConfig.MobFastConfig.acceleration;
+			this.persuitPlayer = MobConfig.MobFastConfig.persuitPlayer;
+			break;
+
+		case Mob.MobType.SLOW:
+			this.speed = MobConfig.MobSlowConfig.speed;
+			this.acceleration = MobConfig.MobSlowConfig.acceleration;
+			this.persuitPlayer = MobConfig.MobSlowConfig.persuitPlayer;
+			break;
+
+		case Mob.MobType.GOLEM:
+			this.speed = MobConfig.MobGolemConfig.speed;
+			this.acceleration = MobConfig.MobGolemConfig.acceleration;
+			this.persuitPlayer = MobConfig.MobGolemConfig.persuitPlayer;
+			break;
+		}
 
         actualSpeed = speed;
 	}
@@ -87,7 +125,7 @@ public class SimpleNavScript : NetworkBehaviour {
 			NavMeshHit myDestinationHit, myPositionHit;
 			bool canReachDestination = NavMesh.SamplePosition (destination, out myDestinationHit, 2f, NavMesh.AllAreas);
 
-			if (Reached () || (!canReachDestination && pathIndex != pathLength - 1)) {
+			if (Reached () || PassedWaypoint() || (!canReachDestination && pathIndex != pathLength - 1) ) {
 				if (pathIndex == pathLength) {
 					agent.enabled = false;
 					this.enabled = false;
@@ -217,4 +255,18 @@ public class SimpleNavScript : NetworkBehaviour {
 		}
 	}
 
+	bool PassedWaypoint(){
+		if (pathIndex >= pathLength - 1)
+			return false;
+		
+		return Vector3.Distance(waypoints [pathIndex+1].position, body.position) < Vector3.Distance(destination, body.position) ;
+	}
+
+	public void SetWaypoints(Transform[] waypoints, int pathIndex){
+		this.waypoints = waypoints;
+		this.pathIndex = pathIndex;
+		this.pathLength = waypoints.Length;
+		this.destination = waypoints [pathIndex].position;
+	}
+		
 }

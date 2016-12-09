@@ -3,6 +3,12 @@ using UnityEngine.Networking;
 
 public class MobGolem : Mob {
 	public GameObject miniGolem;
+	private SimpleNavScript golemNavScript;
+
+	override protected void Start(){
+		base.Start ();
+		golemNavScript = GetComponent<SimpleNavScript> ();
+	}
 
 	override
 	public void takeDamage(float damage){
@@ -16,14 +22,25 @@ public class MobGolem : Mob {
 			Vector3 randomVector2 = Random.insideUnitSphere;
 			randomVector1.y = randomVector2.y = 0;
 
-			GameObject spawnedObject = Instantiate (miniGolem, position + randomVector1, Quaternion.identity) as GameObject;
+			GameObject spawnedObject1 = Instantiate (miniGolem, position + randomVector1, Quaternion.identity) as GameObject;
+			GameObject spawnedObject2 = Instantiate (miniGolem, position + randomVector2, Quaternion.identity) as GameObject;
 			//spawnedObject.GetComponentInChildren<Rigidbody> ().transform = position + randomVector1;
-			NetworkServer.Spawn(spawnedObject);
-			spawnedObject = Instantiate (miniGolem, position + randomVector2, Quaternion.identity) as GameObject;
+			UpdateNavScript(spawnedObject1);
+			NetworkServer.Spawn(spawnedObject1);
+			UpdateNavScript(spawnedObject2);
 			//spawnedObject.GetComponentInChildren<Rigidbody> ().transform = position + randomVector2;
-			NetworkServer.Spawn(spawnedObject);
+			NetworkServer.Spawn(spawnedObject2);
 			Destroy (gameObject);
 		}
+	}
+
+	private void UpdateNavScript(GameObject miniGolem){
+		SimpleNavScript miniGolemNavScript = miniGolem.GetComponent<SimpleNavScript> ();
+		if (golemNavScript && miniGolemNavScript) {
+			miniGolemNavScript.SetWaypoints (golemNavScript.Waypoints, golemNavScript.PathIndex);
+			//Destroy (miniGolemNavScript);
+		}
+		//miniGolem.AddComponent<SimpleNavScript> (miniGolemNavScript);
 	}
 
 }

@@ -2,6 +2,9 @@
 
 public class Mob : MonoBehaviour {
 
+	public enum MobType {REGULAR, FAST, SLOW, GOLEM};
+	public MobType mobType;
+
 	private bool stunned = false;
     public bool Stunned{
         get{ return stunned; }
@@ -28,9 +31,39 @@ public class Mob : MonoBehaviour {
 
 	public SkillConfig.MarkOfTheStorm markOfTheStorm;
 
-	void Start(){
+	virtual protected void Start(){
 		body = GetComponent<Rigidbody> ();
 		markOfTheStorm = new SkillConfig.MarkOfTheStorm ();
+
+		switch (mobType) {
+		case MobType.REGULAR:
+			this.health = MobConfig.MobRegularConfig.health;
+			this.damage = MobConfig.MobRegularConfig.damage;
+			this.attackRange = MobConfig.MobRegularConfig.attackRange;
+			this.attackTime = MobConfig.MobRegularConfig.attackTime;
+			break;
+
+		case MobType.FAST:
+			this.health = MobConfig.MobFastConfig.health;
+			this.damage = MobConfig.MobFastConfig.damage;
+			this.attackRange = MobConfig.MobFastConfig.attackRange;
+			this.attackTime = MobConfig.MobFastConfig.attackTime;
+			break;
+
+		case MobType.SLOW:
+			this.health = MobConfig.MobSlowConfig.health;
+			this.damage = MobConfig.MobSlowConfig.damage;
+			this.attackRange = MobConfig.MobSlowConfig.attackRange;
+			this.attackTime = MobConfig.MobSlowConfig.attackTime;
+			break;
+
+		case MobType.GOLEM:
+			this.health = MobConfig.MobGolemConfig.health;
+			this.damage = MobConfig.MobGolemConfig.damage;
+			this.attackRange = MobConfig.MobGolemConfig.attackRange;
+			this.attackTime = MobConfig.MobGolemConfig.attackTime;
+			break;
+		}
 	}
 
 	void Update () {
