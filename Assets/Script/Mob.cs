@@ -28,7 +28,6 @@ public class Mob : MonoBehaviour {
 
 	public SkillConfig.MarkOfTheStorm markOfTheStorm;
 
-
 	void Start(){
 		body = GetComponent<Rigidbody> ();
 		markOfTheStorm = new SkillConfig.MarkOfTheStorm ();

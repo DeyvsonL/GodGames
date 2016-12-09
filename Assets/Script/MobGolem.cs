@@ -4,14 +4,6 @@ using UnityEngine.Networking;
 public class MobGolem : Mob {
 	public GameObject miniGolem;
 
-	void Start(){
-		SimpleNavScript golemNavScript = GetComponent<SimpleNavScript> ();
-		SimpleNavScript miniGolemNavScript = miniGolem.GetComponent<SimpleNavScript> ();
-		if (golemNavScript && miniGolemNavScript) {
-			miniGolemNavScript.possiblePaths = golemNavScript.possiblePaths;
-		}
-	}
-
 	override
 	public void takeDamage(float damage){
 		health -= damage;

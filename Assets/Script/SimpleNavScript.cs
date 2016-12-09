@@ -97,6 +97,9 @@ public class SimpleNavScript : NetworkBehaviour {
 				Vector3 randomized = Random.insideUnitCircle * randomizedDistance;
 				randomized.y = 0;
 				destination += randomized;
+				NavMeshHit randomizedDestinationHit = new NavMeshHit ();
+				NavMesh.SamplePosition (destination, out randomizedDestinationHit, randomizedDistance + 2f, NavMesh.AllAreas);
+				destination = randomizedDestinationHit.position;
 				//agent.SetDestination (destination);
 				string message = string.Format ("{0} going from {1} to {2} {3}({4})\n",
 					                 name, 
@@ -164,7 +167,8 @@ public class SimpleNavScript : NetworkBehaviour {
 			body.velocity = direction * actualSpeed;
 
 		Vector3 targetPosition = body.position + body.velocity;
-		Debug.DrawLine (body.position, targetPosition, Color.red);
+		Debug.DrawLine (body.position, targetPosition, Color.blue);
+		Debug.DrawLine (body.position, destination, Color.red);
 		currentVelocity = body.velocity;
 	}
 
