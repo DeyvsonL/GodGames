@@ -23,8 +23,12 @@ public class Mob : MonoBehaviour {
 
 	private float elapsed;
 
+	public SkillConfig.MarkOfTheStorm markOfTheStorm;
+
+
 	void Start(){
 		body = GetComponent<Rigidbody> ();
+		markOfTheStorm = new SkillConfig.MarkOfTheStorm ();
 	}
 
 	void Update () {
@@ -32,13 +36,14 @@ public class Mob : MonoBehaviour {
 			return;
 		//se não estiver estunado, fazer o resto das ações abaixo
 
+		markOfTheStorm.CheckStacks (Time.deltaTime);
+
 		if (attackMode) {
 			elapsed += Time.deltaTime;
 
 			if (elapsed >= attackTime) {
 				elapsed -= attackTime;
 				float distance = Vector3.Distance (body.position, target.position);
-				print ("distance: " + distance);
 				if (distance <= attackRange) {
 					Attack (target.gameObject);
 				}

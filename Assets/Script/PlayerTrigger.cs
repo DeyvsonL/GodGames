@@ -8,6 +8,7 @@ public class PlayerTrigger : NetworkBehaviour{
 	public float bulletSpeed;
 
 	private Player player;
+	private Rigidbody body;
     private GameObject auxGancho;
 
     [SerializeField]
@@ -38,6 +39,7 @@ public class PlayerTrigger : NetworkBehaviour{
     private readonly int PILLAR = 2;
     private readonly int TRAP = 3;
     private readonly int HOOK = 4;
+	private readonly int MARK = 5;
     public int Skill
     {
         get { return Skill; }
@@ -49,6 +51,8 @@ public class PlayerTrigger : NetworkBehaviour{
     }
 
     void Start(){
+		body = GetComponent<Rigidbody> ();
+
 		player = GetComponent<Player>();
         lrMark = GetComponent<LineRenderer>();
         lrMark.SetWidth(0.05f, 0.05f);
@@ -114,30 +118,31 @@ public class PlayerTrigger : NetworkBehaviour{
     }
 
     private void skillsButtonOne(RaycastHit hit, Vector3 realDirection) {
-        if (skill == HOOK) {
+		if (skill == HOOK) {
 			
-            if (auxGancho == null) {
-                GameObject hitObject = hit.collider.gameObject;
-                auxGancho = Instantiate(hookPrefab, transform.position, Quaternion.LookRotation(realDirection)) as GameObject;
-            }
-        }
-        else if (skill == PILLAR){
-            GameObject hitObject = hit.collider.gameObject;
-            if (hitObject != null) {
-                CmdSpawnPillar(hitObject);
-            }
+			if (auxGancho == null) {
+				GameObject hitObject = hit.collider.gameObject;
+				auxGancho = Instantiate (hookPrefab, transform.position, Quaternion.LookRotation (realDirection)) as GameObject;
+			}
+		} else if (skill == PILLAR) {
+			GameObject hitObject = hit.collider.gameObject;
+			if (hitObject != null) {
+				CmdSpawnPillar (hitObject);
+			}
 
-            if (hitObject.tag == "TopWall") {
-                TopWall topWall = hitObject.GetComponentInParent<TopWall>();
-                if (topWall.pillar == null) {
-                    topWall.insertPillar(pillarPrefab);
-                }
-            }
-        }else if (skill == TRAP){
-            spawnTrapSlow(hit);
-        } else if (skill == BULLET){
-            CmdSpawnBulletOne(realDirection);
-        }
+			if (hitObject.tag == "TopWall") {
+				TopWall topWall = hitObject.GetComponentInParent<TopWall> ();
+				if (topWall.pillar == null) {
+					topWall.insertPillar (pillarPrefab);
+				}
+			}
+		} else if (skill == TRAP) {
+			spawnTrapSlow (hit);
+		} else if (skill == BULLET) {
+			CmdSpawnBulletOne (realDirection);
+		} else if (skill == MARK) {
+			SkillConfig.MarkOfTheStormConfig.Damage (body.position);
+		}
     }
     [Command]
     private void CmdSpawnPillar(GameObject hitObject) {
@@ -200,6 +205,11 @@ public class PlayerTrigger : NetworkBehaviour{
             updateButtonSKill();
         }
 
+		if (Input.GetKeyDown(KeyCode.Alpha5)) {
+			skill = 5;
+			updateButtonSKill();
+		}
+
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) {
             skill++;
             if (skill > gameObjectsSkill.Length)
@@ -216,6 +226,12 @@ public class PlayerTrigger : NetworkBehaviour{
     }
 
     private void updateButtonSKill() {
+		if (skill == 5) {
+			return;
+			// TODO: CHANGE THIS SHIT
+		}
+
+
         for (int i = 0; i < gameObjectsSkill.Length; i++) {
             gameObjectsSkill[i].gameObject.GetComponent<Button>().interactable = true;
         }
