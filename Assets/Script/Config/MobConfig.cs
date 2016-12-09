@@ -13,6 +13,7 @@ public class MobConfig : MonoBehaviour {
 		public static float attackRange = 3;
 		public static float speed = 6;
 		public static float acceleration = 6;
+		public static bool persuitPlayer =  true;
 	}
 
 	// Mob fast (2)
@@ -24,6 +25,7 @@ public class MobConfig : MonoBehaviour {
 		public static float attackRange = 0;
 		public static float speed = 10;
 		public static float acceleration = 8;
+		public static bool persuitPlayer =  false;
 	}
 
 	// Mob slow (3)
@@ -35,6 +37,7 @@ public class MobConfig : MonoBehaviour {
 		public static float attackRange = 3;
 		public static float speed = 3;
 		public static float acceleration = 10;
+		public static bool persuitPlayer =  true;
 	}
 
 	// Mob golem (4)
@@ -46,5 +49,6 @@ public class MobConfig : MonoBehaviour {
 		public static float attackRange = 3;
 		public static float speed = 4;
 		public static float acceleration = 10;
+		public static bool persuitPlayer =  false;
 	}
 }
