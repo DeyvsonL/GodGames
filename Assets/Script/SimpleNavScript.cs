@@ -31,6 +31,15 @@ public class SimpleNavScript : NetworkBehaviour {
 
 	private Transform target;
 
+    private float actualSpeed;
+    public float ActualSpeed{
+        set{
+            actualSpeed = speed * value;
+        }
+    }
+
+    private Mob mob;
+
 	// Use this for initialization
 	void Start () {
 //		if (!isServer) {
@@ -41,7 +50,9 @@ public class SimpleNavScript : NetworkBehaviour {
 		agent.updateRotation = false;
 		agent.avoidancePriority = Random.Range (1, 99);
 		agentPath = new NavMeshPath ();
-		//agent.stoppingDistance = randomizedDistance/2 + 0.5f;
+        //agent.stoppingDistance = randomizedDistance/2 + 0.5f;
+
+        mob = GetComponent<Mob>();
 
 		int length = possiblePaths.Length;
 
@@ -60,7 +71,7 @@ public class SimpleNavScript : NetworkBehaviour {
 		body = GetComponent<Rigidbody> ();
 		destination = body.position;
 
-
+        actualSpeed = speed;
 	}
 
 	void FixedUpdate () {
@@ -68,7 +79,7 @@ public class SimpleNavScript : NetworkBehaviour {
 //			return;
 //		}
 
-		if (!IsOnGround()) {
+		if (!IsOnGround() || mob.Stunned) {
 			return;
 		}
 
@@ -147,10 +158,10 @@ public class SimpleNavScript : NetworkBehaviour {
 			} 
 		}
 
-		if (body.velocity.magnitude < speed)
+		if (body.velocity.magnitude < actualSpeed)
 			body.AddForce (direction * acceleration * 10);
-		else if (body.velocity.magnitude > speed)
-			body.velocity = direction * speed;
+		else if (body.velocity.magnitude > actualSpeed)
+			body.velocity = direction * actualSpeed;
 
 		Vector3 targetPosition = body.position + body.velocity;
 		Debug.DrawLine (body.position, targetPosition, Color.red);

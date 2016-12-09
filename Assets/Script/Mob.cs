@@ -3,6 +3,9 @@
 public class Mob : MonoBehaviour {
 
 	private bool stunned = false;
+    public bool Stunned{
+        get{ return stunned; }
+    }
 
 	private float stunTime = 0;
 
@@ -37,7 +40,6 @@ public class Mob : MonoBehaviour {
 		//se não estiver estunado, fazer o resto das ações abaixo
 
 		markOfTheStorm.CheckStacks (Time.deltaTime);
-
 		if (attackMode) {
 			elapsed += Time.deltaTime;
 
