@@ -14,7 +14,7 @@ public class GateToTheHell : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other){
-        if(other.gameObject.tag == "Mob"){
+		if(!other.isTrigger && other.gameObject.tag == "Mob"){
             qtdMobs--;
             text.text = qtdMobs.ToString();
             Destroy(other.transform.parent.gameObject);
