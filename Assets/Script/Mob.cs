@@ -13,8 +13,8 @@ public class Mob : MonoBehaviour {
 	private float damage = 20;
 
 	private Rigidbody body;
-	private Transform target;
-	private bool attackMode;
+	public Transform target;
+	public bool attackMode;
 
 	[SerializeField]
 	private float attackTime;
@@ -37,7 +37,9 @@ public class Mob : MonoBehaviour {
 
 			if (elapsed >= attackTime) {
 				elapsed -= attackTime;
-				if (Vector3.Distance (body.position, target.position) < attackRange) {
+				float distance = Vector3.Distance (body.position, target.position);
+				print ("distance: " + distance);
+				if (distance <= attackRange) {
 					Attack (target.gameObject);
 				}
 			}

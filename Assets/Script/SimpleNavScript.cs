@@ -186,9 +186,11 @@ public class SimpleNavScript : NetworkBehaviour {
 		//print (string.Format ("{0} colidiu com {1}\n", gameObject.name, other.name));
 		if (other.tag == "Player") {
 			if (persuitPlayer) {
-				target = other.transform;
 				state = State.PERSUIT;
 			}
+			target = other.transform;
+			GetComponent<Mob> ().attackMode = true;
+			GetComponent<Mob> ().target = target;
 		}
 	}
 
@@ -196,6 +198,7 @@ public class SimpleNavScript : NetworkBehaviour {
 		if (other.tag == "Player") {
 			target = other.transform;
 			state = State.SEEK;
+			GetComponent<Mob> ().attackMode = false;
 		}
 	}
 
