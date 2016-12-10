@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 531025fc790979d429f04df6c5cff227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mobType: 0
+  mobType: 3
   health: 100
   damage: 50
   target: {fileID: 0}
