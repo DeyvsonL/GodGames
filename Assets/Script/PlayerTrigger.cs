@@ -108,6 +108,41 @@ public class PlayerTrigger : NetworkBehaviour{
         }
     }
 
+	private void skillsButtonOne(RaycastHit hit, Vector3 realDirection) {
+		if (skill == HOOK) {
+			if (auxGancho == null) {
+				GameObject hitObject = hit.collider.gameObject;
+				auxGancho = Instantiate (hookPrefab, transform.position, Quaternion.LookRotation (realDirection)) as GameObject;
+			}
+		} else if (skill == PILLAR) {
+			if(pillarPrefab.GetComponent<Pillar>().Mana < player.CurrentMana)
+			{
+				spawnPillar(hit, pillarPrefab);
+				anim.SetTrigger("Trap");
+			}
+			else{
+				//TO DO SOM FALTA MANA
+			}
+		} else if (skill == TRAP) {
+			if (skill == TRAP){
+				if (trapSlowPrefab.GetComponent<TrapSlow>().Mana < player.CurrentMana){
+					spawnTrap(hit, trapSlowPrefab);
+					player.takeMana(trapSlowPrefab.GetComponent<TrapSlow>().Mana);
+					anim.SetTrigger("Trap");
+				}
+				else{
+					// TO DO SOM FALTA DE MANA
+				}
+			}
+
+		} else if (skill == BULLET) {
+			anim.SetTrigger("Attack");
+			CmdSpawnBullet (realDirection);
+		} else if (skill == MARK) {
+			SkillConfig.MarkOfTheStormConfig.Damage (body.position);
+		}
+	}
+
     private void skillsButtonTwo(RaycastHit hit, Vector3 realDirection)
     {
         if (skill == TRAP){
@@ -124,7 +159,7 @@ public class PlayerTrigger : NetworkBehaviour{
             if (bulletStunPrefab.GetComponent<CollisionPushBullet>().Mana < player.CurrentMana){
                 anim.SetTrigger("Attack");
                 GameObject bulletAux = Instantiate(bulletStunPrefab, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
-                CmdSpawnBulletTwo(realDirection, bulletAux);
+                CmdSpawnBullet(realDirection, bulletAux);
                 player.takeMana(bulletStunPrefab.GetComponent<CollisionPushBullet>().Mana);
             }else{
                    //TO DO SOM FALTA MANA
@@ -142,61 +177,23 @@ public class PlayerTrigger : NetworkBehaviour{
 		}
     }
 
-    [Command]
-    void CmdSpawnBulletTwo(Vector3 realDirection, GameObject bulletAux)
+	[Command]
+    void CmdSpawnBullet(Vector3 realDirection, GameObject bulletAux)
     {
         bulletAux.GetComponent<Rigidbody>().velocity = realDirection * bulletSpeed;
         NetworkServer.Spawn(bulletAux);
     }
+		
 
-	private void spawnTrap(RaycastHit hit, GameObject trap){
-        GameObject hitObject = hit.collider.gameObject;
-		CmdSpawnTrap(hitObject, trap);
-    }
-
-    [Command]
-	private void CmdSpawnTrap(GameObject hitObject, GameObject trap){
-        TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
-        if (tileGround != null && tileGround.trap == null)
-        {
-            tileGround.insertTrap(trap);
-        }
-    }
-
-    private void skillsButtonOne(RaycastHit hit, Vector3 realDirection) {
-		if (skill == HOOK) {
-			if (auxGancho == null) {
-				GameObject hitObject = hit.collider.gameObject;
-				auxGancho = Instantiate (hookPrefab, transform.position, Quaternion.LookRotation (realDirection)) as GameObject;
-			}
-		} else if (skill == PILLAR) {
-			if(pillarPrefab.GetComponent<Pillar>().Mana < player.CurrentMana)
-            {
-				spawnPillar(hit, pillarPrefab);
-                anim.SetTrigger("Trap");
-            }
-            else{
-                //TO DO SOM FALTA MANA
-            }
-        } else if (skill == TRAP) {
-            if (skill == TRAP){
-                if (trapSlowPrefab.GetComponent<TrapSlow>().Mana < player.CurrentMana){
-					spawnTrap(hit, trapSlowPrefab);
-                    player.takeMana(trapSlowPrefab.GetComponent<TrapSlow>().Mana);
-                    anim.SetTrigger("Trap");
-                }
-                else{
-                    // TO DO SOM FALTA DE MANA
-                }
-            }
-           
-		} else if (skill == BULLET) {
-            anim.SetTrigger("Attack");
-			CmdSpawnBulletOne (realDirection);
-		} else if (skill == MARK) {
-			SkillConfig.MarkOfTheStormConfig.Damage (body.position);
+	private void spawnPillar(RaycastHit hit, GameObject pillar)
+	{
+		GameObject hitObject = hit.collider.gameObject;
+		if (hitObject != null)
+		{
+			CmdSpawnPillar(hitObject, pillar);
 		}
-    }
+	}
+
     [Command]
 	private void CmdSpawnPillar(GameObject hitObject, GameObject pillar) {
         TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
@@ -205,22 +202,20 @@ public class PlayerTrigger : NetworkBehaviour{
         }
     }
 
-	private void spawnPillar(RaycastHit hit, GameObject pillar)
-    {
-        GameObject hitObject = hit.collider.gameObject;
-        if (hitObject != null)
-        {
-            CmdSpawnPillar(hitObject, pillar);
-        }
-    }
-		
+	private void spawnTrap(RaycastHit hit, GameObject trap){
+		GameObject hitObject = hit.collider.gameObject;
+		CmdSpawnTrap(hitObject, trap);
+	}
 
-    [Command]
-    void CmdSpawnBulletOne(Vector3 realDirection){
-        GameObject bulletAux = Instantiate(bulletPrefab, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
-        bulletAux.GetComponent<Rigidbody>().velocity = realDirection * bulletSpeed;
-        NetworkServer.Spawn(bulletAux);
-    }
+	[Command]
+	private void CmdSpawnTrap(GameObject hitObject, GameObject trap){
+		TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
+		if (tileGround != null && tileGround.trap == null)
+		{
+			tileGround.insertTrap(trap);
+		}
+	}
+		
 
     private void calculateDirection(out RaycastHit hit, out Vector3 realDirection) {
 		bool hasHit = Physics.Raycast(player.Cam.transform.position, player.Cam.transform.forward, out hit, 100);
