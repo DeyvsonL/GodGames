@@ -26,6 +26,8 @@ public class PlayerTrigger : NetworkBehaviour{
 	private GameObject hookPrefab;
     [SerializeField]
 	private GameObject pillarPrefab;
+	[SerializeField]
+	private GameObject pillarExplosivePrefab;
     [SerializeField]
 	private GameObject trapSlowPrefab;
     [SerializeField]
@@ -112,7 +114,7 @@ public class PlayerTrigger : NetworkBehaviour{
         {
             if (trapDamagePrefab.GetComponent<TrapDamage>().Mana < player.CurrentMana)
             {
-                spawnTrapDamage(hit);
+				spawnTrap(hit, trapDamagePrefab);
                 player.takeMana(trapDamagePrefab.GetComponent<TrapDamage>().Mana);
             }
             else
@@ -120,7 +122,7 @@ public class PlayerTrigger : NetworkBehaviour{
                 // TO DO SOM FALTA DE MANA
             }
         }
-        if (skill == BULLET)
+        else if (skill == BULLET)
         {
 
 
@@ -136,6 +138,18 @@ public class PlayerTrigger : NetworkBehaviour{
                    //TO DO SOM FALTA MANA
             }
         }
+		else if (skill == PILLAR)
+		{
+			if(SkillConfig.ExplosivePillar.manaCost < player.CurrentMana)
+			{
+				spawnPillar(hit, pillarExplosivePrefab);
+				player.takeMana(SkillConfig.ExplosivePillar.manaCost);
+			}
+			else
+			{
+				//TO DO SOM FALTA MANA
+			}
+		}
     }
 
     [Command]
@@ -145,20 +159,20 @@ public class PlayerTrigger : NetworkBehaviour{
         NetworkServer.Spawn(bulletAux);
     }
 
-    private void spawnTrapDamage(RaycastHit hit)
+	private void spawnTrap(RaycastHit hit, GameObject trap)
     {
         Debug.Log("ENTROU SPAWN TRAP DAMAGE " + hit);
         GameObject hitObject = hit.collider.gameObject;
-        CmdSpawnTrapDamage(hitObject);
+		CmdSpawnTrap(hitObject, trap);
     }
 
     [Command]
-    private void CmdSpawnTrapDamage(GameObject hitObject)
+	private void CmdSpawnTrap(GameObject hitObject, GameObject trap)
     {
         TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
         if (tileGround != null && tileGround.trap == null)
         {
-            tileGround.insertTrap(trapDamagePrefab);
+            tileGround.insertTrap(trap);
         }
     }
 
@@ -171,7 +185,7 @@ public class PlayerTrigger : NetworkBehaviour{
 		} else if (skill == PILLAR) {
 			if(pillarPrefab.GetComponent<Pillar>().Mana < player.CurrentMana)
             {
-                spawnPillar(hit);
+				spawnPillar(hit, pillarPrefab);
                 player.takeMana(bulletStunPrefab.GetComponent<CollisionStunBullet>().Mana);
             }
             else
@@ -182,7 +196,7 @@ public class PlayerTrigger : NetworkBehaviour{
             if (skill == TRAP){
                 if (trapSlowPrefab.GetComponent<TrapSlow>().Mana < player.CurrentMana)
                 {
-                    spawnTrapSlow(hit);
+					spawnTrap(hit, trapSlowPrefab);
                     player.takeMana(trapSlowPrefab.GetComponent<TrapSlow>().Mana);
                 }else{
                     // TO DO SOM FALTA DE MANA
@@ -197,36 +211,22 @@ public class PlayerTrigger : NetworkBehaviour{
 		}
     }
     [Command]
-    private void CmdSpawnPillar(GameObject hitObject) {
+	private void CmdSpawnPillar(GameObject hitObject, GameObject pillar) {
         TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
         if (tileGround != null && tileGround.pillar == null) {
-            tileGround.insertPillar(pillarPrefab);
+			tileGround.insertPillar(pillar);
         }
     }
 
-    private void spawnTrapSlow(RaycastHit hit) {
-        GameObject hitObject = hit.collider.gameObject;
-        if (hitObject!=null) {
-            CmdSpawnTrapSlow(hitObject);
-        }
-    }
-
-    private void spawnPillar(RaycastHit hit)
+	private void spawnPillar(RaycastHit hit, GameObject pillar)
     {
         GameObject hitObject = hit.collider.gameObject;
         if (hitObject != null)
         {
-            CmdSpawnPillar(hitObject);
+            CmdSpawnPillar(hitObject, pillar);
         }
     }
-
-    [Command]
-    private void CmdSpawnTrapSlow(GameObject hitObject) {
-        TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
-        if (tileGround != null && tileGround.trap == null) {
-            tileGround.insertTrap(trapSlowPrefab);
-        }
-    }
+		
 
     [Command]
     void CmdSpawnBulletOne(Vector3 realDirection){

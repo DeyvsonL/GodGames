@@ -27114,7 +27114,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Trap
+  m_Text: Hook
 --- !u!222 &650791240
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -65533,7 +65533,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Hook
+  m_Text: Trap
 --- !u!222 &1617988098
 CanvasRenderer:
   m_ObjectHideFlags: 0

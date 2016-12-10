@@ -61,5 +61,12 @@ public class SkillConfig : MonoBehaviour {
 		}
 	}
 
+	// Explosive Pillar
+	public class ExplosivePillar {
+		public static int damage = 20;
+		public static float radius = 5f;
+		public static int manaCost = 20;
+	}
+
 
 }

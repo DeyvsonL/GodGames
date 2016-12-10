@@ -1582,6 +1582,8 @@ MonoBehaviour:
   hookPrefab: {fileID: 1000012329631666, guid: 60cd7774a060440d8b4bd63a81f20500, type: 2}
   pillarPrefab: {fileID: 1000012162766012, guid: c01675e492176894ab4ef59c873bc7ad,
     type: 2}
+  pillarExplosivePrefab: {fileID: 1201215336033544, guid: c2432f255f89f5c44bc08411c61fecdf,
+    type: 2}
   trapSlowPrefab: {fileID: 1000010223229338, guid: b39d33e42d428564d89649c5b686a9ee,
     type: 2}
   trapDamagePrefab: {fileID: 1000011233926520, guid: 8c9c962c53ea8924fa510209e75f1366,
