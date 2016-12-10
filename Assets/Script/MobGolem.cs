@@ -35,7 +35,7 @@ public class MobGolem : Mob {
 	}
 
 	private void UpdateNavScript(GameObject miniGolem){
-		SimpleNavScript miniGolemNavScript = miniGolem.GetComponent<SimpleNavScript> ();
+		SimpleNavScript miniGolemNavScript = miniGolem.GetComponentInChildren<SimpleNavScript> ();
 		if (golemNavScript && miniGolemNavScript) {
 			miniGolemNavScript.SetWaypoints (golemNavScript.Waypoints, golemNavScript.PathIndex);
 			//Destroy (miniGolemNavScript);

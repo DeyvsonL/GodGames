@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a64512dd546b7584c96fb7692e07fdbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mobType: 0
+  mobType: 2
   health: 100
   damage: 50
   target: {fileID: 0}
