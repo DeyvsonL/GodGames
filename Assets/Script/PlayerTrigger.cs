@@ -110,41 +110,31 @@ public class PlayerTrigger : NetworkBehaviour{
 
     private void skillsButtonTwo(RaycastHit hit, Vector3 realDirection)
     {
-        if (skill == TRAP)
-        {
-            if (trapDamagePrefab.GetComponent<TrapDamage>().Mana < player.CurrentMana)
-            {
+        if (skill == TRAP){
+            if (trapDamagePrefab.GetComponent<TrapDamage>().Mana < player.CurrentMana){
 				spawnTrap(hit, trapDamagePrefab);
                 player.takeMana(trapDamagePrefab.GetComponent<TrapDamage>().Mana);
-            }
-            else
-            {
+                anim.SetTrigger("Trap");
+            }else{
                 // TO DO SOM FALTA DE MANA
             }
-        }
-        else if (skill == BULLET)
-        {
+        }else if (skill == BULLET) {
 
 
-            if (bulletStunPrefab.GetComponent<CollisionPushBullet>().Mana < player.CurrentMana)
-            {
+            if (bulletStunPrefab.GetComponent<CollisionPushBullet>().Mana < player.CurrentMana){
                 anim.SetTrigger("Attack");
                 GameObject bulletAux = Instantiate(bulletStunPrefab, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
                 CmdSpawnBulletTwo(realDirection, bulletAux);
                 player.takeMana(bulletStunPrefab.GetComponent<CollisionPushBullet>().Mana);
-            }
-            else
-            {
+            }else{
                    //TO DO SOM FALTA MANA
             }
-        }
-		else if (skill == PILLAR)
-		{
-			if(SkillConfig.ExplosivePillar.manaCost < player.CurrentMana)
-			{
+        }else if (skill == PILLAR){
+			if(SkillConfig.ExplosivePillar.manaCost < player.CurrentMana){
 				spawnPillar(hit, pillarExplosivePrefab);
 				player.takeMana(SkillConfig.ExplosivePillar.manaCost);
-			}
+                anim.SetTrigger("Trap");
+            }
 			else
 			{
 				//TO DO SOM FALTA MANA
@@ -159,16 +149,13 @@ public class PlayerTrigger : NetworkBehaviour{
         NetworkServer.Spawn(bulletAux);
     }
 
-	private void spawnTrap(RaycastHit hit, GameObject trap)
-    {
-        Debug.Log("ENTROU SPAWN TRAP DAMAGE " + hit);
+	private void spawnTrap(RaycastHit hit, GameObject trap){
         GameObject hitObject = hit.collider.gameObject;
 		CmdSpawnTrap(hitObject, trap);
     }
 
     [Command]
-	private void CmdSpawnTrap(GameObject hitObject, GameObject trap)
-    {
+	private void CmdSpawnTrap(GameObject hitObject, GameObject trap){
         TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
         if (tileGround != null && tileGround.trap == null)
         {
@@ -186,19 +173,19 @@ public class PlayerTrigger : NetworkBehaviour{
 			if(pillarPrefab.GetComponent<Pillar>().Mana < player.CurrentMana)
             {
 				spawnPillar(hit, pillarPrefab);
-                //player.takeMana(bulletStunPrefab.GetComponent<CollisionStunBullet>().Mana);
+                anim.SetTrigger("Trap");
             }
-            else
-            {
+            else{
                 //TO DO SOM FALTA MANA
             }
         } else if (skill == TRAP) {
             if (skill == TRAP){
-                if (trapSlowPrefab.GetComponent<TrapSlow>().Mana < player.CurrentMana)
-                {
+                if (trapSlowPrefab.GetComponent<TrapSlow>().Mana < player.CurrentMana){
 					spawnTrap(hit, trapSlowPrefab);
                     player.takeMana(trapSlowPrefab.GetComponent<TrapSlow>().Mana);
-                }else{
+                    anim.SetTrigger("Trap");
+                }
+                else{
                     // TO DO SOM FALTA DE MANA
                 }
             }
