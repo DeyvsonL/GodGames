@@ -186,7 +186,7 @@ public class PlayerTrigger : NetworkBehaviour{
 			if(pillarPrefab.GetComponent<Pillar>().Mana < player.CurrentMana)
             {
 				spawnPillar(hit, pillarPrefab);
-                player.takeMana(bulletStunPrefab.GetComponent<CollisionStunBullet>().Mana);
+                //player.takeMana(bulletStunPrefab.GetComponent<CollisionStunBullet>().Mana);
             }
             else
             {
