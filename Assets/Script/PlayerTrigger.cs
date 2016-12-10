@@ -124,12 +124,12 @@ public class PlayerTrigger : NetworkBehaviour{
         {
 
 
-            if (bulletStunPrefab.GetComponent<CollisionStunBullet>().Mana < player.CurrentMana)
+            if (bulletStunPrefab.GetComponent<CollisionPushBullet>().Mana < player.CurrentMana)
             {
                 anim.SetTrigger("Attack");
                 GameObject bulletAux = Instantiate(bulletStunPrefab, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
                 CmdSpawnBulletTwo(realDirection, bulletAux);
-                player.takeMana(bulletStunPrefab.GetComponent<CollisionStunBullet>().Mana);
+                player.takeMana(bulletStunPrefab.GetComponent<CollisionPushBullet>().Mana);
             }
             else
             {
