@@ -46,4 +46,14 @@ public class Player : NetworkBehaviour {
 			dead = true;
 		}
 	}
+
+    public void takeMana(float manaCost)
+    {
+        currentMana -= manaCost;
+        if (currentMana <= 0)
+        {
+            currentMana = 0;
+            dead = true;
+        }
+    }
 }

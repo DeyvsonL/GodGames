@@ -12,6 +12,8 @@ public class ColisionBullet : MonoBehaviour
 			collider.gameObject.GetComponentInParent<Mob>().takeDamage(damage);
 			//print ("bala colidiu com " + collider.gameObject.name);
         }
+
+        //TO DO - Destruir quando todar no player
         if (collider.gameObject.tag != "Player"){
             Destroy(gameObject);
         }
