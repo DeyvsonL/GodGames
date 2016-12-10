@@ -47,7 +47,7 @@ public class PlayerMovement : NetworkBehaviour {
         anim.SetFloat("Horizontal", movementInput.x);
         anim.SetFloat("Vertical", movementInput.y);
         jumpInput = Input.GetButtonDown ("Jump") && grounded;
-
+        if(jumpInput) anim.SetTrigger("Jump");
 		transform.rotation = new Quaternion(0, player.Cam.transform.rotation.y, 0, player.Cam.transform.rotation.w);
 	}
 
