@@ -169,10 +169,8 @@ public class PlayerTrigger : NetworkBehaviour{
 				auxGancho = Instantiate (hookPrefab, transform.position, Quaternion.LookRotation (realDirection)) as GameObject;
 			}
 		} else if (skill == PILLAR) {
-			if(pillarPrefab.GetComponent<Pillar>().Mana < player.CurrentMana)
-            {
+			if(pillarPrefab.GetComponent<Pillar>().Mana < player.CurrentMana){
                 spawnPillar(hit);
-                player.takeMana(bulletStunPrefab.GetComponent<CollisionStunBullet>().Mana);
             }
             else
             {
