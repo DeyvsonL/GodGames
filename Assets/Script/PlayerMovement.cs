@@ -26,9 +26,12 @@ public class PlayerMovement : NetworkBehaviour {
 		set{slow = value;}
 	}
 
+    Animator anim;
+
     void Start() {
         body = GetComponent<Rigidbody>();
 		player = GetComponent<Player>();
+        anim = GetComponentInChildren<Animator>();
     }
 
 	void Update(){
@@ -41,7 +44,9 @@ public class PlayerMovement : NetworkBehaviour {
 			|| Physics.Raycast(transform.position - transform.right * 0.45f, -transform.up, 1.4f) ;
 
 		movementInput = new Vector2( Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-		jumpInput = Input.GetButtonDown ("Jump") && grounded;
+        anim.SetFloat("Horizontal", movementInput.x);
+        anim.SetFloat("Vertical", movementInput.y);
+        jumpInput = Input.GetButtonDown ("Jump") && grounded;
 
 		transform.rotation = new Quaternion(0, player.Cam.transform.rotation.y, 0, player.Cam.transform.rotation.w);
 	}

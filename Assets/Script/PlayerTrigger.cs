@@ -95,9 +95,6 @@ public class PlayerTrigger : NetworkBehaviour{
     }
 
     private void tryShot(RaycastHit hit, Vector3 realDirection) {
-        Debug.Log("ENTROU TRY SHOT");
-        Debug.Log("Mana  " + player.mana);
-
         if (Input.GetButtonDown("Fire1")) {
             skillsButtonOne(hit, realDirection);
         } else if (Input.GetButtonDown("Fire2"))

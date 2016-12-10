@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: d9a602aacebd50c489996584a2345d88
-timeCreated: 1481386179
+guid: 803f33ec19cb4154a88349bfcc83260b
+timeCreated: 1481400171
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -89,7 +89,7 @@ ModelImporter:
     400078: mixamorig:Spine1
     400080: mixamorig:Spine2
     400082: //RootNode
-    7400000: sneak_walk_inPlace_Mirrored
+    7400000: walk_backward_inPlace
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -113,10 +113,10 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: sneak_walk_inPlace_Mirrored
+      name: walk_backward_inPlace
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 53
+      lastFrame: 65
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
