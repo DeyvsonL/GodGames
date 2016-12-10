@@ -26,7 +26,7 @@ public class PlayerMovement : NetworkBehaviour {
 		set{slow = value;}
 	}
 
-    Animator anim;
+    private Animator anim;
 
     void Start() {
         body = GetComponent<Rigidbody>();

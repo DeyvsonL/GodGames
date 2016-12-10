@@ -50,10 +50,13 @@ public class PlayerTrigger : NetworkBehaviour{
         skill = newSkill;
     }
 
+    private Animator anim;
+
     void Start(){
 		body = GetComponent<Rigidbody> ();
+        anim = GetComponentInChildren<Animator>();
 
-		player = GetComponent<Player>();
+        player = GetComponent<Player>();
         lrMark = GetComponent<LineRenderer>();
         lrMark.SetWidth(0.05f, 0.05f);
         lrMark.SetColors(Color.red, Color.red);
@@ -123,11 +126,10 @@ public class PlayerTrigger : NetworkBehaviour{
 
             if (bulletStunPrefab.GetComponent<CollisionStunBullet>().Mana < player.CurrentMana)
             {
+                anim.SetTrigger("Attack");
                 GameObject bulletAux = Instantiate(bulletStunPrefab, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
                 CmdSpawnBulletTwo(realDirection, bulletAux);
-                Debug.Log(bulletStunPrefab.GetComponent<CollisionStunBullet>().Mana);
                 player.takeMana(bulletStunPrefab.GetComponent<CollisionStunBullet>().Mana);
-                player.takeDamage(bulletStunPrefab.GetComponent<CollisionStunBullet>().Mana);
             }
             else
             {
@@ -177,22 +179,19 @@ public class PlayerTrigger : NetworkBehaviour{
                 //TO DO SOM FALTA MANA
             }
         } else if (skill == TRAP) {
-            if (skill == TRAP)
-            {
+            if (skill == TRAP){
                 if (trapSlowPrefab.GetComponent<TrapSlow>().Mana < player.CurrentMana)
                 {
                     spawnTrapSlow(hit);
                     player.takeMana(trapSlowPrefab.GetComponent<TrapSlow>().Mana);
-                }
-                else
-                {
+                }else{
                     // TO DO SOM FALTA DE MANA
                 }
             }
            
 		} else if (skill == BULLET) {
+            anim.SetTrigger("Attack");
 			CmdSpawnBulletOne (realDirection);
-            player.takeDamage(10);
 		} else if (skill == MARK) {
 			SkillConfig.MarkOfTheStormConfig.Damage (body.position);
 		}
