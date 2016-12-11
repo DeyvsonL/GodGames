@@ -21687,7 +21687,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6b5095f7ce2fb54da7a21314cc8574c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  qtdMobs: 10
 --- !u!1 &514636836
 GameObject:
   m_ObjectHideFlags: 0
@@ -27984,7 +27983,7 @@ GameObject:
   - component: {fileID: 674164766}
   - component: {fileID: 674164765}
   m_Layer: 5
-  m_Name: MobsCountText
+  m_Name: PortalHealthCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47730,10 +47729,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6419d75ea6d65449b3098d42a93ccf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mobKilledCountText: {fileID: 778378190}
+  mobKilledCanvas: {fileID: 778378190}
+  portalHealthCanvas: {fileID: 674164763}
   mobsKilled: 0
   mobsSpawned: 0
   mobsDestroyed: 0
+  portalHealth: 10
 --- !u!4 &1223091910
 Transform:
   m_ObjectHideFlags: 0
@@ -51346,7 +51347,7 @@ GameObject:
   - component: {fileID: 1287303632}
   - component: {fileID: 1287303631}
   m_Layer: 5
-  m_Name: MobsCount
+  m_Name: PortalHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51403,7 +51404,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Lives Left:'
+  m_Text: 'Portal Health:'
 --- !u!222 &1287303632
 CanvasRenderer:
   m_ObjectHideFlags: 0
