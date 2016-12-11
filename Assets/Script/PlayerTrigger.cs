@@ -162,11 +162,11 @@ public class PlayerTrigger : NetworkBehaviour{
         }else if (skill == BULLET) {
 
 
-            if (bulletStunPrefab.GetComponent<CollisionPushBullet>().Mana < player.CurrentMana){
+            if (bulletStunPrefab.GetComponent<CollisionStunBullet>().Mana < player.CurrentMana){
                 anim.SetTrigger("Attack");
                 GameObject bulletAux = Instantiate(bulletStunPrefab, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
                 CmdSpawnBullet(realDirection, bulletAux);
-                player.takeMana(bulletStunPrefab.GetComponent<CollisionPushBullet>().Mana);
+                player.takeMana(bulletStunPrefab.GetComponent<CollisionStunBullet>().Mana);
             }else{
                    //TO DO SOM FALTA MANA
             }
