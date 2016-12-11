@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class Mob : MonoBehaviour {
 
@@ -21,6 +22,8 @@ public class Mob : MonoBehaviour {
 	private Rigidbody body;
 	public Transform target;
 	public bool attackMode;
+	private Renderer rend;
+	private Color mobColor;
 
 	[SerializeField]
 	private float attackTime;
@@ -36,6 +39,8 @@ public class Mob : MonoBehaviour {
 
 		body = GetComponent<Rigidbody> ();
 		markOfTheStorm = new SkillConfig.MarkOfTheStorm ();
+		rend = GetComponent<Renderer>();
+		mobColor = rend.material.color;
 
 		switch (mobType) {
 		case MobType.REGULAR:
@@ -107,13 +112,14 @@ public class Mob : MonoBehaviour {
 		stunTime = time;
 	}
 
-	public virtual void takeDamage(float damage){
+	public void takeDamage(float damage){
 		health -= damage;
-		//print (gameObject.name + " newHealth:" + health);
+
+		rend.material.color = Color.red;
+		StartCoroutine(TakeDamageColorChange (0.15f));
 
 		if (health <= 0) {
-			GameManager.instance.countMobKilled ();
-			Destroy (gameObject);
+			Die ();
 		}
 	}
 
@@ -129,6 +135,18 @@ public class Mob : MonoBehaviour {
 
 	void OnDestroy(){
 		GameManager.instance.countMobDestroyed ();
+	}
+
+	public virtual void Die(){
+		GameManager.instance.countMobKilled ();
+		Destroy (gameObject);
+	}
+
+	IEnumerator TakeDamageColorChange(float delay)
+	{
+		yield return new WaitForSeconds(delay);
+
+		rend.material.color = mobColor;
 	}
 
 }
