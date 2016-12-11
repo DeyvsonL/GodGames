@@ -16,6 +16,9 @@ public class TrapDamage : MonoBehaviour {
         set { mana = value; }
     }
 
+    public int time;
+    
+
     void Start() {
         lastDamageTime = Time.time;
     }

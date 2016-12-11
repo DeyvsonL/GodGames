@@ -117,7 +117,7 @@ public class PlayerTrigger : NetworkBehaviour{
 		} else if (skill == PILLAR) {
 			if(pillarPrefab.GetComponent<Pillar>().Mana < player.CurrentMana)
 			{
-				spawnPillar(hit, pillarPrefab);
+				spawnPillar(hit, pillarPrefab, pillarPrefab.GetComponent<Pillar>().time);
 				anim.SetTrigger("Trap");
 			}
 			else{
@@ -126,7 +126,7 @@ public class PlayerTrigger : NetworkBehaviour{
 		} else if (skill == TRAP) {
 			if (skill == TRAP){
 				if (trapSlowPrefab.GetComponent<TrapSlow>().Mana < player.CurrentMana){
-					spawnTrap(hit, trapSlowPrefab);
+					spawnTrap(hit, trapSlowPrefab, trapSlowPrefab.GetComponent<TrapSlow>().time);
 					player.takeMana(trapSlowPrefab.GetComponent<TrapSlow>().Mana);
 					anim.SetTrigger("Trap");
 				}
@@ -140,20 +140,24 @@ public class PlayerTrigger : NetworkBehaviour{
 			GameObject bulletAux = Instantiate(bulletPrefab, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
 			CmdSpawnBullet (realDirection, bulletAux);
 		} else if (skill == MARK) {
-			SkillConfig.MarkOfTheStormConfig.Damage (body.position);
-			ParticleSystem explosion = GetComponentInChildren<ParticleSystem> ();
-			explosion.transform.position = body.position;
-			//explosion.transform.rotation = new Quaternion (0, 0, 0, 0);
-			explosion.Play ();
-
-		}
+            int costMana = 30;
+            if (costMana < player.CurrentMana)
+            {
+                SkillConfig.MarkOfTheStormConfig.Damage(body.position);
+                ParticleSystem explosion = GetComponentInChildren<ParticleSystem>();
+                explosion.transform.position = body.position;
+                //explosion.transform.rotation = new Quaternion (0, 0, 0, 0);
+                explosion.Play();
+                player.takeMana(costMana);
+            }
+        }
 	}
 
     private void skillsButtonTwo(RaycastHit hit, Vector3 realDirection)
     {
         if (skill == TRAP){
             if (trapDamagePrefab.GetComponent<TrapDamage>().Mana < player.CurrentMana){
-				spawnTrap(hit, trapDamagePrefab);
+				spawnTrap(hit, trapDamagePrefab, trapDamagePrefab.GetComponent<TrapDamage>().time);
                 player.takeMana(trapDamagePrefab.GetComponent<TrapDamage>().Mana);
                 anim.SetTrigger("Trap");
             }else{
@@ -172,7 +176,7 @@ public class PlayerTrigger : NetworkBehaviour{
             }
         }else if (skill == PILLAR){
 			if(SkillConfig.ExplosivePillar.manaCost < player.CurrentMana){
-				spawnPillar(hit, pillarExplosivePrefab);
+				spawnPillar(hit, pillarExplosivePrefab, pillarExplosivePrefab.GetComponent<PillarExplosive>().time);
 				player.takeMana(SkillConfig.ExplosivePillar.manaCost);
                 anim.SetTrigger("Trap");
             }
@@ -191,34 +195,34 @@ public class PlayerTrigger : NetworkBehaviour{
     }
 		
 
-	private void spawnPillar(RaycastHit hit, GameObject pillar)
+	private void spawnPillar(RaycastHit hit, GameObject pillar, int time)
 	{
 		GameObject hitObject = hit.collider.gameObject;
 		if (hitObject != null)
 		{
-			CmdSpawnPillar(hitObject, pillar);
+			CmdSpawnPillar(hitObject, pillar, time);
 		}
 	}
 
     [Command]
-	private void CmdSpawnPillar(GameObject hitObject, GameObject pillar) {
+	private void CmdSpawnPillar(GameObject hitObject, GameObject pillar, int time) {
         TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
         if (tileGround != null && tileGround.pillar == null) {
-			tileGround.insertPillar(pillar);
+			tileGround.insertPillar(pillar, time);
         }
     }
 
-	private void spawnTrap(RaycastHit hit, GameObject trap){
+	private void spawnTrap(RaycastHit hit, GameObject trap, int time){
 		GameObject hitObject = hit.collider.gameObject;
-		CmdSpawnTrap(hitObject, trap);
+		CmdSpawnTrap(hitObject, trap, time);
 	}
 
 	[Command]
-	private void CmdSpawnTrap(GameObject hitObject, GameObject trap){
+	private void CmdSpawnTrap(GameObject hitObject, GameObject trap, int time){
 		TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
 		if (tileGround != null && tileGround.trap == null)
 		{
-			tileGround.insertTrap(trap);
+			tileGround.insertTrap(trap,time);
 		}
 	}
 		
@@ -274,11 +278,7 @@ public class PlayerTrigger : NetworkBehaviour{
         }
     }
 
-    private void updateButtonSKill() {
-		if (skill == 5) {
-			return;
-			// TODO: CHANGE THIS SHIT
-		}
+    private void updateButtonSKill() { 
 
 
         for (int i = 0; i < gameObjectsSkill.Length; i++) {

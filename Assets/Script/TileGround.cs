@@ -18,14 +18,15 @@ public class TileGround :  NetworkBehaviour
 
 	}
 		
-	public void insertPillar(GameObject objectToSpawn){
+	public void insertPillar(GameObject objectToSpawn, int time)
+    {
 		pillar = insertObject (objectToSpawn);
-        Destroy(pillar, 10);
-
+        Destroy(pillar, time);
     }
 
-	public void insertTrap(GameObject objectToSpawn){
+	public void insertTrap(GameObject objectToSpawn, int time){
 		trap = insertObject (objectToSpawn);
+        Destroy(trap, time);
 	}
 
 	private GameObject insertObject(GameObject objectToSpawn){

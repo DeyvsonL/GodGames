@@ -20,5 +20,10 @@ public class CollisionStunBullet : MonoBehaviour {
             collider.gameObject.GetComponent<Mob>().Stun(stunTime);
             collider.gameObject.GetComponentInParent<Mob>().takeDamage(damage);
         }
+
+        if (collider.gameObject.tag != "Player")
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -16,7 +16,9 @@ public class PillarExplosive : MonoBehaviour {
 		set { manaCost = value; }
 	}
 
-	void Start() {
+    public int time;
+
+    void Start() {
 		damage = SkillConfig.ExplosivePillar.damage;
 		radius = SkillConfig.ExplosivePillar.radius;
 		manaCost = SkillConfig.ExplosivePillar.manaCost;

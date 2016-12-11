@@ -8,7 +8,10 @@ public class Pillar : MonoBehaviour {
     public int Mana
     {
         get { return mana; }
+        set { mana = value; }
     }
+
+    public int time;
     // Use this for initialization
     void Start () {
 		

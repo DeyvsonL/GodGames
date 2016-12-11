@@ -13,6 +13,8 @@ public class TrapSlow : MonoBehaviour {
         set { mana = value; }
     }
 
+    public int time;
+
     void OnTriggerEnter(Collider collider){
         if (collider.tag == "Mob"){
             //mudar depois

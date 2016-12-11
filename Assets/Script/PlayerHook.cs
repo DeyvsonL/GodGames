@@ -60,7 +60,19 @@ public class PlayerHook : MonoBehaviour {
         lrRope.SetPosition(1, player.transform.position);
 
     }
-	void OnTriggerEnter(Collider coll){
+    
+    void OnTriggerExit(Collider coll)
+    {
+        Debug.Log("EXIT " + coll.tag);
+        if (coll.tag == "Pillar")
+        {
+            Destroy(coll);
+        }
+    }
+
+    
+
+    void OnTriggerEnter(Collider coll){
         if (coll.isTrigger) {
             return;
         }
@@ -115,7 +127,8 @@ public class PlayerHook : MonoBehaviour {
 		ropeCollided = false;
 
 		if(playerDistance <= 2){
-			Destroy(gameObject);
-		}
-	}
+            Destroy(gameObject);
+            Destroy(gameObject);
+        }
+    }
 } 
