@@ -30,6 +30,7 @@ public class MobGolem : Mob {
 			UpdateNavScript(spawnedObject2);
 			//spawnedObject.GetComponentInChildren<Rigidbody> ().transform = position + randomVector2;
 			NetworkServer.Spawn(spawnedObject2);
+			WaveConfig.mobsKilled++;
 			Destroy (gameObject);
 		}
 	}

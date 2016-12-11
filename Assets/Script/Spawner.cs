@@ -37,8 +37,8 @@ public class Spawner : NetworkBehaviour {
 	[System.Serializable]
 	public struct SpawnGroup {
 		public Spawn[] objectsToSpawn;
-		public bool randomize;
-		public int loops;
+		public bool randomize; //TODO
+		public int loops; // TODO
 		public float groupInterval;
 	}
 
@@ -69,8 +69,8 @@ public class Spawner : NetworkBehaviour {
 
 		if (groupIndex == waves [waveIndex].spawnGroups.Length) {
 			elapsed += Time.deltaTime;
-			if (elapsed > waveInterval) {
-				elapsed -= waveInterval;
+			if (WaveConfig.mobsKilled == WaveConfig.mobsSpawned) { // TODO: or elapsed > waveInterval?
+				elapsed = 0;
 				waveIndex++;
 				groupIndex = 0;
 				spawnIndex = 0;
@@ -97,9 +97,9 @@ public class Spawner : NetworkBehaviour {
 
 					if (elapsed > spawnInterval) {
 						elapsed -= spawnInterval;
-						spawnCnt++;
 						GameObject spawnedObject = Instantiate (spawnObject, gameObject.transform.position, Quaternion.identity) as GameObject;
 						NetworkServer.Spawn (spawnedObject);
+						spawnCnt++;
 					}
 				}
 			}
