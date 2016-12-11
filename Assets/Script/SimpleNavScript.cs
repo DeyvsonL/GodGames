@@ -153,6 +153,9 @@ public class SimpleNavScript : NetworkBehaviour {
 			}
 		} else if (state == State.PERSUIT) {
 			Move (target.position, true, false);
+            if (target.gameObject.GetComponentInParent<Player>().Dead){
+                state = State.SEEK;
+            }
 		}
 
 	}
@@ -160,7 +163,7 @@ public class SimpleNavScript : NetworkBehaviour {
 	void SearchPlayer(){
 		Collider[] colliders = Physics.OverlapSphere (body.position, 2f);
 		for (int i = 0; i < colliders.Length; i++) {
-			if (colliders [i].tag == "Player") {
+			if (colliders [i].tag == "Player" && !colliders[i].gameObject.GetComponentInParent<Player>().Dead) {
 				state = State.ATTACK;
 				target = colliders [i].transform;
 			}
