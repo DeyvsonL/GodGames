@@ -52,6 +52,7 @@ public class Player : NetworkBehaviour {
 			currentHealth = 0;
 			dead = true;
             StartCoroutine(Die());
+            
         }
         else if(!dead){
             anim.SetTrigger("ReceiveHit");
@@ -61,6 +62,8 @@ public class Player : NetworkBehaviour {
     IEnumerator Die(){
         yield return new WaitForSeconds(1);
         anim.SetTrigger("Death");
+        GetComponent<Rigidbody>().useGravity = false;
+        GetComponent<Collider>().enabled = false;
     }
 
     public void takeMana(float manaCost)
