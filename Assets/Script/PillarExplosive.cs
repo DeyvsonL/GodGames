@@ -26,7 +26,7 @@ public class PillarExplosive : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collider)
 	{
-		if (collider.gameObject.tag == "Bullet")
+		if ((collider.gameObject.tag == "Bullet") || (collider.gameObject.tag == "Bullet"))
 		{
 			Explode();
 		}

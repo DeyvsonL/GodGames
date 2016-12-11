@@ -1619,6 +1619,8 @@ MonoBehaviour:
     type: 2}
   trapDamagePrefab: {fileID: 1000011233926520, guid: 8c9c962c53ea8924fa510209e75f1366,
     type: 2}
+  trapStunPrefab: {fileID: 1609397589981336, guid: a3ad33c65e4e0e84cae905980c1cdf27,
+    type: 2}
   gameObjectsSkill:
   - {fileID: 0}
   - {fileID: 0}
@@ -1651,7 +1653,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10000
-  mana: 10000
+  mana: 200
   currentHealth: 0
   currentMana: 0
 --- !u!114 &114000014165499122
