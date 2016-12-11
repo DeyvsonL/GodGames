@@ -18,10 +18,10 @@ public class ShowHPMana : MonoBehaviour {
     void OnGUI(){
         if (player != null) {
 			int health = (int)player.CurrentHealth;
-			maxHealth = (int)player.health;
+			maxHealth = (int)player.maxHealth;
 
 			int mana = (int)player.CurrentMana;
-			maxMana = (int)player.mana;
+			maxMana = (int)player.maxMana;
 
             //ResolucaoMestre.AutoResize(1024, 768);
             GUI.BeginGroup(new Rect(10, 10, 300, 109));
