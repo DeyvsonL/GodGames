@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class GateToTheHell : MonoBehaviour {
 
     [SerializeField]
     private int qtdMobs = 10;
+    public int QtdMobs {
+        get { return qtdMobs; }
+    }
     Text text;
-
     private void Start(){
         text = GameObject.Find("MobsCountText").GetComponent<Text>();
         text.text = qtdMobs.ToString();
@@ -19,13 +21,8 @@ public class GateToTheHell : MonoBehaviour {
             text.text = qtdMobs.ToString();
             Destroy(other.transform.parent.gameObject);
             if (qtdMobs <= 0){
-                endGame();
+                text.text = "0";
             }
         }
-    }
-
-    private void endGame(){
-        /*int scene = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(scene, LoadSceneMode.Single);*/
     }
 }

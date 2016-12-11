@@ -89345,6 +89345,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 114000011452188158, guid: 7fa79f99154359944b622e0fd7791c34,
+        type: 2}
+      propertyPath: m_OfflineScene
+      value: Cubos
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011452188158, guid: 7fa79f99154359944b622e0fd7791c34,
+        type: 2}
+      propertyPath: m_OnlineScene
+      value: Cubos
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7fa79f99154359944b622e0fd7791c34, type: 2}
   m_IsPrefabParent: 0
