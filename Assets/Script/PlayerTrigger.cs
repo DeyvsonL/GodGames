@@ -88,7 +88,7 @@ public class PlayerTrigger : NetworkBehaviour{
     }
 
     void Update() {
-        if (!isLocalPlayer)
+        if (!isLocalPlayer || player.Dead)
             return;
 
         selectSkill();

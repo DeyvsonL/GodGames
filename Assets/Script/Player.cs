@@ -21,6 +21,7 @@ public class Player : NetworkBehaviour {
 	}
 
 	private bool dead;
+    public bool Dead { get { return dead; } }
 
     Animator anim;
 
@@ -28,6 +29,7 @@ public class Player : NetworkBehaviour {
         currentHealth = health;
         currentMana = mana;
         anim = GetComponentInChildren<Animator>();
+        dead = false;
     }
 
     override public void OnStartLocalPlayer() {
@@ -40,6 +42,7 @@ public class Player : NetworkBehaviour {
 
         canvas.GetComponent<ShowHPMana>().Player = this;
 		cam = Camera.main;
+        dead = false;
     }
 
 	public void takeDamage(float damage){
