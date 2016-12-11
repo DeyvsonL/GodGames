@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 	public int mobsDestroyed = 0;
 	public int portalHealth = 10;
 
+
     private bool win;
     public bool Win { get { return win; } }
 
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
 
 		mobKilledText = mobKilledCanvas.GetComponent<Text> ();
 		portalHealthText = portalHealthCanvas.GetComponent<Text> ();
+		portalHealthText.text = portalHealth.ToString ();
 	}
 
 	//Initializes the game for each level.
