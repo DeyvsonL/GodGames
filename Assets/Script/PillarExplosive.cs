@@ -40,6 +40,15 @@ public class PillarExplosive : MonoBehaviour {
 				mob.takeDamage (damage);
 			}
 		}
-		Destroy(gameObject);
+		ParticleSystem explosion = GetComponent<ParticleSystem> ();
+		Renderer renderer = GetComponent<Renderer> ();
+		Collider collider = GetComponent<Collider> ();
+		if (renderer)
+			Destroy (renderer);
+		if (collider)
+			Destroy (collider);
+
+		explosion.Play ();
+		Destroy(gameObject, explosion.main.duration);
 	}
 }
