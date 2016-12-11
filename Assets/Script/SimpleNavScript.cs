@@ -203,7 +203,7 @@ public class SimpleNavScript : NetworkBehaviour {
 		}
 
 		if (body.velocity.magnitude < actualSpeed)
-			body.AddForce (direction * acceleration * 10);
+			body.AddForce (direction * acceleration * 10 * body.mass);
 		else if (body.velocity.magnitude > actualSpeed)
 			body.velocity = direction * actualSpeed;
 

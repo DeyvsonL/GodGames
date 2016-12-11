@@ -41,6 +41,7 @@ public class Mob : MonoBehaviour {
 			this.damage = MobConfig.MobRegularConfig.damage;
 			this.attackRange = MobConfig.MobRegularConfig.attackRange;
 			this.attackTime = MobConfig.MobRegularConfig.attackTime;
+			this.body.mass = MobConfig.MobRegularConfig.weight;
 			break;
 
 		case MobType.FAST:
@@ -48,6 +49,7 @@ public class Mob : MonoBehaviour {
 			this.damage = MobConfig.MobFastConfig.damage;
 			this.attackRange = MobConfig.MobFastConfig.attackRange;
 			this.attackTime = MobConfig.MobFastConfig.attackTime;
+			this.body.mass = MobConfig.MobFastConfig.weight;
 			break;
 
 		case MobType.SLOW:
@@ -55,6 +57,7 @@ public class Mob : MonoBehaviour {
 			this.damage = MobConfig.MobSlowConfig.damage;
 			this.attackRange = MobConfig.MobSlowConfig.attackRange;
 			this.attackTime = MobConfig.MobSlowConfig.attackTime;
+			this.body.mass = MobConfig.MobSlowConfig.weight;
 			break;
 
 		case MobType.GOLEM:
@@ -62,6 +65,7 @@ public class Mob : MonoBehaviour {
 			this.damage = MobConfig.MobGolemConfig.damage;
 			this.attackRange = MobConfig.MobGolemConfig.attackRange;
 			this.attackTime = MobConfig.MobGolemConfig.attackTime;
+			this.body.mass = MobConfig.MobGolemConfig.weight;
 			break;
 		}
 	}
