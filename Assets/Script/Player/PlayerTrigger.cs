@@ -37,6 +37,11 @@ public class PlayerTrigger : NetworkBehaviour{
     [SerializeField]
     private GameObject trapStunPrefab;
 
+    public AudioClip soundShotOne;
+    public float volSoundShotOne;
+    public AudioClip soundShotTwo;
+    public float volSoundShotTwo;
+    private AudioSource source;
 
     public Button[] gameObjectsSkill;
 
@@ -58,10 +63,10 @@ public class PlayerTrigger : NetworkBehaviour{
     }
 
     private Animator anim;
-    private GameManager gameManager;
 
     void Start(){
-		body = GetComponent<Rigidbody> ();
+        source = GetComponent<AudioSource>();
+        body = GetComponent<Rigidbody> ();
         anim = GetComponentInChildren<Animator>();
 
         player = GetComponent<Player>();
@@ -91,11 +96,10 @@ public class PlayerTrigger : NetworkBehaviour{
                 
             }
         }
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     void Update() {
-        if (!isLocalPlayer || player.Dead || gameManager.Win)
+        if (!isLocalPlayer || player.Dead)
             return;
 
         selectSkill();
@@ -143,7 +147,8 @@ public class PlayerTrigger : NetworkBehaviour{
 
 		} else if (skill == BULLET) {
 			anim.SetTrigger("Attack");
-			GameObject bulletAux = Instantiate(bulletPrefab, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
+            source.PlayOneShot(soundShotOne, volSoundShotOne);
+            GameObject bulletAux = Instantiate(bulletPrefab, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
 			CmdSpawnBullet (realDirection, bulletAux);
 		} else if (skill == MARK) {
             int costMana = 30;
@@ -170,7 +175,7 @@ public class PlayerTrigger : NetworkBehaviour{
     }
 
     IEnumerator DelayShout(Transform markOfTheStorm, float costMana){
-        yield return new WaitForSeconds(0.33f);
+        yield return new WaitForSeconds(0.3f);
         if (markOfTheStorm){
             markOfTheStorm.gameObject.GetComponent<ParticleSystem>().Play();
         }else{
@@ -199,6 +204,7 @@ public class PlayerTrigger : NetworkBehaviour{
 
             if (bulletStunPrefab.GetComponent<CollisionStunBullet>().Mana < player.CurrentMana){
                 anim.SetTrigger("Attack");
+                source.PlayOneShot(soundShotTwo, volSoundShotTwo);
                 GameObject bulletAux = Instantiate(bulletStunPrefab, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
                 CmdSpawnBullet(realDirection, bulletAux);
                 player.takeMana(bulletStunPrefab.GetComponent<CollisionStunBullet>().Mana);

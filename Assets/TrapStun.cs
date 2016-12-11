@@ -7,6 +7,7 @@ public class TrapStun : MonoBehaviour {
     public int timeStun;
     public float stunInterval;
     private float lastStunTime;
+    [SerializeField]
     private int mana;
     public int Mana
     {

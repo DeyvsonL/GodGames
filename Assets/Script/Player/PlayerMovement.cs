@@ -29,8 +29,13 @@ public class PlayerMovement : NetworkBehaviour {
     private Animator anim;
     private GameManager gameManager;
 
+    public AudioClip soundJump;
+    public float volSoundJump;
+    private AudioSource source;
 
     void Start() {
+        source = GetComponent<AudioSource>();
+
         body = GetComponent<Rigidbody>();
 		player = GetComponent<Player>();
         anim = GetComponentInChildren<Animator>();
@@ -53,8 +58,12 @@ public class PlayerMovement : NetworkBehaviour {
         anim.SetFloat("Horizontal", movementInput.x);
         anim.SetFloat("Vertical", movementInput.y);
         jumpInput = Input.GetButtonDown ("Jump") && grounded;
-        if(jumpInput) anim.SetTrigger("Jump");
-		transform.rotation = new Quaternion(0, player.Cam.transform.rotation.y, 0, player.Cam.transform.rotation.w);
+        if (jumpInput)
+        {
+            anim.SetTrigger("Jump");
+            source.PlayOneShot(soundJump, volSoundJump);
+        }
+        transform.rotation = new Quaternion(0, player.Cam.transform.rotation.y, 0, player.Cam.transform.rotation.w);
 	}
 
     void FixedUpdate() {
