@@ -73,7 +73,7 @@ public class Spawner : NetworkBehaviour {
 			
 		if (groupIndex == waves [waveIndex].spawnGroups.Length) {
 			elapsed += Time.deltaTime;
-			if (GameManager.instance.mobsKilled == GameManager.instance.mobsSpawned) { // TODO: or elapsed > waveInterval?
+			if (GameManager.instance.mobsDestroyed == GameManager.instance.mobsSpawned) { // TODO: or elapsed > waveInterval?
 				elapsed = 0;
 				waveIndex++;
 

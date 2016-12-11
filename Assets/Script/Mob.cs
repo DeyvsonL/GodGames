@@ -127,4 +127,8 @@ public class Mob : MonoBehaviour {
 		}
 	}
 
+	void OnDestroy(){
+		GameManager.instance.countMobDestroyed ();
+	}
+
 }

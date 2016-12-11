@@ -9,8 +9,9 @@ public class GameManager : MonoBehaviour
 	//private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
 	//private int level = 3;                                  //Current level number, expressed in game as "Day 1".
 	public GameObject mobKilledCountText;
-	public int mobsKilled = 0; // DO NOT CHANGE THIS
-	public int mobsSpawned = 0; // DO NOT CHANGE THIS
+	public int mobsKilled = 0;
+	public int mobsSpawned = 0;
+	public int mobsDestroyed = 0;
 
 	//Awake is always called before any Start functions
 	void Awake(){
@@ -54,6 +55,10 @@ public class GameManager : MonoBehaviour
 		if (mobKilledCountText) {
 			mobKilledCountText.GetComponent<Text> ().text = ""+mobsKilled;
 		}
+	}
+
+	public void countMobDestroyed(){
+		mobsDestroyed++;
 	}
 }
 	
