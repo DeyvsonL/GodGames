@@ -22,9 +22,12 @@ public class Player : NetworkBehaviour {
 
 	private bool dead;
 
+    Animator anim;
+
     void Start() {
         currentHealth = health;
         currentMana = mana;
+        anim = GetComponentInChildren<Animator>();
     }
 
     override public void OnStartLocalPlayer() {
@@ -41,10 +44,14 @@ public class Player : NetworkBehaviour {
 
 	public void takeDamage(float damage){
 		currentHealth -= damage;
-		if (currentHealth <= 0) {
+		if (currentHealth <= 0 && !dead) {
 			currentHealth = 0;
 			dead = true;
-		}
+            anim.SetTrigger("Death");
+        }
+        else if(!dead){
+            anim.SetTrigger("ReceiveHit");
+        }
 	}
 
     public void takeMana(float manaCost)
