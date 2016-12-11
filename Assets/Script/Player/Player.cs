@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 using UnityStandardAssets.Cameras;
 
 public class Player : NetworkBehaviour
@@ -64,7 +65,11 @@ public class Player : NetworkBehaviour
     {
         if (dead)
         {
-            if (!playedDead) StartCoroutine(Die());
+            if (!playedDead)
+            {
+                PopUpGameOver();
+                StartCoroutine(Die());
+            }
             playedDead = true;
             if (Input.GetButtonDown("EndGame"))
             {
@@ -79,6 +84,13 @@ public class Player : NetworkBehaviour
         }
         if (gate.QtdMobs <= 0) dead = true;
         fillMana(PlayerConfig.manaRegen * Time.deltaTime);
+    }
+
+    private static void PopUpGameOver(){
+        GameObject canvas = GameObject.FindGameObjectWithTag("Canvas");
+        Text[] texts = canvas.GetComponentsInChildren<Text>(true);
+        Text gameOver = System.Array.Find(texts, (search) => (search.name.Equals("Game Over", System.StringComparison.Ordinal)));
+        gameOver.gameObject.SetActive(true);
     }
 
     public void takeDamage(float damage)
