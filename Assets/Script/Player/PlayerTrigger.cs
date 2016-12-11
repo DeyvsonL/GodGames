@@ -151,6 +151,7 @@ public class PlayerTrigger : NetworkBehaviour{
 				Transform markOfTheStorm = transform.Find ("MarkOfTheStorm");
 				if (markOfTheStorm) {
 					markOfTheStorm.gameObject.GetComponent<ParticleSystem> ().Play ();
+                    anim.SetTrigger("Shout");
 				} else {
 					print ("mark of the storm not found on player!");
 				}
