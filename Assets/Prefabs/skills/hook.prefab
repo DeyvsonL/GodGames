@@ -123,8 +123,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   launchSpeed: 25
   ropeLength: 20
-  ropeForce: 0
-  weight: 0
+  ropeForce: 10
+  weight: 5
 --- !u!120 &120000012628071544
 LineRenderer:
   m_ObjectHideFlags: 1

@@ -25,9 +25,9 @@ GameObject:
   - component: {fileID: 54315836174614278}
   - component: {fileID: 114834832413332324}
   - component: {fileID: 114136433562157326}
-  - component: {fileID: 114504609018824380}
   - component: {fileID: 198979243564720184}
   - component: {fileID: 199881176706646336}
+  - component: {fileID: 114344832417448216}
   m_Layer: 0
   m_Name: PillarExplosive
   m_TagString: Pillar
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
---- !u!114 &114504609018824380
+--- !u!114 &114344832417448216
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -134,7 +134,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   radius: 5
-  manaCost: 0
+  manaCost: 20
+  time: 5
 --- !u!114 &114834832413332324
 MonoBehaviour:
   m_ObjectHideFlags: 1

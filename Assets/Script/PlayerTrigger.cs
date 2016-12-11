@@ -32,6 +32,8 @@ public class PlayerTrigger : NetworkBehaviour{
 	private GameObject trapSlowPrefab;
     [SerializeField]
 	private GameObject trapDamagePrefab;
+    [SerializeField]
+    private GameObject trapStunPrefab;
 
 
     public Button[] gameObjectsSkill;
@@ -42,6 +44,7 @@ public class PlayerTrigger : NetworkBehaviour{
     private readonly int HOOK = 3;
     private readonly int TRAP = 4;
 	private readonly int MARK = 5;
+    private readonly int TRAPSTUN = 6;
     public int Skill
     {
         get { return Skill; }
@@ -109,6 +112,7 @@ public class PlayerTrigger : NetworkBehaviour{
     }
 
 	private void skillsButtonOne(RaycastHit hit, Vector3 realDirection) {
+        Debug.Log("aaaa " + skill);
 		if (skill == HOOK) {
 			if (auxGancho == null) {
 				GameObject hitObject = hit.collider.gameObject;
@@ -150,8 +154,17 @@ public class PlayerTrigger : NetworkBehaviour{
                 explosion.Play();
                 player.takeMana(costMana);
             }
+        } else if (skill == TRAPSTUN)
+        {
+            
+            if (trapStunPrefab.GetComponent<TrapStun>().Mana < player.CurrentMana)
+            {
+                spawnTrap(hit, trapStunPrefab, trapStunPrefab.GetComponent<TrapStun>().time);
+                player.takeMana(trapStunPrefab.GetComponent<TrapStun>().Mana);
+                anim.SetTrigger("Trap");
+            }
         }
-	}
+    }
 
     private void skillsButtonTwo(RaycastHit hit, Vector3 realDirection)
     {
@@ -262,6 +275,12 @@ public class PlayerTrigger : NetworkBehaviour{
 			skill = 5;
 			updateButtonSKill();
 		}
+
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            skill = 6;
+            updateButtonSKill();
+        }
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) {
             skill++;

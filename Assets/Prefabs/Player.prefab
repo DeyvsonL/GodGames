@@ -1608,7 +1608,7 @@ MonoBehaviour:
   rightHand: {fileID: 4026215359435768}
   bulletPrefab: {fileID: 1000011340044882, guid: ac7caa683d217cb459036a2401e68a77,
     type: 2}
-  bulletStunPrefab: {fileID: 1000014187537728, guid: 8f4eabb112db9d64eb2f70b3e1b48c8f,
+  bulletStunPrefab: {fileID: 1000014187537728, guid: 57c2df09824ff4b4ab31a08632aa2876,
     type: 2}
   hookPrefab: {fileID: 1000012329631666, guid: 60cd7774a060440d8b4bd63a81f20500, type: 2}
   pillarPrefab: {fileID: 1000012162766012, guid: c01675e492176894ab4ef59c873bc7ad,
@@ -1650,8 +1650,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 801708daa2bd7ad49bf9ab332a2e698c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  mana: 100
+  health: 10000
+  mana: 10000
   currentHealth: 0
   currentMana: 0
 --- !u!114 &114000014165499122

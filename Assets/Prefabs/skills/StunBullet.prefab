@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stunTime: 1
-  damage: 20
+  damage: 50
   mana: 5
 --- !u!114 &114000011506460724
 MonoBehaviour:

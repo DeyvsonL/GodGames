@@ -162,7 +162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de8004fa2563b7f4aa012426de392428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mana: 0
+  mana: 20
+  time: 10
 --- !u!136 &136000010619195566
 CapsuleCollider:
   m_ObjectHideFlags: 1
