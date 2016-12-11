@@ -119,7 +119,11 @@ public class Mob : MonoBehaviour {
 		StartCoroutine(TakeDamageColorChange (0.15f));
 
 		if (health <= 0) {
-			Die ();
+			SimpleNavScript navScript = GetComponent<SimpleNavScript> ();
+			if (navScript) {
+				navScript.enabled = false;
+			}
+			StartCoroutine(WaitToDie (0.2f));
 		}
 	}
 
@@ -140,6 +144,13 @@ public class Mob : MonoBehaviour {
 	public virtual void Die(){
 		GameManager.instance.countMobKilled ();
 		Destroy (gameObject);
+	}
+
+	IEnumerator WaitToDie(float delay)
+	{
+		yield return new WaitForSeconds(delay);
+
+		Die ();
 	}
 
 	IEnumerator TakeDamageColorChange(float delay)
