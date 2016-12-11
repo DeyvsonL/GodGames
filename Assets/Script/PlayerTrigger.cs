@@ -137,7 +137,8 @@ public class PlayerTrigger : NetworkBehaviour{
 
 		} else if (skill == BULLET) {
 			anim.SetTrigger("Attack");
-			CmdSpawnBullet (realDirection);
+			GameObject bulletAux = Instantiate(bulletPrefab, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
+			CmdSpawnBullet (realDirection, bulletAux);
 		} else if (skill == MARK) {
 			SkillConfig.MarkOfTheStormConfig.Damage (body.position);
 		}
