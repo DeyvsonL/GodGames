@@ -54,7 +54,7 @@ public class PlayerMovement : NetworkBehaviour {
 	}
 
     void FixedUpdate() {
-        if (!isLocalPlayer)
+        if (!isLocalPlayer || player.Dead)
             return;
 		float currentSpeed = speed * slow;
 		Vector3 targetPosition = body.position + (((transform.forward * movementInput.y) + (transform.right * movementInput.x)) * currentSpeed);

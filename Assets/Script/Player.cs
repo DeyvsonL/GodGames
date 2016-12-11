@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Networking;
 using UnityStandardAssets.Cameras;
 
@@ -50,12 +51,20 @@ public class Player : NetworkBehaviour {
 		if (currentHealth <= 0 && !dead) {
 			currentHealth = 0;
 			dead = true;
-            anim.SetTrigger("Death");
+            StartCoroutine(Die());
+            
         }
         else if(!dead){
             anim.SetTrigger("ReceiveHit");
         }
 	}
+
+    IEnumerator Die(){
+        yield return new WaitForSeconds(1);
+        anim.SetTrigger("Death");
+        GetComponent<Rigidbody>().useGravity = false;
+        GetComponent<Collider>().enabled = false;
+    }
 
     public void takeMana(float manaCost)
     {
