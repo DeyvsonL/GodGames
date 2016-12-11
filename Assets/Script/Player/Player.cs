@@ -66,12 +66,15 @@ public class Player : NetworkBehaviour {
         }
 	}
 
-    IEnumerator Die(){
-        yield return new WaitForSeconds(1);
-        anim.SetTrigger("Death");
-        GetComponent<Rigidbody>().useGravity = false;
-        GetComponent<Collider>().enabled = false;
-    }
+	public void fillHealth(float health)
+	{
+		if (!dead) {
+			currentHealth += health;
+			if (currentHealth > maxHealth) {
+				currentHealth = maxHealth;
+			}
+		}
+	}
 
     public void takeMana(float manaCost)
     {
@@ -90,5 +93,12 @@ public class Player : NetworkBehaviour {
 		{
 			currentMana = maxMana;
 		}
+	}
+
+	IEnumerator Die(){
+		yield return new WaitForSeconds(1);
+		anim.SetTrigger("Death");
+		GetComponent<Rigidbody>().useGravity = false;
+		GetComponent<Collider>().enabled = false;
 	}
 }

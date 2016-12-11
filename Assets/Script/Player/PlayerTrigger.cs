@@ -112,7 +112,6 @@ public class PlayerTrigger : NetworkBehaviour{
     }
 
 	private void skillsButtonOne(RaycastHit hit, Vector3 realDirection) {
-        Debug.Log("aaaa " + skill);
 		if (skill == HOOK) {
 			if (auxGancho == null) {
 				GameObject hitObject = hit.collider.gameObject;
