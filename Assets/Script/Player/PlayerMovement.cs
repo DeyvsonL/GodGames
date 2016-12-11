@@ -27,7 +27,6 @@ public class PlayerMovement : NetworkBehaviour {
 	}
 
     private Animator anim;
-    private GameManager gameManager;
 
     void Start() {
         body = GetComponent<Rigidbody>();
@@ -35,11 +34,10 @@ public class PlayerMovement : NetworkBehaviour {
         anim = GetComponentInChildren<Animator>();
 
 		body.mass = MobConfig.Weigth.medium;
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
-    void Update(){
-		if (!isLocalPlayer || player.Dead || gameManager.Win)
+	void Update(){
+		if (!isLocalPlayer || player.Dead)
 			return;
 		
 		grounded  = Physics.Raycast(transform.position + transform.forward * 0.45f, -transform.up, 1.4f) 
@@ -56,7 +54,7 @@ public class PlayerMovement : NetworkBehaviour {
 	}
 
     void FixedUpdate() {
-        if (!isLocalPlayer || player.Dead || gameManager.Win)
+        if (!isLocalPlayer || player.Dead)
             return;
 		float currentSpeed = speed * slow;
 		Vector3 targetPosition = body.position + (((transform.forward * movementInput.y) + (transform.right * movementInput.x)) * currentSpeed);
