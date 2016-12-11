@@ -147,6 +147,14 @@ public class PlayerTrigger : NetworkBehaviour{
             if (costMana < player.CurrentMana)
             {
                 SkillConfig.MarkOfTheStormConfig.Damage(body.position);
+
+				Transform markOfTheStorm = transform.Find ("MarkOfTheStorm");
+				if (markOfTheStorm) {
+					markOfTheStorm.gameObject.GetComponent<ParticleSystem> ().Play ();
+				} else {
+					print ("mark of the storm not found on player!");
+				}
+
                 ParticleSystem explosion = GetComponentInChildren<ParticleSystem>();
                 explosion.transform.position = body.position;
                 //explosion.transform.rotation = new Quaternion (0, 0, 0, 0);
