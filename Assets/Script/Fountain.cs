@@ -16,11 +16,11 @@ public class Fountain : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerStar(Collider other){
+	void OnTriggerStay(Collider other){
 		if (other.tag == "Player") {
 			Player player = other.GetComponent<Player> ();
-			player.fillMana (EnvConfig.Fountain.manaRegen);
-			player.fillHealth (EnvConfig.Fountain.healthRegen);
+			player.fillMana (EnvConfig.Fountain.manaRegen * Time.deltaTime);
+			player.fillHealth (EnvConfig.Fountain.healthRegen * Time.deltaTime);
 		}
 	}
 		
@@ -29,7 +29,7 @@ public class Fountain : MonoBehaviour {
 		if (other.tag == "Player") {
 			Transform fountainHeal = other.transform.Find (fountainHealParticlePrefab.name);
 			if (fountainHeal) {
-				fountainHeal.gameObject.SetActive (true);
+				fountainHeal.gameObject.SetActive (false);
 			}
 		}
 	}
