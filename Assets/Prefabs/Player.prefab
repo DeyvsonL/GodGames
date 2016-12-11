@@ -1687,6 +1687,10 @@ MonoBehaviour:
   maxMana: 100
   currentHealth: 0
   currentMana: 0
+  congratulationsText: {fileID: 1748341483634294, guid: b940f9b875cef2746ac93b2da5910790,
+    type: 2}
+  gameOverText: {fileID: 1330912521523406, guid: afd45a43c33655a4d8464fc444eeef12,
+    type: 2}
 --- !u!114 &114000014165499122
 MonoBehaviour:
   m_ObjectHideFlags: 1
