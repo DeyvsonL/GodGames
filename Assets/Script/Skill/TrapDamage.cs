@@ -6,7 +6,7 @@ public class TrapDamage : MonoBehaviour {
     [SerializeField]
     private int damage = 1;
     [SerializeField]
-    private float damageInterval = 1f;
+    public float damageInterval;
     private float lastDamageTime;
     [SerializeField]
     private int mana;
