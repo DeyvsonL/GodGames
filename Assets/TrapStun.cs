@@ -5,7 +5,8 @@ using UnityEngine;
 public class TrapStun : MonoBehaviour {
     public int time;
     public int timeStun;
-
+    public float stunInterval;
+    private float lastStunTime;
     private int mana;
     public int Mana
     {
@@ -16,10 +17,14 @@ public class TrapStun : MonoBehaviour {
 
     void OnTriggerEnter(Collider collider)
     {
+
         if (collider.tag == "Mob")
         {
-            //mudar depois
-            collider.gameObject.GetComponent<Mob>().Stun(timeStun);
+            if (Time.time > lastStunTime + stunInterval)
+            {
+                collider.gameObject.GetComponent<Mob>().Stun(timeStun);
+                lastStunTime = Time.time;
+            }
         }
     }
 }
