@@ -91,7 +91,9 @@ public class Player : NetworkBehaviour
             }
             return;
         }
-        if (gate.QtdMobs <= 0) dead = true;
+		if (GameManager.instance.portalHealth <= 0) { 
+			Lose ();
+		}
         fillMana(PlayerConfig.manaRegen * Time.deltaTime);
     }
 
@@ -168,4 +170,8 @@ public class Player : NetworkBehaviour
             currentMana = maxMana;
         }
     }
+
+	void Lose(){
+		dead = true;
+	}
 }

@@ -8,10 +8,16 @@ public class GameManager : MonoBehaviour
 	public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
 	//private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
 	//private int level = 3;                                  //Current level number, expressed in game as "Day 1".
-	public GameObject mobKilledCountText;
+	public GameObject mobKilledCanvas;
+	private Text mobKilledText;
+
+	public GameObject portalHealthCanvas;
+	private Text portalHealthText;
+
 	public int mobsKilled = 0;
 	public int mobsSpawned = 0;
 	public int mobsDestroyed = 0;
+	public int portalHealth = 10;
 
     private bool win;
     public bool Win { get { return win; } }
@@ -37,6 +43,9 @@ public class GameManager : MonoBehaviour
 
 		//Call the InitGame function to initialize the first level 
 		InitGame();
+
+		mobKilledText = mobKilledCanvas.GetComponent<Text> ();
+		portalHealthText = portalHealthCanvas.GetComponent<Text> ();
 	}
 
 	//Initializes the game for each level.
@@ -56,8 +65,18 @@ public class GameManager : MonoBehaviour
 
 	public void countMobKilled(){
 		mobsKilled++;
-		if (mobKilledCountText) {
-			mobKilledCountText.GetComponent<Text> ().text = ""+mobsKilled;
+		if (mobKilledText) {
+			mobKilledText.text = mobsKilled.ToString();
+		}
+	}
+
+	public void DamagePortal(int damage){
+		portalHealth -= damage;
+		if (portalHealth < 0)
+			portalHealth = 0;
+
+		if (portalHealthText) {
+			portalHealthText.text = portalHealth.ToString();
 		}
 	}
 
