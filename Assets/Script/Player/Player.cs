@@ -155,7 +155,6 @@ public class Player : NetworkBehaviour
         if (currentMana <= 0)
         {
             currentMana = 0;
-            dead = true;
         }
     }
 
