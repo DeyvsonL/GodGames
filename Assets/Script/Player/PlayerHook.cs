@@ -40,17 +40,21 @@ public class PlayerHook : MonoBehaviour {
         lrRope = GetComponent<LineRenderer>();
         lrRope.SetWidth(0.05f, 0.05f);
         lrRope.SetColors(Color.blue, Color.blue);
-
     }
 
     void Update () {
 		playerDistance = Vector3.Distance(transform.position, player.transform.position);
+        bool input = Input.GetMouseButtonDown(0);
 
-		if(Input.GetMouseButtonDown(0) || (ropeCollided && target==null)){
+        if ( input || (ropeCollided && target==null)){
 			launchRope = false;
-		}
+		}else if(!input && target != null){
+            transform.position = target.transform.position;
+        }
 
-        if (launchRope) {
+        if (Input.GetMouseButtonDown(1) ){
+            Cancel();
+        }else if (launchRope) {
             LaunchHook();
         } else {
             RecallHook();
@@ -60,12 +64,14 @@ public class PlayerHook : MonoBehaviour {
         lrRope.SetPosition(1, player.transform.position);
 
     }
+
+    void Cancel(){
+        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, pullSpeed * Time.deltaTime);
+        target = null;
+    }
     
-    void OnTriggerExit(Collider coll)
-    {
-        Debug.Log("EXIT " + coll.tag);
-        if (coll.tag == "Pillar")
-        {
+    void OnTriggerExit(Collider coll){
+        if (coll.tag == "Pillar"){
             Destroy(coll);
         }
     }
@@ -83,6 +89,7 @@ public class PlayerHook : MonoBehaviour {
 				if (targetRigidBody.mass < playerRigidBody.mass) {
 					hookPullDirection = PULL_TARGET;
 					gameObject.transform.SetParent (target.transform);
+                    GetComponent<Rigidbody>().transform.SetParent(target.transform);
 				} else if (targetRigidBody.mass > playerRigidBody.mass) {
 					hookPullDirection = PULL_PLAYER;
 				} else {
@@ -115,7 +122,7 @@ public class PlayerHook : MonoBehaviour {
 
 	public void RecallHook(){
         if(target == null){
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, pullSpeed * Time.deltaTime);
+            Cancel();
         }else if (hookPullDirection == PULL_TARGET) {
 			target.transform.position = Vector3.MoveTowards(target.transform.position, player.transform.position, pullSpeed*Time.deltaTime);
 		} else if (hookPullDirection == PULL_PLAYER) {
@@ -127,7 +134,6 @@ public class PlayerHook : MonoBehaviour {
 		ropeCollided = false;
 
 		if(playerDistance <= 2){
-            Destroy(gameObject);
             Destroy(gameObject);
         }
     }
