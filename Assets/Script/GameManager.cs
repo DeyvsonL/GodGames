@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 	//private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
 	//private int level = 3;                                  //Current level number, expressed in game as "Day 1".
 	public GameObject mobKilledCountText;
+	public GameObject winGameText;
 	public int mobsKilled = 0;
 	public int mobsSpawned = 0;
 	public int mobsDestroyed = 0;
@@ -59,6 +60,10 @@ public class GameManager : MonoBehaviour
 
 	public void countMobDestroyed(){
 		mobsDestroyed++;
+	}
+
+	public void winGame(){
+		winGameText.SetActive (true);
 	}
 }
 	

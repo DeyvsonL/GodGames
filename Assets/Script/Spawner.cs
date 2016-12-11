@@ -67,6 +67,7 @@ public class Spawner : NetworkBehaviour {
 		}
 
 		if (waveIndex == waves.Length) {
+			GameManager.instance.winGame ();
 			this.enabled = false;
 			return;
 		}
@@ -78,6 +79,7 @@ public class Spawner : NetworkBehaviour {
 				waveIndex++;
 
 				if (waveIndex == waves.Length) {
+					GameManager.instance.winGame ();
 					this.enabled = false;
 					return;
 				}
