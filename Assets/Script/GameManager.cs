@@ -9,15 +9,18 @@ public class GameManager : MonoBehaviour
 	//private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
 	//private int level = 3;                                  //Current level number, expressed in game as "Day 1".
 	public GameObject mobKilledCountText;
-	public GameObject winGameText;
 	public int mobsKilled = 0;
 	public int mobsSpawned = 0;
 	public int mobsDestroyed = 0;
 
-	//Awake is always called before any Start functions
+    private bool win;
+    public bool Win { get { return win; } }
+
+    //Awake is always called before any Start functions
 	void Awake(){
-		//Check if instance already exists
-		if (instance == null)
+        win = false;
+        //Check if instance already exists
+        if (instance == null)
 
 			//if not, set instance to this
 			instance = this;
@@ -29,7 +32,7 @@ public class GameManager : MonoBehaviour
 			Destroy(gameObject);    
 
 		//Sets this to not be destroyed when reloading scene
-		DontDestroyOnLoad(gameObject);
+//		DontDestroyOnLoad(gameObject);
 
 
 		//Call the InitGame function to initialize the first level 
@@ -63,7 +66,7 @@ public class GameManager : MonoBehaviour
 	}
 
 	public void winGame(){
-		winGameText.SetActive (true);
+        win = true;
 	}
 }
 	

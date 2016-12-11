@@ -33,6 +33,9 @@ public class Player : NetworkBehaviour
     private NetworkManager networkManager;
     private bool playedDead;
     private GateToTheHell gate;
+    private GameManager gameManager;
+    private bool animationWinStarted;
+
     void Start()
     {
         maxHealth = PlayerConfig.maxHealth;
@@ -59,26 +62,32 @@ public class Player : NetworkBehaviour
         gate = GameObject.Find("GateToTheHell").GetComponent<GateToTheHell>();
         networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
         if (networkManager == null) networkManager = GameObject.Find("LobbyManager").GetComponent<NetworkManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        animationWinStarted = false;
     }
 
     void Update()
     {
-        if (dead)
-        {
-            if (!playedDead)
+        if (gameManager.Win){
+            if (!animationWinStarted){
+                PopUpWin();
+                StartCoroutine(Win());
+            }
+            animationWinStarted = true;
+            if (Input.GetButtonDown("EndGame"))
             {
+                networkManager.StopHost();
+            }
+            return;
+        }
+        if (dead) {
+            if (!playedDead) {
                 PopUpGameOver();
                 StartCoroutine(Die());
             }
             playedDead = true;
-            if (Input.GetButtonDown("EndGame"))
-            {
-                Debug.Log("Enter");
+            if (Input.GetButtonDown("EndGame")){
                 networkManager.StopHost();
-            }
-            else
-            {
-                return;
             }
             return;
         }
@@ -86,7 +95,15 @@ public class Player : NetworkBehaviour
         fillMana(PlayerConfig.manaRegen * Time.deltaTime);
     }
 
-    private static void PopUpGameOver(){
+    private void PopUpWin()
+    {
+        GameObject canvas = GameObject.FindGameObjectWithTag("Canvas");
+        Text[] texts = canvas.GetComponentsInChildren<Text>(true);
+        Text gameOver = System.Array.Find(texts, (search) => (search.name.Equals("Congratulations", System.StringComparison.Ordinal)));
+        gameOver.gameObject.SetActive(true);
+    }
+
+    private void PopUpGameOver(){
         GameObject canvas = GameObject.FindGameObjectWithTag("Canvas");
         Text[] texts = canvas.GetComponentsInChildren<Text>(true);
         Text gameOver = System.Array.Find(texts, (search) => (search.name.Equals("Game Over", System.StringComparison.Ordinal)));
@@ -95,7 +112,7 @@ public class Player : NetworkBehaviour
 
     public void takeDamage(float damage)
     {
-        if (dead) return;
+        if (dead || gameManager.Win) return;
         currentHealth -= damage;
         if (currentHealth <= 0 && !dead)
         {
@@ -108,8 +125,14 @@ public class Player : NetworkBehaviour
         }
     }
 
-    IEnumerator Die()
-    {
+    IEnumerator Win(){
+        yield return new WaitForSeconds(1);
+        anim.SetTrigger("Victory");
+        GetComponent<Rigidbody>().useGravity = false;
+        GetComponent<Collider>().enabled = false;
+    }
+
+    IEnumerator Die(){
         yield return new WaitForSeconds(1);
         anim.SetTrigger("Death");
         GetComponent<Rigidbody>().useGravity = false;
@@ -117,7 +140,7 @@ public class Player : NetworkBehaviour
     }
 
     public void fillHealth(float health){
- 		if (!dead) {
+ 		if (!dead && !gameManager.Win) {
  			currentHealth += health;
  			if (currentHealth > maxHealth) {
  				currentHealth = maxHealth;
@@ -127,7 +150,7 @@ public class Player : NetworkBehaviour
 
     public void takeMana(float manaCost)
     {
-        if (dead) return;
+        if (dead || gameManager.Win) return;
         currentMana -= manaCost;
         if (currentMana <= 0)
         {
@@ -138,7 +161,7 @@ public class Player : NetworkBehaviour
 
     public void fillMana(float mana)
     {
-        if (dead) return;
+        if (dead || gameManager.Win) return;
         currentMana += mana;
         if (currentMana > maxMana)
         {

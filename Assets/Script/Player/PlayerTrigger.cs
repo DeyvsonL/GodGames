@@ -58,6 +58,7 @@ public class PlayerTrigger : NetworkBehaviour{
     }
 
     private Animator anim;
+    private GameManager gameManager;
 
     void Start(){
 		body = GetComponent<Rigidbody> ();
@@ -90,10 +91,11 @@ public class PlayerTrigger : NetworkBehaviour{
                 
             }
         }
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     void Update() {
-        if (!isLocalPlayer || player.Dead)
+        if (!isLocalPlayer || player.Dead || gameManager.Win)
             return;
 
         selectSkill();
@@ -168,7 +170,7 @@ public class PlayerTrigger : NetworkBehaviour{
     }
 
     IEnumerator DelayShout(Transform markOfTheStorm, float costMana){
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.33f);
         if (markOfTheStorm){
             markOfTheStorm.gameObject.GetComponent<ParticleSystem>().Play();
         }else{
