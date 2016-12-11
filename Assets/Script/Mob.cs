@@ -32,7 +32,7 @@ public class Mob : MonoBehaviour {
 	public SkillConfig.MarkOfTheStorm markOfTheStorm;
 
 	virtual protected void Start(){
-		WaveConfig.mobsSpawned++;
+		GameManager.instance.countMobSpawned ();
 
 		body = GetComponent<Rigidbody> ();
 		markOfTheStorm = new SkillConfig.MarkOfTheStorm ();
@@ -112,7 +112,7 @@ public class Mob : MonoBehaviour {
 		//print (gameObject.name + " newHealth:" + health);
 
 		if (health <= 0) {
-			WaveConfig.mobsKilled++;
+			GameManager.instance.countMobKilled ();
 			Destroy (gameObject);
 		}
 	}

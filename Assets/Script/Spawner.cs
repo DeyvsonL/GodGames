@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.Networking;
 using UnityEditor;
+using UnityEngine.UI;
 
 public class Spawner : NetworkBehaviour {
 
@@ -26,6 +27,8 @@ public class Spawner : NetworkBehaviour {
 	private float spawnInterval;
 	private GameObject spawnObject;
 	private int spawnLimit;
+
+	public GameObject waveNumberCanvasText;
 
 	[System.Serializable]
 	public struct Spawn {
@@ -54,6 +57,7 @@ public class Spawner : NetworkBehaviour {
 		elapsed = 0;
 		spawnCnt = 0;
 		GetCurrentSpawn ();
+		ShowWaveNumber ();
 	}
 
 	// Update is called once per frame
@@ -61,21 +65,28 @@ public class Spawner : NetworkBehaviour {
 		if (!isServer) {
 			return;
 		}
-			
+
 		if (waveIndex == waves.Length) {
 			this.enabled = false;
 			return;
 		}
-
+			
 		if (groupIndex == waves [waveIndex].spawnGroups.Length) {
 			elapsed += Time.deltaTime;
-			if (WaveConfig.mobsKilled == WaveConfig.mobsSpawned) { // TODO: or elapsed > waveInterval?
+			if (GameManager.instance.mobsKilled == GameManager.instance.mobsSpawned) { // TODO: or elapsed > waveInterval?
 				elapsed = 0;
 				waveIndex++;
+
+				if (waveIndex == waves.Length) {
+					this.enabled = false;
+					return;
+				}
+
 				groupIndex = 0;
 				spawnIndex = 0;
 				spawnCnt = 0;
 				GetCurrentSpawn ();
+				ShowWaveNumber ();
 			}
 		} else {
 			if (spawnIndex == waves [waveIndex].spawnGroups [groupIndex].objectsToSpawn.Length) {
@@ -128,4 +139,22 @@ public class Spawner : NetworkBehaviour {
 		}
 	}
 
+	private void ShowWaveNumber(){
+		if (waveNumberCanvasText) {
+			waveNumberCanvasText.GetComponent<Text> ().text = "Wave " + (waveIndex+1);
+			waveNumberCanvasText.SetActive (true);
+			StartCoroutine(DisableWaveText(3));
+		} else {
+			print ("Did not found wave number canvas");
+		}
+	}
+
+	IEnumerator DisableWaveText(float delay)
+	{
+		yield return new WaitForSeconds(delay);
+
+		if (waveNumberCanvasText) {
+			waveNumberCanvasText.SetActive (false);
+		}
+	}
 }
