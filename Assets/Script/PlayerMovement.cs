@@ -37,7 +37,7 @@ public class PlayerMovement : NetworkBehaviour {
     }
 
 	void Update(){
-		if (!isLocalPlayer)
+		if (!isLocalPlayer || player.Dead)
 			return;
 		
 		grounded  = Physics.Raycast(transform.position + transform.forward * 0.45f, -transform.up, 1.4f) 
