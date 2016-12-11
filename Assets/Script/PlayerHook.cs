@@ -46,7 +46,7 @@ public class PlayerHook : MonoBehaviour {
     void Update () {
 		playerDistance = Vector3.Distance(transform.position, player.transform.position);
 
-		if(Input.GetMouseButtonDown(0)){
+		if(Input.GetMouseButtonDown(0) || (ropeCollided && target==null)){
 			launchRope = false;
 		}
 
@@ -91,8 +91,6 @@ public class PlayerHook : MonoBehaviour {
 			} else {
 				hookPullDirection = 0;
 			}
-
-			Debug.Log(coll.name);
 			ropeCollided = true;
 		}
 	}
@@ -116,7 +114,9 @@ public class PlayerHook : MonoBehaviour {
 	}
 
 	public void RecallHook(){
-		if (hookPullDirection == PULL_TARGET) {
+        if(target == null){
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, pullSpeed * Time.deltaTime);
+        }else if (hookPullDirection == PULL_TARGET) {
 			target.transform.position = Vector3.MoveTowards(target.transform.position, player.transform.position, pullSpeed*Time.deltaTime);
 		} else if (hookPullDirection == PULL_PLAYER) {
 			player.transform.position = Vector3.MoveTowards(player.transform.position, target.transform.position, pullSpeed*Time.deltaTime);
