@@ -36,8 +36,14 @@ public class Player : NetworkBehaviour
     private GameManager gameManager;
     private bool animationWinStarted;
 
+
+    public AudioClip soundDie;
+    public float volSoundDie;
+    private AudioSource source;
     void Start()
     {
+        source = GetComponent<AudioSource>();
+
         maxHealth = PlayerConfig.maxHealth;
         maxMana = PlayerConfig.maxMana;
 
@@ -117,6 +123,7 @@ public class Player : NetworkBehaviour
         if (currentHealth <= 0 && !dead)
         {
             currentHealth = 0;
+            source.PlayOneShot(soundDie, volSoundDie);
             dead = true;
         }
         else if (!dead)
