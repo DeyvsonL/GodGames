@@ -4,8 +4,8 @@ using UnityEngine.Networking;
 using UnityStandardAssets.Cameras;
 
 public class Player : NetworkBehaviour {
-    public float health = 100;
-    public float mana = 100;
+    public float maxHealth = 100;
+    public float maxMana = 100;
     private Camera cam;
 	public Camera Cam{
 		get { return cam;}
@@ -27,8 +27,11 @@ public class Player : NetworkBehaviour {
     Animator anim;
 
     void Start() {
-        currentHealth = health;
-        currentMana = mana;
+		maxHealth = PlayerConfig.maxHealth;
+		maxMana = PlayerConfig.maxMana;
+
+        currentHealth = maxHealth;
+        currentMana = maxMana;
         anim = GetComponentInChildren<Animator>();
         dead = false;
     }
@@ -45,6 +48,10 @@ public class Player : NetworkBehaviour {
 		cam = Camera.main;
         dead = false;
     }
+
+	void Update(){
+		fillMana (PlayerConfig.manaRegen * Time.deltaTime);
+	}
 
 	public void takeDamage(float damage){
 		currentHealth -= damage;
@@ -75,4 +82,13 @@ public class Player : NetworkBehaviour {
             dead = true;
         }
     }
+
+	public void fillMana(float mana)
+	{
+		currentMana += mana;
+		if (currentMana > maxMana)
+		{
+			currentMana = maxMana;
+		}
+	}
 }
