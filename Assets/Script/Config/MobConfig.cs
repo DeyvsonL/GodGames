@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MobConfig : MonoBehaviour {
+	public class Weigth {
+		public static float heavy = 2f;
+		public static float medium = 1f;
+		public static float light = 0.5f;
+	}
 
 	// Mob regular (1)
 	public class MobRegularConfig
@@ -14,6 +19,7 @@ public class MobConfig : MonoBehaviour {
 		public static float speed = 6;
 		public static float acceleration = 6;
 		public static bool persuitPlayer =  true;
+		public static float weight = Weigth.medium;
 	}
 
 	// Mob fast (2)
@@ -26,6 +32,7 @@ public class MobConfig : MonoBehaviour {
 		public static float speed = 10;
 		public static float acceleration = 8;
 		public static bool persuitPlayer =  false;
+		public static float weight = Weigth.light;
 	}
 
 	// Mob slow (3)
@@ -38,6 +45,7 @@ public class MobConfig : MonoBehaviour {
 		public static float speed = 3;
 		public static float acceleration = 10;
 		public static bool persuitPlayer =  true;
+		public static float weight = Weigth.heavy;
 	}
 
 	// Mob golem (4)
@@ -50,5 +58,6 @@ public class MobConfig : MonoBehaviour {
 		public static float speed = 4;
 		public static float acceleration = 10;
 		public static bool persuitPlayer =  false;
+		public static float weight = Weigth.heavy;
 	}
 }

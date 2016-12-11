@@ -32,6 +32,8 @@ public class PlayerMovement : NetworkBehaviour {
         body = GetComponent<Rigidbody>();
 		player = GetComponent<Player>();
         anim = GetComponentInChildren<Animator>();
+
+		body.mass = MobConfig.Weigth.medium;
     }
 
 	void Update(){
