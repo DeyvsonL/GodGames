@@ -141,6 +141,11 @@ public class PlayerTrigger : NetworkBehaviour{
 			CmdSpawnBullet (realDirection, bulletAux);
 		} else if (skill == MARK) {
 			SkillConfig.MarkOfTheStormConfig.Damage (body.position);
+			ParticleSystem explosion = GetComponentInChildren<ParticleSystem> ();
+			explosion.transform.position = body.position;
+			//explosion.transform.rotation = new Quaternion (0, 0, 0, 0);
+			explosion.Play ();
+
 		}
 	}
 
