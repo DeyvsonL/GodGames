@@ -1861,7 +1861,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6ef7af4b22d45d844ba722325d11a1fd, type: 2}
+  - {fileID: 2100000, guid: a92487b72ccb7a64ebaab2a4997bacac, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1934,7 +1934,7 @@ SpringJoint:
   m_ConnectedBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 10.67207, y: 2.4095018, z: 50.94893}
+  m_ConnectedAnchor: {x: 10.67207, y: 4.14, z: 52.05}
   serializedVersion: 2
   m_Spring: 0
   m_Damper: 0
