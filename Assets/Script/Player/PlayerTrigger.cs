@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
@@ -118,8 +120,7 @@ public class PlayerTrigger : NetworkBehaviour{
 				auxGancho = Instantiate (hookPrefab, transform.position, Quaternion.LookRotation (realDirection)) as GameObject;
 			}
 		} else if (skill == PILLAR) {
-			if(pillarPrefab.GetComponent<Pillar>().Mana < player.CurrentMana)
-			{
+			if(pillarPrefab.GetComponent<Pillar>().Mana < player.CurrentMana){
 				spawnPillar(hit, pillarPrefab, pillarPrefab.GetComponent<Pillar>().time);
 				anim.SetTrigger("Trap");
 			}
@@ -149,18 +150,10 @@ public class PlayerTrigger : NetworkBehaviour{
                 SkillConfig.MarkOfTheStormConfig.Damage(body.position);
 
 				Transform markOfTheStorm = transform.Find ("MarkOfTheStorm");
-				if (markOfTheStorm) {
-					markOfTheStorm.gameObject.GetComponent<ParticleSystem> ().Play ();
-                    anim.SetTrigger("Shout");
-				} else {
-					print ("mark of the storm not found on player!");
-				}
+                anim.SetTrigger("Shout");
+                StartCoroutine(DelayShout(markOfTheStorm, costMana));
 
-                ParticleSystem explosion = GetComponentInChildren<ParticleSystem>();
-                explosion.transform.position = body.position;
-                //explosion.transform.rotation = new Quaternion (0, 0, 0, 0);
-                explosion.Play();
-                player.takeMana(costMana);
+
             }
         } else if (skill == TRAPSTUN)
         {
@@ -172,6 +165,21 @@ public class PlayerTrigger : NetworkBehaviour{
                 anim.SetTrigger("Trap");
             }
         }
+    }
+
+    IEnumerator DelayShout(Transform markOfTheStorm, float costMana){
+        yield return new WaitForSeconds(0.3f);
+        if (markOfTheStorm){
+            markOfTheStorm.gameObject.GetComponent<ParticleSystem>().Play();
+        }else{
+            print("mark of the storm not found on player!");
+        }
+
+        ParticleSystem explosion = GetComponentInChildren<ParticleSystem>();
+        explosion.transform.position = body.position;
+        //explosion.transform.rotation = new Quaternion (0, 0, 0, 0);
+        explosion.Play();
+        player.takeMana(costMana);
     }
 
     private void skillsButtonTwo(RaycastHit hit, Vector3 realDirection)
