@@ -66,6 +66,7 @@ public class PlayerHook : MonoBehaviour {
     }
 
     void Cancel(){
+        launchRope = false;
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, pullSpeed * Time.deltaTime);
         target = null;
     }
