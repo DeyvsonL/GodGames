@@ -29,8 +29,16 @@ public class PlayerHook : MonoBehaviour {
 	public static bool ropeCollided;
     private LineRenderer lrRope;
 
+    public AudioClip soundHookStay;
+    public float volSoundHookStay;
+    public AudioClip soundHookImpact;
+    public float volSoundHookImpact;
+    private AudioSource source;
+
     void Start () {
-		player = GameObject.FindGameObjectWithTag("Player");
+        source = GetComponent<AudioSource>();
+
+        player = GameObject.FindGameObjectWithTag("Player");
 		hookBody = GetComponent<Rigidbody>();
 		ropeEffect = player.GetComponent<SpringJoint>();
         playerRigidBody = player.GetComponent<Rigidbody>();
@@ -84,7 +92,9 @@ public class PlayerHook : MonoBehaviour {
             return;
         }
 		if(coll.tag != "Player" && coll.name != "Platform" && coll.name != "Floor"){
-			target = coll.gameObject;
+            source.PlayOneShot(soundHookImpact, volSoundHookImpact);
+
+            target = coll.gameObject;
 			Rigidbody targetRigidBody = target.GetComponent<Rigidbody> ();
 			if (targetRigidBody && playerRigidBody) {
 				if (targetRigidBody.mass < playerRigidBody.mass) {
@@ -105,7 +115,10 @@ public class PlayerHook : MonoBehaviour {
 
 	public void LaunchHook(){
 		if(playerDistance <= ropeLength){
-			if(!ropeCollided){
+            source.loop = true;
+            source.PlayOneShot(soundHookStay, volSoundHookStay);
+
+            if (!ropeCollided){
 				transform.Translate(0, 0, launchSpeed*Time.deltaTime);
 			}
 
@@ -122,7 +135,7 @@ public class PlayerHook : MonoBehaviour {
 	}
 
 	public void RecallHook(){
-        if(target == null){
+        if (target == null){
             Cancel();
         }else if (hookPullDirection == PULL_TARGET) {
 			target.transform.position = Vector3.MoveTowards(target.transform.position, player.transform.position, pullSpeed*Time.deltaTime);
