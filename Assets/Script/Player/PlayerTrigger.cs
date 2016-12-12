@@ -61,6 +61,8 @@ public class PlayerTrigger : NetworkBehaviour{
     private readonly int TRAPSLOW = 5;
     private readonly int TRAPDAMAGE = 6;
     private readonly int TRAPSTUN = 7;
+
+    bool launching;
     
     public int Skill
     {
@@ -106,6 +108,8 @@ public class PlayerTrigger : NetworkBehaviour{
                 
             }
         }
+        launching = false;
+
     }
 
     void Update() {
@@ -131,12 +135,13 @@ public class PlayerTrigger : NetworkBehaviour{
 
 	private void skillsButtonOne(RaycastHit hit, Vector3 realDirection) {
         if (skill == HOOK) {
-            if (auxGancho == null){
+            if (auxGancho == null && !launching)
+            {
                 anim.SetTrigger("Grab");
                 source.PlayOneShot(soundShotHook, volSoundShotHook);
-                auxGancho = Instantiate(hookPrefab, transform.position, Quaternion.LookRotation(realDirection)) as GameObject;
-                auxGancho.GetComponent<PlayerHook>().player = gameObject;
-            }else{
+                StartCoroutine(launchHook(realDirection));
+            }
+            else if(!launching){
                 anim.SetTrigger("Pull");
             }
         }
@@ -203,6 +208,14 @@ public class PlayerTrigger : NetworkBehaviour{
                 source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
             }
         }
+    }
+
+    IEnumerator launchHook(Vector3 realDirection){
+        launching = true;
+        yield return new WaitForSeconds(0.3f);
+        auxGancho = Instantiate(hookPrefab, transform.position, Quaternion.LookRotation(realDirection)) as GameObject;
+        auxGancho.GetComponent<PlayerHook>().player = gameObject;
+        launching = false;
     }
 
     IEnumerator DelayShout(Transform markOfTheStorm, float costMana){
