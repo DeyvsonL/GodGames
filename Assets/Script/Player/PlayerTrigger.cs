@@ -38,6 +38,10 @@ public class PlayerTrigger : NetworkBehaviour{
     private GameObject trapStunPrefab;
     [SerializeField]
     private GameObject previewPillar;
+    [SerializeField]
+    private GameObject previewTrapSlow;
+    [SerializeField]
+    private GameObject previewTrapDamage;
 
     public AudioClip soundShotOne;
     public float volSoundShotOne;
@@ -77,6 +81,7 @@ public class PlayerTrigger : NetworkBehaviour{
     }
 
     private Animator anim;
+    Collider lastCollider;
 
     void Start(){
         source = GetComponent<AudioSource>();
@@ -305,6 +310,12 @@ public class PlayerTrigger : NetworkBehaviour{
 
     private void calculateDirection(out RaycastHit hit, out Vector3 realDirection) {
 		Physics.Raycast(player.Cam.transform.position, player.Cam.transform.forward, out hit, 100);
+        if(lastCollider!=null && lastCollider != hit.collider){
+            if (lastCollider.name.StartsWith("Ground")){
+                lastCollider.gameObject.GetComponent<TileGround>().cleanPreview();
+            }
+        }
+        lastCollider = hit.collider;
         if (hit.collider == null) {
             hit.point = Camera.main.transform.position + Camera.main.transform.forward * 100f;
         }else if(hit.collider.name.StartsWith("Ground")){
@@ -319,8 +330,12 @@ public class PlayerTrigger : NetworkBehaviour{
 
     private void previewSkill(TileGround tile){
         if(skill == PILLAR){
-            if (tile.pillar != null) return;
             tile.insertPreviewPillar(previewPillar);
+        }else if(skill == TRAPDAMAGE){
+            tile.insertPreviewTrap(previewTrapDamage);
+        }
+        else if(skill == TRAPSLOW){
+            tile.insertPreviewTrap(previewTrapSlow);
         }
     }
 
@@ -374,8 +389,11 @@ public class PlayerTrigger : NetworkBehaviour{
         }
     }
 
-    private void updateButtonSKill() { 
-
+    private void updateButtonSKill() {
+        if (lastCollider != null){
+            if (lastCollider.name.StartsWith("Ground"))
+                lastCollider.gameObject.GetComponent<TileGround>().cleanPreview();
+        }
 
         for (int i = 0; i < gameObjectsSkill.Length; i++) {
             gameObjectsSkill[i].gameObject.GetComponent<Button>().interactable = true;

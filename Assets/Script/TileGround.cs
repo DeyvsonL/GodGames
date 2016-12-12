@@ -7,17 +7,8 @@ public class TileGround :  NetworkBehaviour
 
 	public GameObject trap;
 	public GameObject pillar;
-    public GameObject previewPillar;
-
-	// Use this for initialization
-	void Start () {
-
-	}
-
-	// Update is called once per frame
-	void Update () {
-
-	}
+    private GameObject previewPillar;
+    private GameObject previewTrap;
 		
 	public void insertPillar(GameObject objectToSpawn, int time)
     {
@@ -25,11 +16,20 @@ public class TileGround :  NetworkBehaviour
         Destroy(pillar, time);
     }
 
-    public void insertPreviewPillar(GameObject objectToSpawn)
-    {
-        if(pillar==null)
-        previewPillar = insertObject(objectToSpawn);
-        Destroy(previewPillar, 0.3f);
+    public void insertPreviewPillar(GameObject objectToSpawn){
+        if (pillar == null && previewPillar==null){
+            previewPillar = insertObject(objectToSpawn);
+        }
+    }
+    public void insertPreviewTrap(GameObject objectToSpawn){
+        if (trap == null && previewTrap==null){
+            previewTrap = insertObject(objectToSpawn);
+        }
+    }
+
+    public void cleanPreview() {
+        if (previewTrap != null) Destroy(previewTrap);
+        if(previewPillar != null) Destroy(previewPillar);
     }
 
     public void insertTrap(GameObject objectToSpawn, int time){
