@@ -56,6 +56,7 @@ public class SimpleNavScript : NetworkBehaviour {
 //			return;
 //		}
 		agent = GetComponent<NavMeshAgent> ();
+
 		agent.updatePosition = false;
 		agent.updateRotation = false;
 		agent.avoidancePriority = Random.Range (1, 99);
@@ -124,6 +125,8 @@ public class SimpleNavScript : NetworkBehaviour {
 		}
 
 		if (!IsOnGround() || mob.Stunned) {
+			agent.enabled = false;
+			agent.enabled = true;
 			return;
 		}
 
