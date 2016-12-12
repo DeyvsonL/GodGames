@@ -53,9 +53,10 @@ public class PlayerTrigger : NetworkBehaviour{
     private readonly int BULLET = 1;
     private readonly int PILLAR = 2;
     private readonly int HOOK = 3;
-    private readonly int TRAP = 4;
-	private readonly int MARK = 5;
+    private readonly int TRAPSLOW = 4;
+    private readonly int TRAPDAMAGE = 5;
     private readonly int TRAPSTUN = 6;
+    private readonly int MARK = 7;
     public int Skill
     {
         get { return Skill; }
@@ -124,55 +125,81 @@ public class PlayerTrigger : NetworkBehaviour{
     }
 
 	private void skillsButtonOne(RaycastHit hit, Vector3 realDirection) {
-		if (skill == HOOK) {
-			if (auxGancho == null) {
+        if (skill == HOOK)
+        {
+            if (auxGancho == null)
+            {
                 source.PlayOneShot(soundShotHook, volSoundShotHook);
                 GameObject hitObject = hit.collider.gameObject;
-				auxGancho = Instantiate (hookPrefab, transform.position, Quaternion.LookRotation (realDirection)) as GameObject;
-			}
-		} else if (skill == PILLAR) {
-			if(pillarPrefab.GetComponent<Pillar>().Mana < player.CurrentMana){
-				spawnPillar(hit, pillarPrefab, pillarPrefab.GetComponent<Pillar>().time);
-				anim.SetTrigger("Trap");
-			}
-			else{
+                auxGancho = Instantiate(hookPrefab, transform.position, Quaternion.LookRotation(realDirection)) as GameObject;
+            }
+        }
+        else if (skill == PILLAR)
+        {
+            if (pillarPrefab.GetComponent<Pillar>().Mana < player.CurrentMana)
+            {
+                spawnPillar(hit, pillarPrefab, pillarPrefab.GetComponent<Pillar>().time);
+                anim.SetTrigger("Trap");
+            }
+            else {
                 source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
             }
-        } else if (skill == TRAP) {
-            if (skill == TRAP) {
-                if (trapSlowPrefab.GetComponent<TrapSlow>().Mana < player.CurrentMana) {
-                    spawnTrap(hit, trapSlowPrefab, trapSlowPrefab.GetComponent<TrapSlow>().time);
-                    player.takeMana(trapSlowPrefab.GetComponent<TrapSlow>().Mana);
-                    anim.SetTrigger("Trap");
-                }
-                else {
-                    source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
-                }
-			}
+        }
+        else if (skill == TRAPSLOW)
+        {
 
-		} else if (skill == BULLET) {
-			anim.SetTrigger("Attack");
+            if (trapSlowPrefab.GetComponent<TrapSlow>().Mana < player.CurrentMana)
+            {
+                spawnTrap(hit, trapSlowPrefab, trapSlowPrefab.GetComponent<TrapSlow>().time);
+                player.takeMana(trapSlowPrefab.GetComponent<TrapSlow>().Mana);
+                anim.SetTrigger("Trap");
+            }
+            else {
+                source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
+            }
+
+        }
+        else if (skill == TRAPDAMAGE)
+        {
+
+            if (trapDamagePrefab.GetComponent<TrapDamage>().Mana < player.CurrentMana)
+            {
+                spawnTrap(hit, trapDamagePrefab, trapDamagePrefab.GetComponent<TrapDamage>().time);
+                player.takeMana(trapDamagePrefab.GetComponent<TrapDamage>().Mana);
+                anim.SetTrigger("Trap");
+            }
+            else {
+                source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
+            }
+
+        }
+        else if (skill == BULLET)
+        {
+            anim.SetTrigger("Attack");
             source.PlayOneShot(soundShotOne, volSoundShotOne);
             GameObject bulletAux = Instantiate(bulletPrefab, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
-			CmdSpawnBullet (realDirection, bulletAux);
-		} else if (skill == MARK) {
+            CmdSpawnBullet(realDirection, bulletAux);
+        }
+        else if (skill == MARK)
+        {
             int costMana = 30;
             if (costMana < player.CurrentMana)
             {
                 SkillConfig.MarkOfTheStormConfig.Damage(body.position);
 
-				Transform markOfTheStorm = transform.Find ("MarkOfTheStorm");
+                Transform markOfTheStorm = transform.Find("MarkOfTheStorm");
                 anim.SetTrigger("Shout");
                 StartCoroutine(DelayShout(markOfTheStorm, costMana));
 
 
             }
-            else{
+            else {
                 source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
             }
-        } else if (skill == TRAPSTUN)
+        }
+        else if (skill == TRAPSTUN)
         {
-            
+
             if (trapStunPrefab.GetComponent<TrapStun>().Mana < player.CurrentMana)
             {
                 spawnTrap(hit, trapStunPrefab, trapStunPrefab.GetComponent<TrapStun>().time);
@@ -203,15 +230,7 @@ public class PlayerTrigger : NetworkBehaviour{
 
     private void skillsButtonTwo(RaycastHit hit, Vector3 realDirection)
     {
-        if (skill == TRAP){
-            if (trapDamagePrefab.GetComponent<TrapDamage>().Mana < player.CurrentMana){
-				spawnTrap(hit, trapDamagePrefab, trapDamagePrefab.GetComponent<TrapDamage>().time);
-                player.takeMana(trapDamagePrefab.GetComponent<TrapDamage>().Mana);
-                anim.SetTrigger("Trap");
-            }else{
-                // TO DO SOM FALTA DE MANA
-            }
-        }else if (skill == BULLET) {
+        if (skill == BULLET) {
 
 
             if (bulletStunPrefab.GetComponent<CollisionStunBullet>().Mana < player.CurrentMana){
@@ -315,6 +334,12 @@ public class PlayerTrigger : NetworkBehaviour{
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
             skill = 6;
+            updateButtonSKill();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            skill = 7;
             updateButtonSKill();
         }
 
