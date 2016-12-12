@@ -45,6 +45,10 @@ public class PlayerTrigger : NetworkBehaviour{
     public float volSoundShotHook;
     public AudioClip soundErrorLowMana;
     public float volSoundErrorLowMana;
+    public AudioClip soundShoutDamageArea;
+    public float volSoundShoutDamageArea;
+    public AudioClip soundFlameDamageArea;
+    public float volSoundFlameDamageArea;
     private AudioSource source;
 
     public Button[] gameObjectsSkill;
@@ -189,6 +193,8 @@ public class PlayerTrigger : NetworkBehaviour{
 
                 Transform markOfTheStorm = transform.Find("MarkOfTheStorm");
                 anim.SetTrigger("Shout");
+                source.PlayOneShot(soundShoutDamageArea, volSoundShoutDamageArea);
+                source.PlayOneShot(soundFlameDamageArea, volSoundFlameDamageArea);
                 StartCoroutine(DelayShout(markOfTheStorm, costMana));
 
 
