@@ -56,7 +56,7 @@ public class PlayerHook : MonoBehaviour {
 
         if ( input || (ropeCollided && target==null)){
 			launchRope = false;
-		}else if(!input && target != null){
+		}else if(!input && target != null && target.tag=="Mob"){
             transform.position = target.transform.position;
         }
 
