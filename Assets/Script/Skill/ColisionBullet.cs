@@ -3,7 +3,11 @@
 public class ColisionBullet : MonoBehaviour
 {
     [SerializeField]
-    private int damage;
+	private int damage;
+
+	void Start(){
+		damage = SkillConfig.BaseBullet.damage;
+	}
 
     void OnCollisionEnter(Collision collider)
     {

@@ -9,11 +9,11 @@ public class TrapDamage : MonoBehaviour {
     public float damageInterval;
     private float lastDamageTime;
     [SerializeField]
-    private int mana;
-    public int Mana
+	private int manaCost;
+    public int ManaCost
     {
-        get { return mana; }
-        set { mana = value; }
+		get { return manaCost; }
+		set { manaCost = value; }
     }
 
     public int time;
@@ -21,6 +21,10 @@ public class TrapDamage : MonoBehaviour {
 
     void Start() {
         lastDamageTime = Time.time;
+
+		damage = SkillConfig.TrapDamage.damage;
+		damageInterval = SkillConfig.TrapDamage.damageInterval;
+		manaCost = SkillConfig.TrapDamage.manaCost;
     }
     
     void OnTriggerStay(Collider collider) {

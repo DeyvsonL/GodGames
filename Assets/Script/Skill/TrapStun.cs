@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class TrapStun : MonoBehaviour {
     public int time;
-    public int timeStun;
+    public float stunTime;
     public float stunInterval;
     private float lastStunTime;
     [SerializeField]
-    private int mana;
-    public int Mana
+	private int manaCost;
+    public int ManaCost
     {
-        get { return mana; }
-        set { mana = value; }
+		get { return manaCost; }
+		set { manaCost = value; }
     }
+
+	void Awake(){
+		manaCost = SkillConfig.TrapStun.manaCost;
+		stunTime = SkillConfig.TrapStun.stunTime;
+		stunInterval = SkillConfig.TrapStun.stunInterval;
+	}
 
 
     void OnTriggerEnter(Collider collider)
@@ -23,7 +29,7 @@ public class TrapStun : MonoBehaviour {
         {
             if (Time.time > lastStunTime + stunInterval)
             {
-                collider.gameObject.GetComponent<Mob>().Stun(timeStun);
+				collider.gameObject.GetComponent<Mob>().Stun(stunTime);
                 lastStunTime = Time.time;
             }
         }

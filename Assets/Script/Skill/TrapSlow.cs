@@ -6,14 +6,19 @@ public class TrapSlow : MonoBehaviour {
     [SerializeField]
     private float slow = 0.5f;
     [SerializeField]
-    private int mana;
-    public int Mana
+	private int manaCost;
+	public int ManaCost
     {
-        get { return mana; }
-        set { mana = value; }
+		get { return manaCost; }
+		set { manaCost = value; }
     }
 
     public int time;
+
+	void Start(){
+		slow = SkillConfig.TrapSlow.slow;
+		manaCost = SkillConfig.TrapSlow.manaCost;
+	}
 
     void OnTriggerEnter(Collider collider){
         if (collider.tag == "Mob"){

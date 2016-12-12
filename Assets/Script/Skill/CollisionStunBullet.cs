@@ -7,12 +7,18 @@ public class CollisionStunBullet : MonoBehaviour {
     [SerializeField]
     private int damage;
     [SerializeField]
-    private int mana;
-    public int Mana
+	private int manaCost;
+    public int ManaCost
     {
-        get { return mana; }
-        set { mana = value; }
+		get { return manaCost; }
+		set { manaCost = value; }
     }
+
+	void Start(){
+		damage = SkillConfig.StunBullet.damage;
+		stunTime = SkillConfig.StunBullet.stunTime;
+		manaCost = SkillConfig.StunBullet.manaCost;
+	}
 
     void OnCollisionEnter(Collision collider) {
         if ((collider.gameObject.tag != "Player") && (collider.gameObject.tag == "Mob"))

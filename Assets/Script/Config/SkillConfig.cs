@@ -61,12 +61,54 @@ public class SkillConfig : MonoBehaviour {
 		}
 	}
 
-	// Explosive Pillar
+	//Pillars
+
+
 	public class ExplosivePillar {
 		public static int damage = 20;
 		public static float radius = 5f;
 		public static int manaCost = 20;
 	}
 
+	//Traps
 
+	// Trap Damage
+	public class TrapDamage {
+		public static int damage = 5;
+		public static float damageInterval = 1f;
+		public static int manaCost = 20;
+	}
+
+	// Trap Slow
+	public class TrapSlow {
+		public static float slow = 0.1f;
+		public static int manaCost = 15;
+	}
+
+	// Trap Stun
+	public class TrapStun {
+		public static float stunTime = 5f;
+		public static float stunInterval = 0f;
+		public static int manaCost = 20;
+	}
+
+
+	//Bullets
+
+	// Bullet
+	public class BaseBullet {
+		public static int damage = 10;
+	}
+
+	// Stun Bullet
+	public class StunBullet {
+		public static int damage = 20;
+		public static int manaCost = 20;
+		public static float stunTime = 2;
+	}
+
+	// Area Bullet
+	public class AreaBullet {
+		
+	}
 }

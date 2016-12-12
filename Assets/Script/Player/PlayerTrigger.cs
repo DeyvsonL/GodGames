@@ -153,10 +153,10 @@ public class PlayerTrigger : NetworkBehaviour{
         else if (skill == TRAPSLOW)
         {
 
-            if (trapSlowPrefab.GetComponent<TrapSlow>().Mana < player.CurrentMana)
+			if (SkillConfig.TrapSlow.manaCost < player.CurrentMana)
             {
                 spawnTrap(hit, trapSlowPrefab, trapSlowPrefab.GetComponent<TrapSlow>().time);
-                player.takeMana(trapSlowPrefab.GetComponent<TrapSlow>().Mana);
+				player.takeMana(SkillConfig.TrapSlow.manaCost);
                 anim.SetTrigger("Trap");
             }
             else {
@@ -167,10 +167,10 @@ public class PlayerTrigger : NetworkBehaviour{
         else if (skill == TRAPDAMAGE)
         {
 
-            if (trapDamagePrefab.GetComponent<TrapDamage>().Mana < player.CurrentMana)
+			if (SkillConfig.TrapDamage.manaCost < player.CurrentMana)
             {
                 spawnTrap(hit, trapDamagePrefab, trapDamagePrefab.GetComponent<TrapDamage>().time);
-                player.takeMana(trapDamagePrefab.GetComponent<TrapDamage>().Mana);
+				player.takeMana(SkillConfig.TrapDamage.manaCost);
                 anim.SetTrigger("Trap");
             }
             else {
@@ -207,10 +207,10 @@ public class PlayerTrigger : NetworkBehaviour{
         else if (skill == TRAPSTUN)
         {
 
-            if (trapStunPrefab.GetComponent<TrapStun>().Mana < player.CurrentMana)
+			if (SkillConfig.TrapStun.manaCost < player.CurrentMana)
             {
                 spawnTrap(hit, trapStunPrefab, trapStunPrefab.GetComponent<TrapStun>().time);
-                player.takeMana(trapStunPrefab.GetComponent<TrapStun>().Mana);
+				player.takeMana(SkillConfig.TrapStun.manaCost);
                 anim.SetTrigger("Trap");
             }
             else
@@ -240,12 +240,12 @@ public class PlayerTrigger : NetworkBehaviour{
         if (skill == BULLET) {
 
 
-            if (bulletStunPrefab.GetComponent<CollisionStunBullet>().Mana < player.CurrentMana){
+			if (SkillConfig.StunBullet.manaCost < player.CurrentMana){
                 anim.SetTrigger("Attack");
                 source.PlayOneShot(soundShotTwo, volSoundShotTwo);
                 GameObject bulletAux = Instantiate(bulletStunPrefab, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
                 CmdSpawnBullet(realDirection, bulletAux);
-                player.takeMana(bulletStunPrefab.GetComponent<CollisionStunBullet>().Mana);
+				player.takeMana(SkillConfig.StunBullet.manaCost);
             }else{
                 source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
             }
