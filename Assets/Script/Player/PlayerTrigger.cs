@@ -16,7 +16,6 @@ public class PlayerTrigger : NetworkBehaviour{
     [SerializeField]
     private Transform rightHand;
 
-	private LineRenderer lrMark;
 	private GameObject mark;
 	private LineRenderer lrGancho;
 
@@ -89,9 +88,6 @@ public class PlayerTrigger : NetworkBehaviour{
         anim = GetComponentInChildren<Animator>();
 
         player = GetComponent<Player>();
-        lrMark = GetComponent<LineRenderer>();
-        lrMark.SetWidth(0.05f, 0.05f);
-        lrMark.SetColors(Color.red, Color.red);
         mark = GameObject.FindGameObjectWithTag("mark");
         skill = 1;
         GameObject[] go = GameObject.FindGameObjectsWithTag("BtnSkill");
@@ -323,8 +319,6 @@ public class PlayerTrigger : NetworkBehaviour{
             previewSkill(tile);
         }
         realDirection = hit.point - rightHand.position;
-        lrMark.SetPosition(0, rightHand.position);
-        lrMark.SetPosition(1, hit.point);
         mark.transform.position = hit.point;
     }
 
