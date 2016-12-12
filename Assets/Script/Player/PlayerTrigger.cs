@@ -36,6 +36,8 @@ public class PlayerTrigger : NetworkBehaviour{
 	private GameObject trapDamagePrefab;
     [SerializeField]
     private GameObject trapStunPrefab;
+    [SerializeField]
+    private GameObject previewPillar;
 
     public AudioClip soundShotOne;
     public float volSoundShotOne;
@@ -302,16 +304,24 @@ public class PlayerTrigger : NetworkBehaviour{
 		
 
     private void calculateDirection(out RaycastHit hit, out Vector3 realDirection) {
-		bool hasHit = Physics.Raycast(player.Cam.transform.position, player.Cam.transform.forward, out hit, 100);
+		Physics.Raycast(player.Cam.transform.position, player.Cam.transform.forward, out hit, 100);
         if (hit.collider == null) {
             hit.point = Camera.main.transform.position + Camera.main.transform.forward * 100f;
-        } else {
-			hit.distance = player.Cam.farClipPlane;
+        }else if(hit.collider.name.StartsWith("Ground")){
+            TileGround tile = hit.collider.gameObject.GetComponent<TileGround>();
+            previewSkill(tile);
         }
         realDirection = hit.point - rightHand.position;
         lrMark.SetPosition(0, rightHand.position);
         lrMark.SetPosition(1, hit.point);
         mark.transform.position = hit.point;
+    }
+
+    private void previewSkill(TileGround tile){
+        if(skill == PILLAR){
+            if (tile.pillar != null) return;
+            tile.insertPreviewPillar(previewPillar);
+        }
     }
 
     private void selectSkill() {

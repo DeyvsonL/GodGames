@@ -7,6 +7,7 @@ public class TileGround :  NetworkBehaviour
 
 	public GameObject trap;
 	public GameObject pillar;
+    public GameObject previewPillar;
 
 	// Use this for initialization
 	void Start () {
@@ -24,9 +25,17 @@ public class TileGround :  NetworkBehaviour
         Destroy(pillar, time);
     }
 
-	public void insertTrap(GameObject objectToSpawn, int time){
+    public void insertPreviewPillar(GameObject objectToSpawn)
+    {
+        if(pillar==null)
+        previewPillar = insertObject(objectToSpawn);
+        Destroy(previewPillar, 0.3f);
+    }
+
+    public void insertTrap(GameObject objectToSpawn, int time){
+        if (trap != null) return;
 		trap = insertObject (objectToSpawn);
-        Destroy(trap, time);
+        //Destroy(trap, time);
 	}
 
 	private GameObject insertObject(GameObject objectToSpawn){
