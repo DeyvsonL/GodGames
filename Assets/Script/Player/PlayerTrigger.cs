@@ -130,13 +130,16 @@ public class PlayerTrigger : NetworkBehaviour{
     }
 
 	private void skillsButtonOne(RaycastHit hit, Vector3 realDirection) {
-        if (skill == HOOK)
-        {
-            if (auxGancho == null)
-            {
+        if (skill == HOOK) {
+            if (auxGancho == null){
                 source.PlayOneShot(soundShotHook, volSoundShotHook);
                 GameObject hitObject = hit.collider.gameObject;
                 auxGancho = Instantiate(hookPrefab, transform.position, Quaternion.LookRotation(realDirection)) as GameObject;
+                auxGancho.GetComponent<PlayerHook>().player = gameObject;
+                //auxGancho.GetComponent<PlayerHook>().
+                anim.SetTrigger("Grab");
+            }else{
+                anim.SetTrigger("Pull");
             }
         }
         else if (skill == PILLAR)
@@ -164,32 +167,24 @@ public class PlayerTrigger : NetworkBehaviour{
             }
 
         }
-        else if (skill == TRAPDAMAGE)
-        {
-
-			if (SkillConfig.TrapDamage.manaCost < player.CurrentMana)
-            {
+        else if (skill == TRAPDAMAGE){
+			if (SkillConfig.TrapDamage.manaCost < player.CurrentMana){
                 spawnTrap(hit, trapDamagePrefab, trapDamagePrefab.GetComponent<TrapDamage>().time);
 				player.takeMana(SkillConfig.TrapDamage.manaCost);
                 anim.SetTrigger("Trap");
-            }
-            else {
+            }else {
                 source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
             }
 
         }
-        else if (skill == BULLET)
-        {
+        else if (skill == BULLET){
             anim.SetTrigger("Attack");
             source.PlayOneShot(soundShotOne, volSoundShotOne);
             GameObject bulletAux = Instantiate(bulletPrefab, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
             CmdSpawnBullet(realDirection, bulletAux);
-        }
-        else if (skill == MARK)
-        {
+        }else if (skill == MARK){
             int costMana = 30;
-            if (costMana < player.CurrentMana)
-            {
+            if (costMana < player.CurrentMana){
                 SkillConfig.MarkOfTheStormConfig.Damage(body.position);
 
                 Transform markOfTheStorm = transform.Find("MarkOfTheStorm");
@@ -198,23 +193,15 @@ public class PlayerTrigger : NetworkBehaviour{
                 source.PlayOneShot(soundFlameDamageArea, volSoundFlameDamageArea);
                 StartCoroutine(DelayShout(markOfTheStorm, costMana));
 
-
-            }
-            else {
+            }else {
                 source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
             }
-        }
-        else if (skill == TRAPSTUN)
-        {
-
-			if (SkillConfig.TrapStun.manaCost < player.CurrentMana)
-            {
+        }else if (skill == TRAPSTUN){
+			if (SkillConfig.TrapStun.manaCost < player.CurrentMana){
                 spawnTrap(hit, trapStunPrefab, trapStunPrefab.GetComponent<TrapStun>().time);
 				player.takeMana(SkillConfig.TrapStun.manaCost);
                 anim.SetTrigger("Trap");
-            }
-            else
-            {
+            }else{
                 source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
             }
         }
@@ -235,8 +222,7 @@ public class PlayerTrigger : NetworkBehaviour{
         player.takeMana(costMana);
     }
 
-    private void skillsButtonTwo(RaycastHit hit, Vector3 realDirection)
-    {
+    private void skillsButtonTwo(RaycastHit hit, Vector3 realDirection){
         if (skill == BULLET) {
 
 
@@ -254,12 +240,14 @@ public class PlayerTrigger : NetworkBehaviour{
 				spawnPillar(hit, pillarExplosivePrefab, pillarExplosivePrefab.GetComponent<PillarExplosive>().time);
 				player.takeMana(SkillConfig.ExplosivePillar.manaCost);
                 anim.SetTrigger("Trap");
-            }
-			else
-			{
+            }else{
                 source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
             }
-		}
+		}else if(skill == HOOK){
+            if (auxGancho != null){
+                anim.SetTrigger("Pull");
+            }
+        }
     }
 
 	[Command]

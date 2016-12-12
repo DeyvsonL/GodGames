@@ -7,7 +7,7 @@ public class PlayerHook : MonoBehaviour {
 	public float ropeForce;
 	public float weight;
 
-	private GameObject player;
+	public GameObject player;
 	private GameObject target;
 	private Rigidbody hookBody;
 	private SpringJoint ropeEffect;
@@ -38,7 +38,6 @@ public class PlayerHook : MonoBehaviour {
     void Start () {
         source = GetComponent<AudioSource>();
 
-        player = GameObject.FindGameObjectWithTag("Player");
 		hookBody = GetComponent<Rigidbody>();
 		ropeEffect = player.GetComponent<SpringJoint>();
         playerRigidBody = player.GetComponent<Rigidbody>();
@@ -56,7 +55,7 @@ public class PlayerHook : MonoBehaviour {
 
         if ( input || (ropeCollided && target==null)){
 			launchRope = false;
-		}else if(!input && target != null && target.tag=="Mob"){
+		}else if(!input && target != null && target.name=="Mob"){
             transform.position = target.transform.position;
         }
 
