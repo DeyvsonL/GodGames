@@ -41,6 +41,10 @@ public class PlayerTrigger : NetworkBehaviour{
     public float volSoundShotOne;
     public AudioClip soundShotTwo;
     public float volSoundShotTwo;
+    public AudioClip soundShotHook;
+    public float volSoundShotHook;
+    public AudioClip soundErrorLowMana;
+    public float volSoundErrorLowMana;
     private AudioSource source;
 
     public Button[] gameObjectsSkill;
@@ -122,7 +126,8 @@ public class PlayerTrigger : NetworkBehaviour{
 	private void skillsButtonOne(RaycastHit hit, Vector3 realDirection) {
 		if (skill == HOOK) {
 			if (auxGancho == null) {
-				GameObject hitObject = hit.collider.gameObject;
+                source.PlayOneShot(soundShotHook, volSoundShotHook);
+                GameObject hitObject = hit.collider.gameObject;
 				auxGancho = Instantiate (hookPrefab, transform.position, Quaternion.LookRotation (realDirection)) as GameObject;
 			}
 		} else if (skill == PILLAR) {
@@ -131,18 +136,18 @@ public class PlayerTrigger : NetworkBehaviour{
 				anim.SetTrigger("Trap");
 			}
 			else{
-				//TO DO SOM FALTA MANA
-			}
-		} else if (skill == TRAP) {
-			if (skill == TRAP){
-				if (trapSlowPrefab.GetComponent<TrapSlow>().Mana < player.CurrentMana){
-					spawnTrap(hit, trapSlowPrefab, trapSlowPrefab.GetComponent<TrapSlow>().time);
-					player.takeMana(trapSlowPrefab.GetComponent<TrapSlow>().Mana);
-					anim.SetTrigger("Trap");
-				}
-				else{
-					// TO DO SOM FALTA DE MANA
-				}
+                source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
+            }
+        } else if (skill == TRAP) {
+            if (skill == TRAP) {
+                if (trapSlowPrefab.GetComponent<TrapSlow>().Mana < player.CurrentMana) {
+                    spawnTrap(hit, trapSlowPrefab, trapSlowPrefab.GetComponent<TrapSlow>().time);
+                    player.takeMana(trapSlowPrefab.GetComponent<TrapSlow>().Mana);
+                    anim.SetTrigger("Trap");
+                }
+                else {
+                    source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
+                }
 			}
 
 		} else if (skill == BULLET) {
@@ -162,6 +167,9 @@ public class PlayerTrigger : NetworkBehaviour{
 
 
             }
+            else{
+                source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
+            }
         } else if (skill == TRAPSTUN)
         {
             
@@ -170,6 +178,10 @@ public class PlayerTrigger : NetworkBehaviour{
                 spawnTrap(hit, trapStunPrefab, trapStunPrefab.GetComponent<TrapStun>().time);
                 player.takeMana(trapStunPrefab.GetComponent<TrapStun>().Mana);
                 anim.SetTrigger("Trap");
+            }
+            else
+            {
+                source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
             }
         }
     }
@@ -209,7 +221,7 @@ public class PlayerTrigger : NetworkBehaviour{
                 CmdSpawnBullet(realDirection, bulletAux);
                 player.takeMana(bulletStunPrefab.GetComponent<CollisionStunBullet>().Mana);
             }else{
-                   //TO DO SOM FALTA MANA
+                source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
             }
         }else if (skill == PILLAR){
 			if(SkillConfig.ExplosivePillar.manaCost < player.CurrentMana){
@@ -219,8 +231,8 @@ public class PlayerTrigger : NetworkBehaviour{
             }
 			else
 			{
-				//TO DO SOM FALTA MANA
-			}
+                source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
+            }
 		}
     }
 
