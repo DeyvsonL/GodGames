@@ -132,12 +132,10 @@ public class PlayerTrigger : NetworkBehaviour{
 	private void skillsButtonOne(RaycastHit hit, Vector3 realDirection) {
         if (skill == HOOK) {
             if (auxGancho == null){
+                anim.SetTrigger("Grab");
                 source.PlayOneShot(soundShotHook, volSoundShotHook);
-                GameObject hitObject = hit.collider.gameObject;
                 auxGancho = Instantiate(hookPrefab, transform.position, Quaternion.LookRotation(realDirection)) as GameObject;
                 auxGancho.GetComponent<PlayerHook>().player = gameObject;
-                //auxGancho.GetComponent<PlayerHook>().
-                anim.SetTrigger("Grab");
             }else{
                 anim.SetTrigger("Pull");
             }

@@ -8,7 +8,7 @@ public class PlayerHook : MonoBehaviour {
 	public float weight;
 
 	public GameObject player;
-	private GameObject target;
+	public GameObject target;
 	private Rigidbody hookBody;
 	private SpringJoint ropeEffect;
     private Rigidbody playerRigidBody;
@@ -55,7 +55,7 @@ public class PlayerHook : MonoBehaviour {
 
         if ( input || (ropeCollided && target==null)){
 			launchRope = false;
-		}else if(!input && target != null && target.name=="Mob"){
+		}else if(!input && target != null && target.tag=="Mob"){
             transform.position = target.transform.position;
         }
 
@@ -90,7 +90,7 @@ public class PlayerHook : MonoBehaviour {
         if (coll.isTrigger || target!=null) {
             return;
         }
-		if(coll.tag != "Player" && coll.name != "Platform" && coll.name != "Floor"){
+		if(coll.tag != "Player"){
             source.PlayOneShot(soundHookImpact, volSoundHookImpact);
 
             target = coll.gameObject;

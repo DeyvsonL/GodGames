@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: bdfd464437cf344438612aefe4792b99
-timeCreated: 1481412575
+guid: a34b2b7287e7b204db7b535f8d1f8382
+timeCreated: 1481561951
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -89,7 +89,7 @@ ModelImporter:
     400078: mixamorig:Spine1
     400080: mixamorig:Spine2
     400082: //RootNode
-    7400000: grab_and_slam
+    7400000: grab_and_slam - 2
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -113,10 +113,10 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: grab_and_slam
+      name: grab_and_slam - 2
       takeName: mixamo.com
-      firstFrame: 0
-      lastFrame: 70
+      firstFrame: 94
+      lastFrame: 127
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
