@@ -1761,6 +1761,11 @@ MonoBehaviour:
   volSoundShotHook: 1
   soundErrorLowMana: {fileID: 8300000, guid: 4081c32d7226841469a23624d4bd6f35, type: 3}
   volSoundErrorLowMana: 1
+  soundShoutDamageArea: {fileID: 8300000, guid: 064d5eb5747fe3f46a7654810a3c5a9a,
+    type: 3}
+  volSoundShoutDamageArea: 0.5
+  soundFlameDamageArea: {fileID: 0}
+  volSoundFlameDamageArea: 0
   gameObjectsSkill:
   - {fileID: 0}
   - {fileID: 0}

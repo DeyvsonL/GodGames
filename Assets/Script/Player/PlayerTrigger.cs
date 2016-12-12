@@ -57,10 +57,11 @@ public class PlayerTrigger : NetworkBehaviour{
     private readonly int BULLET = 1;
     private readonly int PILLAR = 2;
     private readonly int HOOK = 3;
-    private readonly int TRAPSLOW = 4;
-    private readonly int TRAPDAMAGE = 5;
-    private readonly int TRAPSTUN = 6;
-    private readonly int MARK = 7;
+	private readonly int MARK = 4;
+    private readonly int TRAPSLOW = 5;
+    private readonly int TRAPDAMAGE = 6;
+    private readonly int TRAPSTUN = 7;
+    
     public int Skill
     {
         get { return Skill; }
