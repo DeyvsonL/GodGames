@@ -41,6 +41,8 @@ public class PlayerTrigger : NetworkBehaviour{
     private GameObject previewTrapSlow;
     [SerializeField]
     private GameObject previewTrapDamage;
+    [SerializeField]
+    private GameObject previewTrapStun;
 
     public AudioClip soundShotOne;
     public float volSoundShotOne;
@@ -330,6 +332,9 @@ public class PlayerTrigger : NetworkBehaviour{
         }
         else if(skill == TRAPSLOW){
             tile.insertPreviewTrap(previewTrapSlow);
+        }else if(skill == TRAPSTUN){
+            tile.insertPreviewTrap(previewTrapStun);
+
         }
     }
 

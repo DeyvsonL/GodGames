@@ -1747,13 +1747,11 @@ MonoBehaviour:
     type: 2}
   previewPillar: {fileID: 1000012162766012, guid: 445b58c04317da1428d8e753d56c6908,
     type: 2}
-  previewExplosivePillar: {fileID: 1201215336033544, guid: b9d589ad9890198409507c9224969aeb,
-    type: 2}
   previewTrapSlow: {fileID: 1000010223229338, guid: 944f4be7eee034448be57d94f105badc,
     type: 2}
   previewTrapDamage: {fileID: 1000011233926520, guid: 011cd4a3227e3764b8aed32b02ceb1d0,
     type: 2}
-  previewTrapStun: {fileID: 1609397589981336, guid: 667a81a64e4f3884bae05258a9110797,
+  previewTrapStun: {fileID: 1609397589981336, guid: 23c19c615b173684f99452449284e6ef,
     type: 2}
   soundShotOne: {fileID: 8300000, guid: cee1b01ae2e7ff14d88865f31178290a, type: 3}
   volSoundShotOne: 1
