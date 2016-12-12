@@ -4,25 +4,30 @@ using UnityEngine.Networking;
 
 public class GateToTheHell : MonoBehaviour {
 
-    [SerializeField]
-    private int qtdMobs = 10;
-    public int QtdMobs {
-        get { return qtdMobs; }
-    }
-    Text text;
-    private void Start(){
-        text = GameObject.Find("MobsCountText").GetComponent<Text>();
-        text.text = qtdMobs.ToString();
-    }
-
     private void OnTriggerEnter(Collider other){
 		if(!other.isTrigger && other.gameObject.tag == "Mob"){
-            qtdMobs--;
-            text.text = qtdMobs.ToString();
-            Destroy(other.transform.parent.gameObject);
-            if (qtdMobs <= 0){
-                text.text = "0";
-            }
+			Mob mob = other.gameObject.GetComponent<Mob> ();
+
+			int portalDamage = 0;
+			switch (mob.mobType) {
+			case (Mob.MobType.REGULAR):
+				portalDamage = MobConfig.MobRegularConfig.portalDamage;
+				break;
+			case (Mob.MobType.SLOW):
+				portalDamage = MobConfig.MobSlowConfig.portalDamage;
+				break;
+			case (Mob.MobType.FAST):
+				portalDamage = MobConfig.MobFastConfig.portalDamage;
+				break;
+			case (Mob.MobType.GOLEM):
+				portalDamage = MobConfig.MobGolemConfig.portalDamage;
+				break;
+
+			}
+				
+			GameManager.instance.DamagePortal (portalDamage);
+				
+			Destroy(other.transform.parent.gameObject);
         }
     }
 }
