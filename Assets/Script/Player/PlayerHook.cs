@@ -87,7 +87,7 @@ public class PlayerHook : MonoBehaviour {
     
 
     void OnTriggerEnter(Collider coll){
-        if (coll.isTrigger) {
+        if (coll.isTrigger || target!=null) {
             return;
         }
 		if(coll.tag != "Player" && coll.name != "Platform" && coll.name != "Floor"){
