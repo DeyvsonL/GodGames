@@ -30,7 +30,6 @@ GameObject:
   - component: {fileID: 114000010406822316}
   - component: {fileID: 208000013813583090}
   - component: {fileID: 136823324922334702}
-  - component: {fileID: 81886522270579584}
   - component: {fileID: 82701425671047980}
   m_Layer: 0
   m_Name: Player
@@ -1575,13 +1574,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!81 &81886522270579584
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010512022538}
-  m_Enabled: 1
 --- !u!82 &82701425671047980
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1763,7 +1755,7 @@ MonoBehaviour:
   volSoundErrorLowMana: 1
   soundShoutDamageArea: {fileID: 8300000, guid: 064d5eb5747fe3f46a7654810a3c5a9a,
     type: 3}
-  volSoundShoutDamageArea: 0.5
+  volSoundShoutDamageArea: 0.1
   soundFlameDamageArea: {fileID: 0}
   volSoundFlameDamageArea: 0
   gameObjectsSkill:
