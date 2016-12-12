@@ -143,7 +143,7 @@ public class Mob : MonoBehaviour {
 
 	public virtual void Die(){
 		GameManager.instance.countMobKilled ();
-		Destroy (gameObject);
+		Destroy (gameObject.transform.parent.gameObject);
 	}
 
 	IEnumerator WaitToDie(float delay)

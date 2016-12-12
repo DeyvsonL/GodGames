@@ -25,7 +25,7 @@ public class MobGolem : Mob {
 		//spawnedObject.GetComponentInChildren<Rigidbody> ().transform = position + randomVector2;
 		NetworkServer.Spawn(spawnedObject2);
 		GameManager.instance.countMobKilled ();
-		Destroy (gameObject);
+		Destroy (gameObject.transform.parent.gameObject);
 	}
 
 	private void UpdateNavScript(GameObject miniGolem){

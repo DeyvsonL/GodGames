@@ -20,11 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000011801252356}
   - component: {fileID: 33000011143945562}
-  - component: {fileID: 65000013065348184}
   - component: {fileID: 23000011380166418}
-  - component: {fileID: 114000013855080222}
-  - component: {fileID: 114000010935172416}
-  - component: {fileID: 114136729405319462}
   m_Layer: 0
   m_Name: PreviewTrapDamage
   m_TagString: Untagged
@@ -58,7 +54,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 99caa1837facde743aa6744421dd0d74, type: 2}
+  - {fileID: 2100000, guid: e4252accf54b30f4d98ef9343ebe3125, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,82 +79,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011233926520}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65000013065348184
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011233926520}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114000010935172416
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011233926520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
---- !u!114 &114000013855080222
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011233926520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 1
-    i1: 28
-    i2: 212
-    i3: 163
-    i4: 34
-    i5: 126
-    i6: 55
-    i7: 100
-    i8: 184
-    i9: 174
-    i10: 211
-    i11: 43
-    i12: 2
-    i13: 206
-    i14: 177
-    i15: 208
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
---- !u!114 &114136729405319462
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011233926520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d810fe3650df8574fb5a3ecdf4a05304, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
-  damageInterval: 1
-  manaCost: 0
-  time: 10

@@ -18,12 +18,12 @@ public class TileGround :  NetworkBehaviour
 
     public void insertPreviewPillar(GameObject objectToSpawn){
         if (pillar == null && previewPillar==null){
-            previewPillar = insertObject(objectToSpawn);
+            previewPillar = insertPreviewObject(objectToSpawn);
         }
     }
     public void insertPreviewTrap(GameObject objectToSpawn){
         if (trap == null && previewTrap==null){
-            previewTrap = insertObject(objectToSpawn);
+            previewTrap = insertPreviewObject(objectToSpawn);
         }
     }
 
@@ -38,13 +38,20 @@ public class TileGround :  NetworkBehaviour
         //Destroy(trap, time);
 	}
 
-	private GameObject insertObject(GameObject objectToSpawn){
-		float tileHeight = GetComponent<MeshFilter>().mesh.bounds.extents.y * transform.localScale.y;
-		float trapHeight = objectToSpawn.GetComponent<MeshFilter>().sharedMesh.bounds.extents.y * objectToSpawn.transform.localScale.y;
+    private GameObject insertPreviewObject(GameObject objectToSpawn)
+    {
+        float tileHeight = GetComponent<MeshFilter>().mesh.bounds.extents.y * transform.localScale.y;
+        float trapHeight = objectToSpawn.GetComponent<MeshFilter>().sharedMesh.bounds.extents.y * objectToSpawn.transform.localScale.y;
 
-		Vector3 spawnPos = transform.position + new Vector3 (0, tileHeight + trapHeight + 0.1f, 0);
+        Vector3 spawnPos = transform.position + new Vector3(0, tileHeight + trapHeight + 0.1f, 0);
 
-		GameObject objReturn = Instantiate (objectToSpawn, spawnPos, Quaternion.identity) as GameObject;
+        GameObject objReturn = Instantiate(objectToSpawn, spawnPos, Quaternion.identity) as GameObject;
+        return objReturn;
+    }
+
+    private GameObject insertObject(GameObject objectToSpawn){
+
+        GameObject objReturn = insertPreviewObject(objectToSpawn);
         NetworkServer.Spawn(objReturn);
         return objReturn;
     }
