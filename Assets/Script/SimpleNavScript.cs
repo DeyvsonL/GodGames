@@ -117,6 +117,12 @@ public class SimpleNavScript : NetworkBehaviour {
 //			return;
 //		}
 
+		if (pathIndex == pathLength) {
+			agent.enabled = false;
+			this.enabled = false;
+			return;
+		}
+
 		if (!IsOnGround() || mob.Stunned) {
 			return;
 		}
@@ -126,11 +132,7 @@ public class SimpleNavScript : NetworkBehaviour {
 			bool canReachDestination = NavMesh.SamplePosition (destination, out myDestinationHit, 2f, NavMesh.AllAreas);
 
 			if (Reached () || PassedWaypoint() || (!canReachDestination && pathIndex != pathLength - 1) ) {
-				if (pathIndex == pathLength) {
-					agent.enabled = false;
-					this.enabled = false;
-					return;
-				}
+
 				destination = waypoints [pathIndex].position;
 				Vector3 randomized = Random.insideUnitCircle * randomizedDistance;
 				randomized.y = 0;
@@ -146,7 +148,10 @@ public class SimpleNavScript : NetworkBehaviour {
 					                 waypoints [pathIndex].name,
 					                 pathIndex);
 				//print (message);
-				pathIndex++;
+				if (pathIndex < pathLength-1) {
+					pathIndex++;
+					return;
+				}
 
 			} else {
 				Move (destination, true, true);
