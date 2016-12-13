@@ -33,10 +33,12 @@ public class Mob : MonoBehaviour {
 	private float elapsed;
 
 	public SkillConfig.MarkOfTheStorm markOfTheStorm;
+    Animator anim;
 
 	virtual protected void Start(){
 		GameManager.instance.countMobSpawned ();
 
+        anim = GetComponentInChildren<Animator>();
 		body = GetComponent<Rigidbody> ();
 		markOfTheStorm = new SkillConfig.MarkOfTheStorm ();
 		rend = GetComponent<Renderer>();
@@ -114,11 +116,13 @@ public class Mob : MonoBehaviour {
 
 	public void takeDamage(float damage){
 		health -= damage;
-
+        /*
 		rend.material.color = Color.red;
 		StartCoroutine(TakeDamageColorChange (0.15f));
+        */
+        anim.SetTrigger("Damage");
 
-		if (health <= 0) {
+        if (health <= 0) {
 			SimpleNavScript navScript = GetComponent<SimpleNavScript> ();
 			if (navScript) {
 				navScript.enabled = false;
