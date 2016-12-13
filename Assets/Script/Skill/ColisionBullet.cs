@@ -6,18 +6,18 @@ public class ColisionBullet : MonoBehaviour
     [SerializeField]
 	private int damage;
 
-    public AudioClip soundImpact;
-    public float volSoundImpact;
-    private AudioSource source;
+    //public AudioClip soundImpact;
+   // public float volSoundImpact;
+   // private AudioSource source;
 
     void Start(){
-        source = GetComponent<AudioSource>();
+        //source = GetComponent<AudioSource>();
         damage = SkillConfig.BaseBullet.damage;
 	}
 
     void OnCollisionEnter(Collision collider)
     {
-        source.PlayOneShot(soundImpact, volSoundImpact);
+        //source.PlayOneShot(soundImpact, volSoundImpact);
 
         if ((collider.gameObject.tag != "Player") && (collider.gameObject.tag == "Mob"))
         {
