@@ -1840,7 +1840,7 @@ MonoBehaviour:
   volSoundShotTwo: 1
   soundShotHook: {fileID: 8300000, guid: 78b99264750f9d847adba0d7df769d0a, type: 3}
   volSoundShotHook: 1
-  soundErrorLowMana: {fileID: 0}
+  soundErrorLowMana: {fileID: 8300000, guid: 4081c32d7226841469a23624d4bd6f35, type: 3}
   volSoundErrorLowMana: 0
   soundShoutDamageArea: {fileID: 8300000, guid: 064d5eb5747fe3f46a7654810a3c5a9a,
     type: 3}
@@ -1895,6 +1895,8 @@ MonoBehaviour:
   volSoundDie: 1
   soundDamage: {fileID: 8300000, guid: beab2473dae471d45a230c008ea6cedd, type: 3}
   volSoundDamage: 1
+  soundMusicGame: {fileID: 8300000, guid: 1e5b30211728478448b29af01f1aca5c, type: 3}
+  volSoundMusicGame: 0.5
 --- !u!114 &114000014165499122
 MonoBehaviour:
   m_ObjectHideFlags: 1

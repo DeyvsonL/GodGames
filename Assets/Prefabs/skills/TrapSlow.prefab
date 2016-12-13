@@ -190,7 +190,7 @@ MonoBehaviour:
   slow: 0.1
   manaCost: 0
   time: 10
-  soundSlow: {fileID: 8300000, guid: d1e79926460334746bf96ba763e52330, type: 3}
+  soundSlow: {fileID: 8300000, guid: 3251230f44b06f942ab12eddbc48fae3, type: 3}
   volSoundSlow: 1
 --- !u!114 &114000012219741910
 MonoBehaviour:

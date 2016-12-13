@@ -243,5 +243,5 @@ MonoBehaviour:
   stunTime: 0
   stunInterval: 0
   manaCost: 0
-  soundStun: {fileID: 8300000, guid: d1e79926460334746bf96ba763e52330, type: 3}
+  soundStun: {fileID: 8300000, guid: 3251230f44b06f942ab12eddbc48fae3, type: 3}
   volSoundStun: 1
