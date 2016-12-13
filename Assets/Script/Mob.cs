@@ -35,8 +35,14 @@ public class Mob : MonoBehaviour {
 	public SkillConfig.MarkOfTheStorm markOfTheStorm;
     Animator anim;
 
-	virtual protected void Start(){
-		GameManager.instance.countMobSpawned ();
+    public AudioClip soundDamage;
+    public float volSoundDamage;
+    private AudioSource source;
+
+    virtual protected void Start()
+    {
+        source = GetComponent<AudioSource>();
+        GameManager.instance.countMobSpawned ();
 
         anim = GetComponentInChildren<Animator>();
 		body = GetComponent<Rigidbody> ();
@@ -117,7 +123,8 @@ public class Mob : MonoBehaviour {
 	}
 
 	public void takeDamage(float damage){
-		health -= damage;
+        source.PlayOneShot(soundDamage, volSoundDamage);
+        health -= damage;
         /*
 		rend.material.color = Color.red;
 		StartCoroutine(TakeDamageColorChange (0.15f));
