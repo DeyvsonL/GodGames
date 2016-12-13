@@ -817,7 +817,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010512022538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.67207, y: 3.46, z: 52.05}
+  m_LocalPosition: {x: 6.9675965, y: 7.28985, z: 53.69178}
   m_LocalScale: {x: 1, y: 1.36, z: 1}
   m_Children:
   - {fileID: 4225392940852028}
@@ -1520,7 +1520,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013607700288}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -1766,6 +1766,12 @@ MonoBehaviour:
   volSoundShoutDamageArea: 0.1
   soundFlameDamageArea: {fileID: 0}
   volSoundFlameDamageArea: 0
+  soundInvokeTrap: {fileID: 0}
+  volSoundInvokeTrap: 0
+  soundInvokePillar: {fileID: 0}
+  volSoundInvokePillar: 0
+  soundError: {fileID: 0}
+  volSoundError: 0
   gameObjectsSkill:
   - {fileID: 0}
   - {fileID: 0}
@@ -1805,6 +1811,8 @@ MonoBehaviour:
   currentMana: 0
   soundDie: {fileID: 8300000, guid: 4924bd6078593c444bac168e1a7931c6, type: 3}
   volSoundDie: 1
+  soundDamage: {fileID: 0}
+  volSoundDamage: 0
 --- !u!114 &114000014165499122
 MonoBehaviour:
   m_ObjectHideFlags: 1
