@@ -1848,9 +1848,9 @@ MonoBehaviour:
   soundFlameDamageArea: {fileID: 8300000, guid: 100f7c52edb39a1409ee86f5a57163d3,
     type: 3}
   volSoundFlameDamageArea: 1
-  soundInvokeTrap: {fileID: 8300000, guid: 484e4e78010b42b498f655d9ee724a69, type: 3}
+  soundInvokeTrap: {fileID: 8300000, guid: 29a8f11f08f290b45b281fa322347c62, type: 3}
   volSoundInvokeTrap: 1
-  soundInvokePillar: {fileID: 8300000, guid: 8dac8c2bf2dcb9345ba53d2a331ae6df, type: 3}
+  soundInvokePillar: {fileID: 8300000, guid: 29a8f11f08f290b45b281fa322347c62, type: 3}
   volSoundInvokePillar: 1
   soundError: {fileID: 8300000, guid: ad5b3c70d3235044a825199a53d05874, type: 3}
   volSoundError: 1
