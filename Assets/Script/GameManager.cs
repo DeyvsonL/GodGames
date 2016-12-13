@@ -14,11 +14,16 @@ public class GameManager : MonoBehaviour
 	public GameObject portalHealthCanvas;
 	private Text portalHealthText;
 
+	public GameObject winGameText;
+	public GameObject loseGameText;
+	public GameObject crossHair;
+
 	public int mobsKilled = 0;
 	public int mobsSpawned = 0;
 	public int mobsDestroyed = 0;
 	public int portalHealth = 10;
 
+	public bool lose;
 
     private bool win;
     public bool Win { get { return win; } }
@@ -26,6 +31,9 @@ public class GameManager : MonoBehaviour
     //Awake is always called before any Start functions
 	void Awake(){
         win = false;
+		lose = false;
+		crossHair.SetActive (true); // TODO: disable on lobby
+
         //Check if instance already exists
         if (instance == null)
 
@@ -74,8 +82,14 @@ public class GameManager : MonoBehaviour
 
 	public void DamagePortal(int damage){
 		portalHealth -= damage;
-		if (portalHealth < 0)
+		if (portalHealth <= 0) {
 			portalHealth = 0;
+			if (!win) {
+				lose = true;
+				loseGameText.SetActive (true);
+				crossHair.SetActive (false);
+			}
+		}
 
 		if (portalHealthText) {
 			portalHealthText.text = portalHealth.ToString();
@@ -86,8 +100,10 @@ public class GameManager : MonoBehaviour
 		mobsDestroyed++;
 	}
 
-	public void winGame(){
+	public void WinGame(){
         win = true;
+		winGameText.SetActive (true);
+		crossHair.SetActive (false);
 	}
 }
 	

@@ -76,7 +76,6 @@ public class Player : NetworkBehaviour
     {
         if (gameManager.Win){
             if (!animationWinStarted){
-                PopUpWin();
                 StartCoroutine(Win());
             }
             animationWinStarted = true;
@@ -88,7 +87,6 @@ public class Player : NetworkBehaviour
         }
         if (dead) {
             if (!playedDead) {
-                PopUpGameOver();
                 StartCoroutine(Die());
             }
             playedDead = true;
@@ -97,25 +95,10 @@ public class Player : NetworkBehaviour
             }
             return;
         }
-		if (GameManager.instance.portalHealth <= 0) { 
+		if (GameManager.instance.lose) { 
 			Lose ();
 		}
         fillMana(PlayerConfig.manaRegen * Time.deltaTime);
-    }
-
-    private void PopUpWin()
-    {
-        GameObject canvas = GameObject.FindGameObjectWithTag("Canvas");
-        Text[] texts = canvas.GetComponentsInChildren<Text>(true);
-        Text gameOver = System.Array.Find(texts, (search) => (search.name.Equals("Congratulations", System.StringComparison.Ordinal)));
-        gameOver.gameObject.SetActive(true);
-    }
-
-    private void PopUpGameOver(){
-        GameObject canvas = GameObject.FindGameObjectWithTag("Canvas");
-        Text[] texts = canvas.GetComponentsInChildren<Text>(true);
-        Text gameOver = System.Array.Find(texts, (search) => (search.name.Equals("Game Over", System.StringComparison.Ordinal)));
-        gameOver.gameObject.SetActive(true);
     }
 
     public void takeDamage(float damage)
