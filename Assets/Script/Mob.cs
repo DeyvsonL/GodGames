@@ -80,11 +80,13 @@ public class Mob : MonoBehaviour {
 	}
 
 	void Update () {
-		if (stunCount())
+        anim.speed = stunned ? 0 : 1;
+        if (stunCount())
 			return;
-		//se não estiver estunado, fazer o resto das ações abaixo
+        //se não estiver estunado, fazer o resto das ações abaixo
+        
 
-		markOfTheStorm.CheckStacks (Time.deltaTime);
+        markOfTheStorm.CheckStacks (Time.deltaTime);
 		if (attackMode) {
 			elapsed += Time.deltaTime;
 
@@ -132,6 +134,7 @@ public class Mob : MonoBehaviour {
 	}
 
 	public void Attack(GameObject gameObject){
+        anim.SetTrigger("Attack");
 		gameObject.GetComponent<Player>().takeDamage(damage);
 	}
 
