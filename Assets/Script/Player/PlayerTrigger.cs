@@ -395,8 +395,8 @@ public class PlayerTrigger : NetworkBehaviour{
         }
 
         for (int i = 0; i < gameObjectsSkill.Length; i++) {
-            gameObjectsSkill[i].gameObject.GetComponent<Button>().interactable = true;
+            gameObjectsSkill[i].gameObject.GetComponent<Button>().interactable = false;
         }
-        gameObjectsSkill[skill - 1].gameObject.GetComponent<Button>().interactable = false;
+		gameObjectsSkill[skill - 1].gameObject.GetComponent<Button>().interactable = true;
     }
 }
