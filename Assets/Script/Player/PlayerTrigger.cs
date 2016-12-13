@@ -50,12 +50,14 @@ public class PlayerTrigger : NetworkBehaviour{
     public float volSoundShotTwo;
     public AudioClip soundShotHook;
     public float volSoundShotHook;
-    public AudioClip soundErrorLowMana;
-    public float volSoundErrorLowMana;
+    public AudioClip soundError;
+    public float volSoundError;
     public AudioClip soundShoutDamageArea;
     public float volSoundShoutDamageArea;
     public AudioClip soundFlameDamageArea;
     public float volSoundFlameDamageArea;
+    public AudioClip soundInvokeTrap;
+    public float volSoundInvokeTrap;
     private AudioSource source;
 
     public Button[] gameObjectsSkill;
@@ -163,7 +165,7 @@ public class PlayerTrigger : NetworkBehaviour{
 					anim.SetTrigger ("Trap");
 					lastPillarTime = Time.time;
 				} else {
-					source.PlayOneShot (soundErrorLowMana, volSoundErrorLowMana);
+					source.PlayOneShot (soundError, volSoundError);
 				}
 			}
         }
@@ -175,9 +177,10 @@ public class PlayerTrigger : NetworkBehaviour{
                 spawnTrap(hit, trapSlowPrefab, trapSlowPrefab.GetComponent<TrapSlow>().time);
 				player.takeMana(SkillConfig.TrapSlow.manaCost);
                 anim.SetTrigger("Trap");
+                source.PlayOneShot(soundInvokeTrap, volSoundInvokeTrap);
             }
             else {
-                source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
+                source.PlayOneShot(soundError, volSoundError);
             }
 
         }
@@ -186,8 +189,10 @@ public class PlayerTrigger : NetworkBehaviour{
                 spawnTrap(hit, trapDamagePrefab, trapDamagePrefab.GetComponent<TrapDamage>().time);
 				player.takeMana(SkillConfig.TrapDamage.manaCost);
                 anim.SetTrigger("Trap");
-            }else {
-                source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
+                source.PlayOneShot(soundInvokeTrap, volSoundInvokeTrap);
+            }
+            else {
+                source.PlayOneShot(soundError, volSoundError);
             }
 
         }
@@ -211,7 +216,7 @@ public class PlayerTrigger : NetworkBehaviour{
 					StartCoroutine (DelayShout (markOfTheStorm, SkillConfig.MarkOfTheStormConfig.manaCost));
 					lastShoutTime = Time.time;
 				} else {
-					source.PlayOneShot (soundErrorLowMana, volSoundErrorLowMana);
+					source.PlayOneShot (soundError, volSoundError);
 				}
 			}
         }else if (skill == TRAPSTUN){
@@ -219,8 +224,10 @@ public class PlayerTrigger : NetworkBehaviour{
                 spawnTrap(hit, trapStunPrefab, trapStunPrefab.GetComponent<TrapStun>().time);
 				player.takeMana(SkillConfig.TrapStun.manaCost);
                 anim.SetTrigger("Trap");
-            }else{
-                source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
+                source.PlayOneShot(soundInvokeTrap, volSoundInvokeTrap);
+            }
+            else{
+                source.PlayOneShot(soundError, volSoundError);
             }
         }
     }
@@ -259,7 +266,7 @@ public class PlayerTrigger : NetworkBehaviour{
 					player.takeMana (SkillConfig.StunBullet.manaCost);
 					lastBulletTwoTime = Time.time;
 				} else {
-					source.PlayOneShot (soundErrorLowMana, volSoundErrorLowMana);
+					source.PlayOneShot (soundError, volSoundError);
 				}
 			}
         }else if (skill == PILLAR){
@@ -270,7 +277,7 @@ public class PlayerTrigger : NetworkBehaviour{
 					anim.SetTrigger ("Trap");
 					lastPillarTime = Time.time;
 				} else {
-					source.PlayOneShot (soundErrorLowMana, volSoundErrorLowMana);
+					source.PlayOneShot (soundError, volSoundError);
 				}
 			}
 		}else if(skill == HOOK){
