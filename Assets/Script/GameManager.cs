@@ -95,12 +95,8 @@ public class GameManager : MonoBehaviour
 		portalHealth -= damage;
 		if (portalHealth <= 0) {
 			portalHealth = 0;
-			if (!win) {
-				lose = true;
-
-				loseGameText.SetActive (true);
-				crossHair.SetActive (false);
-                source.PlayOneShot(soundLoseSong, volSoundLoseSong);
+			if (!win && !lose) {
+				LoseGame();
             }
 		}
 
@@ -120,5 +116,13 @@ public class GameManager : MonoBehaviour
         source.PlayOneShot(soundWinSong, volSoundWinSong);
         source.PlayOneShot(soundWinShout, volSoundWinShout);
     }
+
+	public void LoseGame(){
+		lose = true;
+
+		loseGameText.SetActive (true);
+		crossHair.SetActive (false);
+		source.PlayOneShot(soundLoseSong, volSoundLoseSong);
+	}
 }
 	
