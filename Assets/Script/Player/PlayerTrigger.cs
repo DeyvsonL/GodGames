@@ -50,14 +50,18 @@ public class PlayerTrigger : NetworkBehaviour{
     public float volSoundShotTwo;
     public AudioClip soundShotHook;
     public float volSoundShotHook;
-    public AudioClip soundError;
-    public float volSoundError;
+    public AudioClip soundErrorLowMana;
+    public float volSoundErrorLowMana;
     public AudioClip soundShoutDamageArea;
     public float volSoundShoutDamageArea;
     public AudioClip soundFlameDamageArea;
     public float volSoundFlameDamageArea;
     public AudioClip soundInvokeTrap;
     public float volSoundInvokeTrap;
+    public AudioClip soundInvokePillar;
+    public float volSoundInvokePillar;
+    public AudioClip soundError;
+    public float volSoundError;
     private AudioSource source;
 
     public Button[] gameObjectsSkill;
@@ -162,10 +166,10 @@ public class PlayerTrigger : NetworkBehaviour{
 			if (lastPillarTime + SkillConfig.Pillar.cooldown <= Time.time) {
 				if (pillarPrefab.GetComponent<Pillar> ().Mana < player.CurrentMana) {
 					spawnPillar (hit, pillarPrefab, pillarPrefab.GetComponent<Pillar> ().time);
-					anim.SetTrigger ("Trap");
-					lastPillarTime = Time.time;
+					anim.SetTrigger ("Trap");                    
+                    lastPillarTime = Time.time;
 				} else {
-					source.PlayOneShot (soundError, volSoundError);
+					source.PlayOneShot (soundErrorLowMana, volSoundErrorLowMana);
 				}
 			}
         }
@@ -180,7 +184,7 @@ public class PlayerTrigger : NetworkBehaviour{
                 source.PlayOneShot(soundInvokeTrap, volSoundInvokeTrap);
             }
             else {
-                source.PlayOneShot(soundError, volSoundError);
+                source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
             }
 
         }
@@ -192,7 +196,7 @@ public class PlayerTrigger : NetworkBehaviour{
                 source.PlayOneShot(soundInvokeTrap, volSoundInvokeTrap);
             }
             else {
-                source.PlayOneShot(soundError, volSoundError);
+                source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
             }
 
         }
@@ -216,7 +220,7 @@ public class PlayerTrigger : NetworkBehaviour{
 					StartCoroutine (DelayShout (markOfTheStorm, SkillConfig.MarkOfTheStormConfig.manaCost));
 					lastShoutTime = Time.time;
 				} else {
-					source.PlayOneShot (soundError, volSoundError);
+					source.PlayOneShot (soundErrorLowMana, volSoundErrorLowMana);
 				}
 			}
         }else if (skill == TRAPSTUN){
@@ -227,7 +231,7 @@ public class PlayerTrigger : NetworkBehaviour{
                 source.PlayOneShot(soundInvokeTrap, volSoundInvokeTrap);
             }
             else{
-                source.PlayOneShot(soundError, volSoundError);
+                source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
             }
         }
     }
@@ -266,7 +270,7 @@ public class PlayerTrigger : NetworkBehaviour{
 					player.takeMana (SkillConfig.StunBullet.manaCost);
 					lastBulletTwoTime = Time.time;
 				} else {
-					source.PlayOneShot (soundError, volSoundError);
+					source.PlayOneShot (soundErrorLowMana, volSoundErrorLowMana);
 				}
 			}
         }else if (skill == PILLAR){
@@ -277,7 +281,7 @@ public class PlayerTrigger : NetworkBehaviour{
 					anim.SetTrigger ("Trap");
 					lastPillarTime = Time.time;
 				} else {
-					source.PlayOneShot (soundError, volSoundError);
+					source.PlayOneShot (soundErrorLowMana, volSoundErrorLowMana);
 				}
 			}
 		}else if(skill == HOOK){
@@ -297,11 +301,22 @@ public class PlayerTrigger : NetworkBehaviour{
 
 	private void spawnPillar(RaycastHit hit, GameObject pillar, int time)
 	{
-		GameObject hitObject = hit.collider.gameObject;
+        if (hit.collider == null)
+        {
+            source.PlayOneShot(soundError, volSoundError);
+            return;
+        }
+
+        GameObject hitObject = hit.collider.gameObject;
 		if (hitObject != null)
 		{
 			CmdSpawnPillar(hitObject, pillar, time);
-		}
+            source.PlayOneShot(soundInvokePillar, volSoundInvokePillar);
+        }
+        else
+        {
+            source.PlayOneShot(soundError, volSoundError);
+        }
 	}
 
     [Command]
@@ -323,7 +338,11 @@ public class PlayerTrigger : NetworkBehaviour{
 		if (tileGround != null && tileGround.trap == null)
 		{
 			tileGround.insertTrap(trap,time);
-		}
+        }
+        else
+        {
+            source.PlayOneShot(soundError, volSoundError);
+        }
 	}
 		
 

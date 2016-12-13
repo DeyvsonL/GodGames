@@ -9,6 +9,7 @@ public class TileGround :  NetworkBehaviour
 	public GameObject pillar;
     private GameObject previewPillar;
     private GameObject previewTrap;
+
 		
 	public void insertPillar(GameObject objectToSpawn, int duration)
     {
