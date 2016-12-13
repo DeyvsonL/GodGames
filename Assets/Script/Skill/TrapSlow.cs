@@ -15,8 +15,13 @@ public class TrapSlow : MonoBehaviour {
 
     public int time;
 
-	void Start(){
-		slow = SkillConfig.TrapSlow.slow;
+    public AudioClip soundSlow;
+    public float volSoundSlow;
+    private AudioSource source;
+
+    void Start(){
+        source = GetComponent<AudioSource>();
+        slow = SkillConfig.TrapSlow.slow;
 		manaCost = SkillConfig.TrapSlow.manaCost;
 	}
 
@@ -24,6 +29,7 @@ public class TrapSlow : MonoBehaviour {
 		if (collider.tag == "Mob" && !collider.isTrigger){
             //mudar depois
             collider.gameObject.GetComponent<SimpleNavScript>().ActualSpeed = slow;
+            source.PlayOneShot(soundSlow, volSoundSlow);
         }
     }
 

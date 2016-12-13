@@ -15,7 +15,13 @@ public class TrapStun : MonoBehaviour {
 		set { manaCost = value; }
     }
 
-	void Awake(){
+    public AudioClip soundStun;
+    public float volSoundStun;
+    private AudioSource source;
+
+    void Start()
+    {
+        source = GetComponent<AudioSource>();
 		manaCost = SkillConfig.TrapStun.manaCost;
 		stunTime = SkillConfig.TrapStun.stunTime;
 		stunInterval = SkillConfig.TrapStun.stunInterval;
@@ -30,6 +36,7 @@ public class TrapStun : MonoBehaviour {
             if (Time.time > lastStunTime + stunInterval)
             {
 				collider.gameObject.GetComponent<Mob>().Stun(stunTime);
+                source.PlayOneShot(soundStun, volSoundStun);
                 lastStunTime = Time.time;
             }
         }
