@@ -14,13 +14,21 @@ public class CollisionStunBullet : MonoBehaviour {
 		set { manaCost = value; }
     }
 
-	void Start(){
-		damage = SkillConfig.StunBullet.damage;
+    public AudioClip soundImpact;
+    public float volSoundImpact;
+    private AudioSource source;
+
+    void Start()
+    {
+        source = GetComponent<AudioSource>();
+        damage = SkillConfig.StunBullet.damage;
 		stunTime = SkillConfig.StunBullet.stunTime;
 		manaCost = SkillConfig.StunBullet.manaCost;
 	}
 
     void OnCollisionEnter(Collision collider) {
+        source.PlayOneShot(soundImpact, volSoundImpact);
+
         if ((collider.gameObject.tag != "Player") && (collider.gameObject.tag == "Mob"))
         {
             collider.gameObject.GetComponent<Mob>().Stun(stunTime);
@@ -29,7 +37,7 @@ public class CollisionStunBullet : MonoBehaviour {
 
         if (collider.gameObject.tag != "Player")
         {
-            Destroy(gameObject);
+            Destroy(gameObject,0.2f);
         }
     }
 }
