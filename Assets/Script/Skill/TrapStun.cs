@@ -25,7 +25,7 @@ public class TrapStun : MonoBehaviour {
     void OnTriggerEnter(Collider collider)
     {
 
-        if (collider.tag == "Mob")
+		if (collider.tag == "Mob" && !collider.isTrigger)
         {
             if (Time.time > lastStunTime + stunInterval)
             {

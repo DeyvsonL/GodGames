@@ -21,21 +21,21 @@ public class TrapSlow : MonoBehaviour {
 	}
 
     void OnTriggerEnter(Collider collider){
-        if (collider.tag == "Mob"){
+		if (collider.tag == "Mob" && !collider.isTrigger){
             //mudar depois
             collider.gameObject.GetComponent<SimpleNavScript>().ActualSpeed = slow;
         }
     }
 
     void OnTriggerStay(Collider collider) {
-        if (collider.tag == "Mob") {
+		if (collider.tag == "Mob" && !collider.isTrigger) {
             //mudar depois
             collider.gameObject.GetComponent<SimpleNavScript>().ActualSpeed = slow;
         }
     }
 
     void OnTriggerExit(Collider collider) {
-        if (collider.tag == "Mob") {
+		if (collider.tag == "Mob" && !collider.isTrigger) {
             //mudar depois
             collider.gameObject.GetComponent<SimpleNavScript>().ActualSpeed = 1;
         }

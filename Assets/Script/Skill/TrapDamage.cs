@@ -28,7 +28,7 @@ public class TrapDamage : MonoBehaviour {
     }
     
     void OnTriggerStay(Collider collider) {
-       if(collider.tag == "Mob"){
+		if(collider.tag == "Mob" && !collider.isTrigger){
             if (Time.time > lastDamageTime + damageInterval){
                 collider.gameObject.GetComponent<Mob>().takeDamage(damage);
                 lastDamageTime = Time.time;
