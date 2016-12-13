@@ -39,7 +39,10 @@ public class Player : NetworkBehaviour
 
     public AudioClip soundDie;
     public float volSoundDie;
+    public AudioClip soundDamage;
+    public float volSoundDamage;
     private AudioSource source;
+
     void Start()
     {
         source = GetComponent<AudioSource>();
@@ -103,7 +106,9 @@ public class Player : NetworkBehaviour
 
     public void takeDamage(float damage)
     {
+
         if (dead || gameManager.Win) return;
+        source.PlayOneShot(soundDamage, volSoundDamage);
         currentHealth -= damage;
         if (currentHealth <= 0 && !dead)
         {
