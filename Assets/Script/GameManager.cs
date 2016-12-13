@@ -28,8 +28,19 @@ public class GameManager : MonoBehaviour
     private bool win;
     public bool Win { get { return win; } }
 
+
+    public AudioClip soundWinSong;
+    public float volSoundWinSong;
+    public AudioClip soundWinShout;
+    public float volSoundWinShout;
+    public AudioClip soundLoseSong;
+    public float volSoundLoseSong;
+    private AudioSource source;
+       
+
     //Awake is always called before any Start functions
-	void Awake(){
+    void Awake(){
+        source = GetComponent<AudioSource>();
         win = false;
 		lose = false;
 		crossHair.SetActive (true); // TODO: disable on lobby
@@ -86,9 +97,11 @@ public class GameManager : MonoBehaviour
 			portalHealth = 0;
 			if (!win) {
 				lose = true;
+
 				loseGameText.SetActive (true);
 				crossHair.SetActive (false);
-			}
+                source.PlayOneShot(soundLoseSong, volSoundLoseSong);
+            }
 		}
 
 		if (portalHealthText) {
@@ -104,6 +117,8 @@ public class GameManager : MonoBehaviour
         win = true;
 		winGameText.SetActive (true);
 		crossHair.SetActive (false);
-	}
+        source.PlayOneShot(soundWinSong, volSoundWinSong);
+        source.PlayOneShot(soundWinShout, volSoundWinShout);
+    }
 }
 	
