@@ -115,6 +115,7 @@ public class Player : NetworkBehaviour
             currentHealth = 0;
             source.PlayOneShot(soundDie, volSoundDie);
             dead = true;
+			GameManager.instance.LoseGame ();
         }
         else if (!dead)
         {
