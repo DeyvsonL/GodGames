@@ -183,6 +183,7 @@ public class SimpleNavScript : NetworkBehaviour {
 		agent.SetDestination (position);
 
 		Vector3 direction = agent.desiredVelocity.normalized;
+		body.transform.LookAt (body.position + (direction + body.transform.forward)/2f);
 
 		if (avoidWalls || avoidPlayer) {
 			RaycastHit frontRay, leftRay, rightRay;
