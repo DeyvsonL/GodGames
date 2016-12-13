@@ -113,6 +113,7 @@ public class GameManager : MonoBehaviour
         win = true;
 		winGameText.SetActive (true);
 		crossHair.SetActive (false);
+        source.Stop();
         source.PlayOneShot(soundWinSong, volSoundWinSong);
         source.PlayOneShot(soundWinShout, volSoundWinShout);
     }
@@ -122,7 +123,8 @@ public class GameManager : MonoBehaviour
 
 		loseGameText.SetActive (true);
 		crossHair.SetActive (false);
-		source.PlayOneShot(soundLoseSong, volSoundLoseSong);
+        source.Stop();
+        source.PlayOneShot(soundLoseSong, volSoundLoseSong);
 	}
 }
 	

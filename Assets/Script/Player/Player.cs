@@ -41,11 +41,12 @@ public class Player : NetworkBehaviour
     public float volSoundDie;
     public AudioClip soundDamage;
     public float volSoundDamage;
+    public AudioClip soundMusicGame;
+    public float volSoundMusicGame;
     private AudioSource source;
 
     void Start()
     {
-        source = GetComponent<AudioSource>();
 
         maxHealth = PlayerConfig.maxHealth;
         maxMana = PlayerConfig.maxMana;
@@ -58,6 +59,9 @@ public class Player : NetworkBehaviour
 
     override public void OnStartLocalPlayer()
     {
+        source = GetComponent<AudioSource>();
+
+        source.PlayOneShot(soundMusicGame, volSoundMusicGame);
         base.OnStartLocalPlayer();
         GameObject camController = GameObject.FindGameObjectWithTag("CamController");
         FreeLookCam flc = camController.GetComponent<FreeLookCam>();
@@ -113,6 +117,7 @@ public class Player : NetworkBehaviour
         if (currentHealth <= 0 && !dead)
         {
             currentHealth = 0;
+            source.Stop();
             source.PlayOneShot(soundDie, volSoundDie);
             dead = true;
 			GameManager.instance.LoseGame ();
