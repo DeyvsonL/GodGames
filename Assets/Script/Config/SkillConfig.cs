@@ -8,12 +8,13 @@ public class SkillConfig : MonoBehaviour {
 
 	// Mark of the storm
 	public static class MarkOfTheStormConfig {
-		public static float baseDamage = 10;
-		public static float stackDamage = 15;
-		public static float duration = 10;
-		public static float cooldown = 5;
-		public static float range = 5;
+		public static float baseDamage = 10f;
+		public static float stackDamage = 15f;
+		public static float duration = 10f;
+		public static float cooldown = 3f;
+		public static float range = 5f;
 		public static int stackLimit = 5;
+		public static int manaCost = 20;
 
 		public static void Damage(Vector3 position){
 			Collider[] colliders = Physics.OverlapSphere (position, range);
@@ -63,6 +64,9 @@ public class SkillConfig : MonoBehaviour {
 
 	//Pillars
 
+	public class Pillar {
+		public static float cooldown = 1f;
+	}
 
 	public class ExplosivePillar {
 		public static int damage = 20;
@@ -98,6 +102,7 @@ public class SkillConfig : MonoBehaviour {
 	// Bullet
 	public class BaseBullet {
 		public static int damage = 10;
+		public static float cooldown = 0.2f;
 	}
 
 	// Stun Bullet
@@ -105,6 +110,7 @@ public class SkillConfig : MonoBehaviour {
 		public static int damage = 20;
 		public static int manaCost = 20;
 		public static float stunTime = 2;
+		public static float cooldown = 0.5f;
 	}
 
 	// Area Bullet

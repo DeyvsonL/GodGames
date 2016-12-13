@@ -69,6 +69,11 @@ public class PlayerTrigger : NetworkBehaviour{
     private readonly int TRAPDAMAGE = 6;
     private readonly int TRAPSTUN = 7;
 
+	private float lastBulletOneTime;
+	private float lastBulletTwoTime;
+	private float lastPillarTime;
+	private float lastShoutTime;
+
     bool launching;
     
     public int Skill
@@ -152,14 +157,15 @@ public class PlayerTrigger : NetworkBehaviour{
         }
         else if (skill == PILLAR)
         {
-            if (pillarPrefab.GetComponent<Pillar>().Mana < player.CurrentMana)
-            {
-                spawnPillar(hit, pillarPrefab, pillarPrefab.GetComponent<Pillar>().time);
-                anim.SetTrigger("Trap");
-            }
-            else {
-                source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
-            }
+			if (lastPillarTime + SkillConfig.Pillar.cooldown <= Time.time) {
+				if (pillarPrefab.GetComponent<Pillar> ().Mana < player.CurrentMana) {
+					spawnPillar (hit, pillarPrefab, pillarPrefab.GetComponent<Pillar> ().time);
+					anim.SetTrigger ("Trap");
+					lastPillarTime = Time.time;
+				} else {
+					source.PlayOneShot (soundErrorLowMana, volSoundErrorLowMana);
+				}
+			}
         }
         else if (skill == TRAPSLOW)
         {
@@ -186,24 +192,28 @@ public class PlayerTrigger : NetworkBehaviour{
 
         }
         else if (skill == BULLET){
-            anim.SetTrigger("Attack");
-            source.PlayOneShot(soundShotOne, volSoundShotOne);
-            GameObject bulletAux = Instantiate(bulletPrefab, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
-            CmdSpawnBullet(realDirection, bulletAux);
+			if (lastBulletOneTime + SkillConfig.BaseBullet.cooldown <= Time.time) {
+				anim.SetTrigger ("Attack");
+				source.PlayOneShot (soundShotOne, volSoundShotOne);
+				GameObject bulletAux = Instantiate (bulletPrefab, rightHand.position, Quaternion.LookRotation (realDirection)) as GameObject;
+				CmdSpawnBullet (realDirection, bulletAux);
+				lastBulletOneTime = Time.time;
+			}
         }else if (skill == MARK){
-            int costMana = 30;
-            if (costMana < player.CurrentMana){
-                SkillConfig.MarkOfTheStormConfig.Damage(body.position);
+			if (lastShoutTime + SkillConfig.MarkOfTheStormConfig.cooldown <= Time.time) {
+				if (SkillConfig.MarkOfTheStormConfig.manaCost < player.CurrentMana) {
+					SkillConfig.MarkOfTheStormConfig.Damage (body.position);
 
-                Transform markOfTheStorm = transform.Find("MarkOfTheStorm");
-                anim.SetTrigger("Shout");
-                source.PlayOneShot(soundShoutDamageArea, volSoundShoutDamageArea);
-                source.PlayOneShot(soundFlameDamageArea, volSoundFlameDamageArea);
-                StartCoroutine(DelayShout(markOfTheStorm, costMana));
-
-            }else {
-                source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
-            }
+					Transform markOfTheStorm = transform.Find ("MarkOfTheStorm");
+					anim.SetTrigger ("Shout");
+					source.PlayOneShot (soundShoutDamageArea, volSoundShoutDamageArea);
+					source.PlayOneShot (soundFlameDamageArea, volSoundFlameDamageArea);
+					StartCoroutine (DelayShout (markOfTheStorm, SkillConfig.MarkOfTheStormConfig.manaCost));
+					lastShoutTime = Time.time;
+				} else {
+					source.PlayOneShot (soundErrorLowMana, volSoundErrorLowMana);
+				}
+			}
         }else if (skill == TRAPSTUN){
 			if (SkillConfig.TrapStun.manaCost < player.CurrentMana){
                 spawnTrap(hit, trapStunPrefab, trapStunPrefab.GetComponent<TrapStun>().time);
@@ -240,25 +250,29 @@ public class PlayerTrigger : NetworkBehaviour{
 
     private void skillsButtonTwo(RaycastHit hit, Vector3 realDirection){
         if (skill == BULLET) {
-
-
-			if (SkillConfig.StunBullet.manaCost < player.CurrentMana){
-                anim.SetTrigger("Attack");
-                source.PlayOneShot(soundShotTwo, volSoundShotTwo);
-                GameObject bulletAux = Instantiate(bulletStunPrefab, rightHand.position, Quaternion.LookRotation(realDirection)) as GameObject;
-                CmdSpawnBullet(realDirection, bulletAux);
-				player.takeMana(SkillConfig.StunBullet.manaCost);
-            }else{
-                source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
-            }
+			if (lastBulletTwoTime + SkillConfig.StunBullet.cooldown <= Time.time) {
+				if (SkillConfig.StunBullet.manaCost < player.CurrentMana) {
+					anim.SetTrigger ("Attack");
+					source.PlayOneShot (soundShotTwo, volSoundShotTwo);
+					GameObject bulletAux = Instantiate (bulletStunPrefab, rightHand.position, Quaternion.LookRotation (realDirection)) as GameObject;
+					CmdSpawnBullet (realDirection, bulletAux);
+					player.takeMana (SkillConfig.StunBullet.manaCost);
+					lastBulletTwoTime = Time.time;
+				} else {
+					source.PlayOneShot (soundErrorLowMana, volSoundErrorLowMana);
+				}
+			}
         }else if (skill == PILLAR){
-			if(SkillConfig.ExplosivePillar.manaCost < player.CurrentMana){
-				spawnPillar(hit, pillarExplosivePrefab, pillarExplosivePrefab.GetComponent<PillarExplosive>().time);
-				player.takeMana(SkillConfig.ExplosivePillar.manaCost);
-                anim.SetTrigger("Trap");
-            }else{
-                source.PlayOneShot(soundErrorLowMana, volSoundErrorLowMana);
-            }
+			if (lastPillarTime + SkillConfig.Pillar.cooldown <= Time.time) {
+				if (SkillConfig.ExplosivePillar.manaCost < player.CurrentMana) {
+					spawnPillar (hit, pillarExplosivePrefab, pillarExplosivePrefab.GetComponent<PillarExplosive> ().time);
+					player.takeMana (SkillConfig.ExplosivePillar.manaCost);
+					anim.SetTrigger ("Trap");
+					lastPillarTime = Time.time;
+				} else {
+					source.PlayOneShot (soundErrorLowMana, volSoundErrorLowMana);
+				}
+			}
 		}else if(skill == HOOK){
             if (auxGancho != null){
                 anim.SetTrigger("Pull");
