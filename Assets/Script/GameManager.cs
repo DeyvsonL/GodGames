@@ -85,9 +85,7 @@ public class GameManager : MonoBehaviour
 		if (portalHealth <= 0) {
 			portalHealth = 0;
 			if (!win) {
-				lose = true;
-				loseGameText.SetActive (true);
-				crossHair.SetActive (false);
+				LoseGame ();
 			}
 		}
 
@@ -103,6 +101,12 @@ public class GameManager : MonoBehaviour
 	public void WinGame(){
         win = true;
 		winGameText.SetActive (true);
+		crossHair.SetActive (false);
+	}
+
+	public void LoseGame(){
+		lose = true;
+		loseGameText.SetActive (true);
 		crossHair.SetActive (false);
 	}
 }
