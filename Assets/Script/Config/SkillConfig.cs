@@ -103,6 +103,7 @@ public class SkillConfig : MonoBehaviour {
 	public class BaseBullet {
 		public static int damage = 10;
 		public static float cooldown = 0.2f;
+		public static float speed = 5f;
 	}
 
 	// Stun Bullet

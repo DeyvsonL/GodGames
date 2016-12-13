@@ -294,7 +294,7 @@ public class PlayerTrigger : NetworkBehaviour{
 	[Command]
     void CmdSpawnBullet(Vector3 realDirection, GameObject bulletAux)
     {
-        bulletAux.GetComponent<Rigidbody>().velocity = realDirection * bulletSpeed;
+		bulletAux.GetComponent<Rigidbody> ().velocity = realDirection * SkillConfig.BaseBullet.speed;
         NetworkServer.Spawn(bulletAux);
     }
 		
