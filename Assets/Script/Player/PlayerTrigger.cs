@@ -65,13 +65,14 @@ public class PlayerTrigger : MonoBehaviour{
     public Button[] gameObjectsSkill;
 
     public int skill;
-    private readonly int BULLET = 1;
-    private readonly int PILLAR = 2;
-    private readonly int HOOK = 3;
-	private readonly int MARK = 4;
-    private readonly int TRAPSLOW = 5;
-    private readonly int TRAPDAMAGE = 6;
-    private readonly int TRAPSTUN = 7;
+	private readonly int MELEE = 1;
+    private readonly int BULLET = 2;
+	private readonly int MARK = 3;
+	private readonly int HOOK = 4;
+	private readonly int PILLAR = 5;
+    private readonly int TRAPSLOW = 6;
+    private readonly int TRAPDAMAGE = 7;
+    private readonly int TRAPSTUN = 8;
 
 	private float lastBulletOneTime;
 	private float lastBulletTwoTime;
@@ -100,7 +101,6 @@ public class PlayerTrigger : MonoBehaviour{
 
         player = GetComponent<Player>();
         mark = GameObject.FindGameObjectWithTag("mark");
-        skill = 1;
         GameObject[] go = GameObject.FindGameObjectsWithTag("BtnSkill");
         gameObjectsSkill = new Button[go.Length];
         for (int i = 0; i<go.Length; i++)
@@ -122,6 +122,8 @@ public class PlayerTrigger : MonoBehaviour{
                 
             }
         }
+		skill = 1;
+
         launching = false;
 
     }
@@ -427,8 +429,11 @@ public class PlayerTrigger : MonoBehaviour{
         }
 
         for (int i = 0; i < gameObjectsSkill.Length; i++) {
-            gameObjectsSkill[i].gameObject.GetComponent<Button>().interactable = false;
+            gameObjectsSkill[i].interactable = false;
+
         }
-		gameObjectsSkill[skill - 1].gameObject.GetComponent<Button>().interactable = true;
+		gameObjectsSkill[skill - 1].interactable = true;
+
+		//gameObjectsSkill[skill - 1].gameObject.GetComponent<Text> ().IsActive = false;
     }
 }
