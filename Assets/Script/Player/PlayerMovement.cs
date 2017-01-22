@@ -131,7 +131,7 @@ public class PlayerMovement : MonoBehaviour {
 		Vector3 targetPosition;
 		if (dash) {
 			currentSpeed *= dashSpeed;
-			targetPosition = body.position + dashDirection * currentSpeed;
+			targetPosition = body.position + dashDirection * currentSpeed * Time.fixedDeltaTime;
 
 			dashCurrentTime += Time.fixedDeltaTime;
 			if (dashCurrentTime >= dashDuration) {
@@ -144,10 +144,16 @@ public class PlayerMovement : MonoBehaviour {
 			}
 
 		} else {
-			targetPosition = body.position + (((transform.forward * movementInput.y) + (transform.right * movementInput.x)) * currentSpeed);
+			targetPosition = body.position + (((transform.forward * movementInput.y) + (transform.right * movementInput.x)) * currentSpeed)*Time.fixedDeltaTime;
 		}
-		
-		Vector3 smoothedTargetPosition = Vector3.SmoothDamp (body.position, targetPosition, ref currentVelocity, 0.2f, currentSpeed, Time.fixedDeltaTime);
+
+		RaycastHit moveRaycastHit;
+
+		if (Physics.Linecast (body.position, targetPosition, out moveRaycastHit)) {
+			targetPosition = moveRaycastHit.point;
+		}
+
+		Vector3 smoothedTargetPosition = targetPosition;
 		body.MovePosition (smoothedTargetPosition);
 		if (jumpInput) {
 			body.AddForce (Vector3.up * jump, ForceMode.VelocityChange);
