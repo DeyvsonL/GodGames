@@ -52,7 +52,6 @@ public class PlayerMovement : MonoBehaviour {
 
 		body.mass = MobConfig.Weigth.medium;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-
     }
 
     void Update(){

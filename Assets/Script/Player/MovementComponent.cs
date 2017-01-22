@@ -10,34 +10,44 @@ public class MovementComponent : MonoBehaviour
 	public Vector3 direction;
 	public float distance;
 
-	public float dashCurrentTime;
+	private float dashCurrentTime;
 	public float dashDuration;
-	public bool dash;
+	private bool onDash;
 
+	public float jumpHeight;
+	private float distToGround;
 	// Use this for initialization
 	void Start ()
 	{
 		body = GetComponent<Rigidbody> ();
+		distToGround = GetComponent<Collider>().bounds.extents.y;
 	}
 
 	public void MoveToTarget (Vector3 direction)
 	{
-		if(dash) return;
+		if(onDash) return;
 		this.direction = direction;	
 		this.distance = currentSpeed;
 	}
 
 	public void Dash (Vector3 direction)
 	{
+		onDash = true;
 		this.direction = direction;
 		this.distance = dashSpeed * dashDuration;
-		dash = true;
 		dashCurrentTime = 0f;
+		print ("dash");
 	}
 
 	public void Jump ()
 	{
-		
+		if(isGrounded ()){
+			body.AddForce (Vector3.up * jumpHeight, ForceMode.VelocityChange);
+		}
+	}
+
+	public bool isGrounded(){
+		return Physics.Raycast (transform.position, Vector3.down, distToGround + 1.0f);
 	}
 
 	public void TeleportTo ()
@@ -53,10 +63,10 @@ public class MovementComponent : MonoBehaviour
 
 	void FixedUpdate ()
 	{
-		if (dash) {
+		if (onDash) {
 			dashCurrentTime += Time.fixedDeltaTime;
 			if (dashCurrentTime >= dashDuration) {
-				dash = false;
+				onDash = false;
 				body.velocity = Vector3.zero;
 				body.angularVelocity = Vector3.zero;
 				// TODO: fix infinite movement after some collisions
