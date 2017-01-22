@@ -1,10 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.Networking;
-using UnityEngine.UI;
 using UnityStandardAssets.Cameras;
 
-public class Player : NetworkBehaviour
+public class Player : MonoBehaviour
 {
     public float maxHealth = 100;
     public float maxMana = 100;
@@ -30,7 +28,6 @@ public class Player : NetworkBehaviour
     public bool Dead { get { return dead; } }
 
     private Animator anim;
-    private NetworkManager networkManager;
     private bool playedDead;
     private GateToTheHell gate;
     private GameManager gameManager;
@@ -56,14 +53,10 @@ public class Player : NetworkBehaviour
         currentMana = maxMana;
         anim = GetComponentInChildren<Animator>();
         dead = false;
-    }
 
-    override public void OnStartLocalPlayer()
-    {
         source = GetComponent<AudioSource>();
 
         source.PlayOneShot(soundMusicGame, volSoundMusicGame);
-        base.OnStartLocalPlayer();
         GameObject camController = GameObject.FindGameObjectWithTag("CamController");
         FreeLookCam flc = camController.GetComponent<FreeLookCam>();
         flc.Target = gameObject.transform;
@@ -74,23 +67,20 @@ public class Player : NetworkBehaviour
         dead = false;
         playedDead = false;
         gate = GameObject.Find("GateToTheHell").GetComponent<GateToTheHell>();
-        networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
-        if (networkManager == null) networkManager = GameObject.Find("LobbyManager").GetComponent<NetworkManager>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         animationWinStarted = false;
+
     }
 
     void Update()
     {
+
+
         if (gameManager.Win){
             if (!animationWinStarted){
                 StartCoroutine(Win());
             }
             animationWinStarted = true;
-            if (Input.GetButtonDown("EndGame"))
-            {
-                networkManager.StopHost();
-            }
             return;
         }
         if (dead) {
@@ -98,9 +88,6 @@ public class Player : NetworkBehaviour
                 StartCoroutine(Die());
             }
             playedDead = true;
-            if (Input.GetButtonDown("EndGame")){
-                networkManager.StopHost();
-            }
             return;
         }
 		if (GameManager.instance.lose) { 

@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.Networking;
 
-public class TileGround :  NetworkBehaviour
+public class TileGround :  MonoBehaviour
 {
 
 	public GameObject trap;
@@ -53,7 +51,6 @@ public class TileGround :  NetworkBehaviour
     private GameObject insertObject(GameObject objectToSpawn){
 
         GameObject objReturn = insertPreviewObject(objectToSpawn);
-        NetworkServer.Spawn(objReturn);
         return objReturn;
     }
 

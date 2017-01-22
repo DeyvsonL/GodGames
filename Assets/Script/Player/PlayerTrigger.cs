@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.Networking;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Player))]
-public class PlayerTrigger : NetworkBehaviour{
+public class PlayerTrigger : MonoBehaviour{
 
 	public float bulletSpeed;
 
@@ -129,8 +127,6 @@ public class PlayerTrigger : NetworkBehaviour{
     }
 
     void Update() {
-        if (!isLocalPlayer || player.Dead)
-            return;
 
         selectSkill();
 
@@ -291,11 +287,9 @@ public class PlayerTrigger : NetworkBehaviour{
         }
     }
 
-	[Command]
     void CmdSpawnBullet(Vector3 realDirection, GameObject bulletAux)
     {
 		bulletAux.GetComponent<Rigidbody> ().velocity = realDirection * SkillConfig.BaseBullet.speed;
-        NetworkServer.Spawn(bulletAux);
     }
 		
 
@@ -319,7 +313,6 @@ public class PlayerTrigger : NetworkBehaviour{
         }
 	}
 
-    [Command]
 	private void CmdSpawnPillar(GameObject hitObject, GameObject pillar, int time) {
         TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
         if (tileGround != null && tileGround.pillar == null) {
@@ -332,7 +325,6 @@ public class PlayerTrigger : NetworkBehaviour{
 		CmdSpawnTrap(hitObject, trap, time);
 	}
 
-	[Command]
 	private void CmdSpawnTrap(GameObject hitObject, GameObject trap, int time){
 		TileGround tileGround = hitObject.GetComponentInParent<TileGround>();
 		if (tileGround != null && tileGround.trap == null)
