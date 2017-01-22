@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Networking;
 
 public class MobGolem : Mob {
 	public GameObject miniGolem;
@@ -18,12 +17,8 @@ public class MobGolem : Mob {
 
 		GameObject spawnedObject1 = Instantiate (miniGolem, position + randomVector1, Quaternion.identity) as GameObject;
 		GameObject spawnedObject2 = Instantiate (miniGolem, position + randomVector2, Quaternion.identity) as GameObject;
-		//spawnedObject.GetComponentInChildren<Rigidbody> ().transform = position + randomVector1;
 		UpdateNavScript(spawnedObject1);
-		NetworkServer.Spawn(spawnedObject1);
 		UpdateNavScript(spawnedObject2);
-		//spawnedObject.GetComponentInChildren<Rigidbody> ().transform = position + randomVector2;
-		NetworkServer.Spawn(spawnedObject2);
 		GameManager.instance.countMobKilled ();
 		Destroy (gameObject.transform.parent.gameObject);
 	}
@@ -32,9 +27,7 @@ public class MobGolem : Mob {
 		SimpleNavScript miniGolemNavScript = miniGolem.GetComponentInChildren<SimpleNavScript> ();
 		if (golemNavScript && miniGolemNavScript) {
 			miniGolemNavScript.SetWaypoints (golemNavScript.Waypoints, golemNavScript.PathIndex);
-			//Destroy (miniGolemNavScript);
 		}
-		//miniGolem.AddComponent<SimpleNavScript> (miniGolemNavScript);
 	}
 
 }

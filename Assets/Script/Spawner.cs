@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.Networking;
-using UnityEditor;
 using UnityEngine.UI;
 
-public class Spawner : NetworkBehaviour {
+public class Spawner : MonoBehaviour {
 
 	public Transform[] possiblePaths;
 
@@ -62,10 +60,6 @@ public class Spawner : NetworkBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (!isServer) {
-			return;
-		}
-
 		if (GameManager.instance.lose || GameManager.instance.Win) {
 			this.enabled = false;
 			return;
@@ -118,7 +112,6 @@ public class Spawner : NetworkBehaviour {
 					if (elapsed > spawnInterval) {
 						elapsed -= spawnInterval;
 						GameObject spawnedObject = Instantiate (spawnObject, gameObject.transform.position, Quaternion.identity) as GameObject;
-						NetworkServer.Spawn (spawnedObject);
 						spawnCnt++;
 					}
 				}
