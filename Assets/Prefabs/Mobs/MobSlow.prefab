@@ -375,8 +375,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4676707338710572}
-  - component: {fileID: 114819580237811710}
-  - component: {fileID: 114312983912927908}
   - component: {fileID: 82149401617269992}
   m_Layer: 0
   m_Name: MobSlow
@@ -1678,26 +1676,6 @@ MonoBehaviour:
   attackRange: 5
   soundDamage: {fileID: 8300000, guid: de8f20abfd2911848bf98d4a0235abbb, type: 3}
   volSoundDamage: 1
---- !u!114 &114312983912927908
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1354423796456944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
 --- !u!114 &114799289448822778
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1720,38 +1698,6 @@ MonoBehaviour:
   acceleration: 10
   persuitPlayer: 0
   state: 0
---- !u!114 &114819580237811710
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1354423796456944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 181
-    i1: 162
-    i2: 168
-    i3: 174
-    i4: 36
-    i5: 198
-    i6: 231
-    i7: 180
-    i8: 216
-    i9: 96
-    i10: 168
-    i11: 223
-    i12: 202
-    i13: 161
-    i14: 252
-    i15: 24
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
 --- !u!114 &114918366626080304
 MonoBehaviour:
   m_ObjectHideFlags: 1

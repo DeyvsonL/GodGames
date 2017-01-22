@@ -435,8 +435,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4130926757762932}
-  - component: {fileID: 114678455600237960}
-  - component: {fileID: 114333160672398730}
   m_Layer: 0
   m_Name: MobFast
   m_TagString: Mob
@@ -1607,58 +1605,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 47
-    i1: 181
-    i2: 134
-    i3: 122
-    i4: 57
-    i5: 160
-    i6: 223
-    i7: 52
-    i8: 218
-    i9: 144
-    i10: 213
-    i11: 148
-    i12: 73
-    i13: 215
-    i14: 7
-    i15: 55
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
---- !u!114 &114333160672398730
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1528112561087626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
---- !u!114 &114678455600237960
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1528112561087626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_SceneId:

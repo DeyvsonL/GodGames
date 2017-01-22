@@ -23,8 +23,6 @@ GameObject:
   - component: {fileID: 65000014007081098}
   - component: {fileID: 23000013988379512}
   - component: {fileID: 114000010888420144}
-  - component: {fileID: 114000013187756196}
-  - component: {fileID: 114000012219741910}
   - component: {fileID: 82135210852453648}
   m_Layer: 0
   m_Name: TrapSlow
@@ -192,55 +190,3 @@ MonoBehaviour:
   time: 10
   soundSlow: {fileID: 8300000, guid: 3251230f44b06f942ab12eddbc48fae3, type: 3}
   volSoundSlow: 1
---- !u!114 &114000012219741910
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010223229338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
---- !u!114 &114000013187756196
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010223229338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 179
-    i1: 157
-    i2: 51
-    i3: 228
-    i4: 45
-    i5: 66
-    i6: 133
-    i7: 100
-    i8: 216
-    i9: 150
-    i10: 73
-    i11: 197
-    i12: 182
-    i13: 134
-    i14: 169
-    i15: 238
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0

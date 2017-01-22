@@ -23,8 +23,6 @@ GameObject:
   - component: {fileID: 135000011893157370}
   - component: {fileID: 23000010225286198}
   - component: {fileID: 54000010689400914}
-  - component: {fileID: 114000012849669720}
-  - component: {fileID: 114000012731626856}
   - component: {fileID: 114000011149553390}
   m_Layer: 0
   m_Name: AreaBullet
@@ -113,58 +111,6 @@ MonoBehaviour:
   damage: 10
   radius: 10
   delay: 0
---- !u!114 &114000012731626856
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011340044882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 3
-  m_SendInterval: 0
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
---- !u!114 &114000012849669720
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011340044882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 231
-    i1: 147
-    i2: 246
-    i3: 239
-    i4: 210
-    i5: 219
-    i6: 163
-    i7: 180
-    i8: 90
-    i9: 163
-    i10: 107
-    i11: 204
-    i12: 214
-    i13: 96
-    i14: 148
-    i15: 5
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
 --- !u!135 &135000011893157370
 SphereCollider:
   m_ObjectHideFlags: 1
