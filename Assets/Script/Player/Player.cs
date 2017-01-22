@@ -47,7 +47,8 @@ public class Player : NetworkBehaviour
 
     void Start()
     {
-
+        gameManager = GameManager.instance;
+        
         maxHealth = PlayerConfig.maxHealth;
         maxMana = PlayerConfig.maxMana;
 
