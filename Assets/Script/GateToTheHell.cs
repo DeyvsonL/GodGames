@@ -10,7 +10,7 @@ public class GateToTheHell : MonoBehaviour {
 
 			int portalDamage = 0;
 			switch (mob.mobType) {
-			case (Mob.MobType.REGULAR):
+			case (Mob.MobType.Regular):
 				portalDamage = MobConfig.MobRegularConfig.portalDamage;
 				break;
 			case (Mob.MobType.SLOW):

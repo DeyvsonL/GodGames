@@ -1,11 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.Networking;
 using UnityEngine.AI;
 
-//
-
-public class SimpleNavScript : NetworkBehaviour {
+public class SimpleNavScript : MonoBehaviour {
 	public Transform[] possiblePaths;
 	public float randomizedDistance = 0;
 
@@ -85,7 +81,7 @@ public class SimpleNavScript : NetworkBehaviour {
 		destination = body.position;
 
 		switch (GetComponent<Mob>().mobType) {
-		case Mob.MobType.REGULAR:
+		case Mob.MobType.Regular:
 			this.speed = MobConfig.MobRegularConfig.speed;
 			this.acceleration = MobConfig.MobRegularConfig.acceleration;
 			this.persuitPlayer = MobConfig.MobRegularConfig.persuitPlayer;
