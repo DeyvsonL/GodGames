@@ -17,7 +17,7 @@ public class ComboSystem {
 		keys=k;
 	}
 
-	public bool Check()
+	public bool Check(KeyCode key)
 	{
 		if ( Time.time > lastKeyPressTime+inBetweenTime)
 		{
@@ -29,7 +29,7 @@ public class ComboSystem {
 		{
 			if(index<keys.Length)
 			{
-				if(Input.GetKeyDown(keys[index]))
+				if(key == keys[index])
 				{
 					lastKeyPressTime=Time.time;
 					index++;

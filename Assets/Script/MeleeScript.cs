@@ -17,6 +17,7 @@ public class MeleeScript : MonoBehaviour {
 	void Update () {
 		if (Input.GetButtonDown ("Fire1")) {
 			attackAnimator.SetTrigger("basicHit");
+			print("Attack1");
 		}else if(Input.GetButtonDown("Fire2")){
 			print("Attack2");
 			attackAnimator.SetTrigger("combo1");
