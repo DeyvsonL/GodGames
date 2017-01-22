@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 4314712172252926}
   - component: {fileID: 33927459249682052}
   - component: {fileID: 23554305793734654}
+  - component: {fileID: 95150572074701074}
   m_Layer: 0
   m_Name: mao do martelo
   m_TagString: Untagged
@@ -206,7 +207,7 @@ Transform:
   m_GameObject: {fileID: 1471217456464670}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.4, y: 2.695, z: 60.7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4724420451384044}
   - {fileID: 4503340326366084}
@@ -668,6 +669,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!95 &95150572074701074
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1603734842548868}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7d3f7e1c2a3a544fb9d2bcdd3f1fbfa8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &95316498622344338
 Animator:
   serializedVersion: 3
@@ -807,7 +825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9017a2191ab87b4c821575bf1856552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 4416981404840534}
+  weapon: {fileID: 4314712172252926}
 --- !u!135 &135822166848261680
 SphereCollider:
   m_ObjectHideFlags: 1
