@@ -55,7 +55,9 @@ public class MovementComponent : MonoBehaviour
 		
 	}
 
-    public void RotateTo(Quaternion quaternion){
+    public void RotateTo(Quaternion quaternion)
+    {
+        if (onDash) return;
         transform.rotation = quaternion;
     }
 
