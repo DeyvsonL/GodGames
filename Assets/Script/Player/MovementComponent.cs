@@ -54,12 +54,10 @@ public class MovementComponent : MonoBehaviour
 	{
 		
 	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-		
-	}
+
+    public void RotateTo(Quaternion quaternion){
+        transform.rotation = quaternion;
+    }
 
 	void FixedUpdate ()
 	{

@@ -54,6 +54,8 @@ public class InputPlayer : MonoBehaviour
 		if (Input.GetButtonDown ("Jump")){
 			movementComponent.Jump ();
 		}
+
+        movementComponent.RotateTo(new Quaternion(0,Camera.main.transform.rotation.y,0,Camera.main.transform.rotation.w));
 	}
 
 }
